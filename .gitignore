@@ -1,2 +1,6 @@
 target/
+<<<<<<< HEAD
 *.prefs
+=======
+>>>>>>> 40386cb9a3a8b8afd270ecada4dc7e35de5fa0c1
+src/main/webapp/WEB-INF/views/home.jsp
