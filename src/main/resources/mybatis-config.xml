@@ -9,14 +9,14 @@
 
   	<typeAliases>
 
-  	<typeAlias type="global.sesoc.www.dto.T_Board" alias="board"/>
-  	<typeAlias type="global.sesoc.www.dto.T_Group" alias="group"/>\
-    <typeAlias type="global.sesoc.www.dto.T_Planner" alias="planner"/>
-  	<typeAlias type="global.sesoc.www.dto.T_Plist" alias="plist"/>
-    <typeAlias type="global.sesoc.www.dto.T_Request" alias="request"/>
+  		<typeAlias type="global.sesoc.www.dto.T_Board" alias="board"/>
+  		<typeAlias type="global.sesoc.www.dto.T_Group" alias="group"/>
+   		<typeAlias type="global.sesoc.www.dto.T_Planner" alias="planner"/>
+  		<typeAlias type="global.sesoc.www.dto.T_Plist" alias="plist"/>
+  		<typeAlias type="global.sesoc.www.dto.T_Request" alias="request"/>
 		<typeAlias type="global.sesoc.www.dto.T_Schedule" alias="schedule" />
 		<typeAlias type="global.sesoc.www.dto.T_User" alias="user"/>
-    <typeAlias type="global.sesoc.www.dto.T_Friend"	alias="friend" />
+   		<typeAlias type="global.sesoc.www.dto.T_Friend"	alias="friend" />
 		<typeAlias type="global.sesoc.www.dto.T_GRequest"	alias="grequest" />
 		<typeAlias type="global.sesoc.www.dto.T_Message"	alias="message" />
 		<typeAlias type="global.sesoc.www.dto.T_Reply"	alias="reply" />
