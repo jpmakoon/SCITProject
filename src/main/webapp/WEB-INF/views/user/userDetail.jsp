@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
     <%@include file="../basicFrame.jsp" %>
 <!DOCTYPE html>
-
 <html>
 <head>
 	<meta charset="UTF-8">
 </head>
+<style type="assets/css/ready.css"></style>
+
 <body>
 	<div class="main-panel">
 			<div class="content">
@@ -14,62 +15,75 @@
 					<h4 class="page-title">Profile</h4>
 					<div class="row">
 						
-						<div class="col-md-6">
+						<div class="col-md-5" id="userUD">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">My Profile</div>
+									<div class="card-title">${user.userName }様のプロフィール</div>
 								</div>
 								<form id="updateForm" name="updateForm" action="userUpdate" method="post" enctype="multipart/form-data"> <!-- submit form -->
 								<div class="card-body">
-									<div class="u-img">
-									<c:if test="${empty mime}">
-										<img class="image" style="border: 3px #ed65a9;border-radius: 70px;-moz-border-radius: 70px;-khtml-border-radius: 70px;-webkit-border-radius: 70px; margin : 0 auto;" src="assets/img/profile.jpg" alt="user">
-									</c:if>
-									<c:if test="${not empty mime}">
-										<img class="image" style="border: 3px #ed65a9;border-radius: 70px;-moz-border-radius: 70px;-khtml-border-radius: 70px;-webkit-border-radius: 70px; margin : 0 auto;" src="download?${user.originalImage }" alt="user">
-									</c:if>									
+									<div class="user-update-box">
+										<div class="u">
+										<c:if test="${empty mime}">
+											<img class="image" src="assets/img/profile.jpg" alt="user">
+										</c:if>
+										<c:if test="${not empty mime}">
+											<img class="image" src="download?userId=${user.userId }" alt="user">
+										</c:if>									
+										</div>
 									</div>
-									
 									
 									<input type="file" class="form-control-file" id="upload" name="upload" disabled>
-									<div class="form-group">
-										<label for="userName">${sessionScope.loginName }</label>
-									</div>
-										<div class="form-group">
-											<label for="userId">ID</label>
-											<input type="text" class="form-control input-pill" id="userId" value="${sessionScope.loginId }" name="userId" disabled>
-										</div>
-										
-										<div class="form-group">
-											<label for="email">Email Address</label>
-											<input type="email" class="form-control input-pill" id="email" value="${sessionScope.loginId }" name="email" disabled>
-										</div>
-										<div class="form-group">
-											<label for="birth">Birth</label>
-											<input type="date" class="form-control input-pill" id="birth" value="${user.birth }" name="birth" disabled>
-										</div>
-										<div class="form-group">
-											<label for="phone">Phone Number</label>
-											<div id="phone">
-											<select class="form-control input-pill" id="phone1" name="phone" disabled style='width: 100px;'>
-											    <option value="1" ${phone1 == '+81' ? 'selected' : ''}>Korea +82</option>
-											    <option value="2" ${phone1 == '+81' ? 'selected' : ''}>Japan +81</option>
-											    <option value="5" ${phone1 == '+1' ? 'selected' : ''}>USA +1</option>
-											    <option value="5" ${phone1 == '+84' ? 'selected' : ''}>Vietnam +84</option>
-											    <option value="5" ${phone1 == '+86' ? 'selected' : ''}>China +86</option>
-											    <option value="5" ${phone1 == '+852' ? 'selected' : ''}>Hong Kong +852</option>
-											    <option value="5" ${phone1 == '+61' ? 'selected' : ''}>Australia +61</option>
-											</select>
-											<input type="text" class="form-control input-pill" id="phone2" name="phone" value="${phone2}" disabled>
+										<div class="form-group form-inline">
+											<label for="inlineinput" class="col-md-3 col-form-label">ID</label>
+											<div class="col-md-8 p-0">
+												<input type="text" class="form-control input-full" id="userId" value="${user.userId }" name="userId" disabled>
 											</div>
 										</div>
-										<div class="form-group">
-											<label for="belong">Belong</label>
-											<input type="text" class="form-control input-pill" id="belong" value="${user.belong }" name="belong" disabled>
+										
+										<div class="form-group form-inline">
+											<label for="inlineinput" class="col-md-3 col-form-label">Email</label>
+											<div class="col-md-8 p-0">
+												<input type="email" class="form-control input-full" id="email" value="${user.email}" name="email" disabled>
+											</div>
 										</div>
-										<div class="form-group">
-											<label for="introduce">Introduce</label>
-											<textarea class="form-control" id="introduce" name="introduce" rows="5"  disabled>${user.introduce }</textarea>
+										<div class="form-group form-inline">
+											<label for="inlineinput" class="col-md-3 col-form-label">Birth</label>
+											<div class="col-md-8 p-0">
+												<input type="date" class="form-control input-full" id="birth" value="${user.birth }" name="birth" disabled>
+											</div>
+										</div>
+										<div class="form-group form-inline">
+											<label for="inlineinput" class="col-md-3 col-form-label">Phone</label>
+ 												<div class="form-inline" id="phone">
+													<div class="col-md-4 p-0"> 
+														<select class="form-control input-full" id="phone1" name="phone" disabled style='width: 80px;'>
+														    <option value="1" ${phone1 == '+81' ? 'selected' : ''}>Korea +82</option>
+														    <option value="2" ${phone1 == '+81' ? 'selected' : ''}>Japan +81</option>
+														    <option value="5" ${phone1 == '+1' ? 'selected' : ''}>USA +1</option>
+														    <option value="5" ${phone1 == '+84' ? 'selected' : ''}>Vietnam +84</option>
+														    <option value="5" ${phone1 == '+86' ? 'selected' : ''}>China +86</option>
+														    <option value="5" ${phone1 == '+852' ? 'selected' : ''}>Hong Kong +852</option>
+														    <option value="5" ${phone1 == '+61' ? 'selected' : ''}>Australia +61</option>
+														</select>
+													</div>
+													&nbsp;&nbsp;
+													<div class="col-md-7 p-0">
+														<input type="text" class="form-control input-full" id="phone2" name="phone" value="${phone2}" style="width: 265px;" disabled>
+													</div>
+												</div>
+										</div>
+										<div class="form-group form-inline">
+											<label for="inlineinput" class="col-md-3 col-form-label">Belong</label>
+											<div class="col-md-8 p-0">
+												<input type="text" class="form-control input-full" id="belong" value="${user.belong }" name="belong" disabled>
+											</div>
+										</div>
+										<div class="form-group form-inline">
+											<label for="inlineinput" class="col-md-3 col-form-label">Introduce</label>
+											<div class="col-md-8 p-0">
+												<textarea class="form-control input-full" id="introduce" name="introduce" rows="5"  disabled>${user.introduce }</textarea>
+												</div>
 										</div>
 								</div>
 							</form>
@@ -79,29 +93,6 @@
 									</div>
 								</div>
 					</div>
-					<footer class="footer">
-						<div class="container-fluid">
-							<nav class="pull-left">
-								<ul class="nav">
-									<li class="nav-item">
-										<a class="nav-link" href="http://www.themekita.com">
-											ThemeKita
-										</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#">
-											Help
-										</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#">
-											Licenses
-										</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
-					</footer>
 				</div>
 			</div>
 		</div>

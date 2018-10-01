@@ -30,7 +30,7 @@
             <div class="form-group">
                <label for="userID">ID</label>
                <div class="wrap-input100  input-group" data-validate = "">
-                  <input type="text" id="userId" name="userId" placeholder="아이디를 입력해주세요" class="input100">
+                  <input type="text" id="userId" name="userId" placeholder="英語、数字３~１０以内" class="input100">
                   <span class="focus-input100"></span>
                </div>
                <span id="userIdHelp" class="form-text"></span>
@@ -117,13 +117,13 @@
             <div class="form-group">
                   <label for="comment">自己紹介</label>
                   <textarea class="form-control" id="introduce" name="introduce" rows="5">
-                           
                   </textarea>
             </div>
             </div> <!-- card body  -->
             <div class="card-action">
                <button class="btn btn-success" type="submit">登録完了</button>
                <input class="btn btn-danger" type="reset" value="削除" />
+	     	   <input class="btn btn-danger" type="button" value="戻る" id="modoru"/>
             </div>
             </form>   <!-- signUpForm -->      
          </div>
@@ -410,6 +410,10 @@ $(function(){
    }
    
 }); 
+
+$('#modoru').on('click',function(){
+	location.href="index";
+})
 </script>
 </body>
 </html>

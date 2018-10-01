@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>検索結果</title>
 </head>
 <body>
 	<div class="main-panel">
@@ -18,13 +18,13 @@
 								<div class="card-body">
 									<c:if test="${empty list}">
 										<div class="card-sub">
-											<span id="searchWord">${searchWord}</span>에 대한 검색결과가 없습니다.
+											<span id="searchWord">${searchWord}</span>の検索結果なし
 										</div>
 									</c:if>	
 										
 									<c:if test="${not empty list}">
 										<div class="card-sub">
-											<span id="searchWord">${searchWord}</span>의 검색결과입니다.
+											<span id="searchWord">${searchWord}</span>の検索結果
 										</div>
 									<table class="table mt-3">
 										<thead>
@@ -40,7 +40,7 @@
 												<td>
 												<a href="userDetail?userId=${list.userId}">
 													<div class="searchPhoto">
-														<img src="download?${list.originalImage }">
+														<img src="download?userId=${list.userId}">
 													</div>
 												</a>
 												</td>
@@ -55,7 +55,7 @@
 												</td>
 												<td>
 													<div id="btnDiv">
-														<button class="btn btn-success" id="Freq" name="Freq">친구신청</button>
+														<button class="btn btn-success" id="Freq" name="Freq">友達要請</button>
 													</div>
 														<input type="hidden" class="accepter" value="${list.userId}">
 												</td>
@@ -87,14 +87,14 @@ $(function(){
 				, contentType : 'application/json; charset=UTF-8'
 				, success : function(response){
 					if(response == "0") {	//내가 친구 요청함
-						$('#Freq').html('요청중').prop("disabled", true).removeClass('btn-success').addClass('btn-danger');
+						$('#Freq').html('要請しています').prop("disabled", true).removeClass('btn-success').addClass('btn-danger');
 					}
 					if(response == "1") {	//친구인 사람
 						$('#Freq').remove();
 					}
 					if(response == "2") {	//누가 나한테 친구요청함
-						var acceptBtn = '<input type="button" id="acceptBtn" class="btn btn-success" value="수락">';
-						var refuseBtn = '<button class="btn btn-danger" id="refuseBtn">거절</button>';
+						var acceptBtn = '<input type="button" id="acceptBtn" class="btn btn-success" value="承知">';
+						var refuseBtn = '<button class="btn btn-danger" id="refuseBtn">拒絶</button>';
 						$('#btnDiv').html(acceptBtn +'&nbsp;'+ refuseBtn);
 					}
 				}
@@ -109,7 +109,7 @@ $(function(){
  	});
 });
 $(document).on("click", "#Freq", function(){
-	if(!confirm("친구 신청을 하시겠습니까?")){
+	if(!confirm("要請しますか？")){
 		return false;
 	}else{
 		var friAccepter = $(this).parent().parent().children('.accepter').val();
@@ -122,10 +122,10 @@ $(document).on("click", "#Freq", function(){
 			, contentType : 'application/json; charset=UTF-8'
 			, success : function(response){
 				if(response == 1){
-					alert('친구신청이완료되었습니다.');
+					alert('要請完了');
 					$('#btnDiv').remove();
 				}else{
-					alert('친구신청이 실패하였습니다.')
+					alert('친구신청이 실패하였습니다.');
 				}
 			}
 		});
@@ -133,7 +133,7 @@ $(document).on("click", "#Freq", function(){
 });
 
 $(document).on("click", "#acceptBtn", function(){
-	if(!confirm("친구 신청을 하시겠습니까?")){
+	if(!confirm("承知？")){
 		return false;
 	}else{
 		var friRequester = $(this).parent().parent().children('.accepter').val();
@@ -147,7 +147,7 @@ $(document).on("click", "#acceptBtn", function(){
 			, contentType : 'application/json; charset=UTF-8'
 			, success : function(response){
 				if(response == 1){
-					alert("친구등록이 완료되었습니다.");
+					alert("登録完了");
 					$('#btnDiv').remove();
 				}
 			}
@@ -156,7 +156,7 @@ $(document).on("click", "#acceptBtn", function(){
 });
 
 $(document).on("click", "#refuseBtn", function(){
-	if(!confirm("거절하시겠습니까?")){
+	if(!confirm("拒絶しますか？")){
 		return false;
 	}else{
 		var friRequester = $(this).parent().parent().children('.accepter').val();
@@ -170,8 +170,8 @@ $(document).on("click", "#refuseBtn", function(){
 			, contentType : 'application/json; charset=UTF-8'
 			, success : function(response){
 				if(response == 1){
-					alert("거절이 완료되었습니다.");
-					$('#btnDiv').html('<button class="btn btn-success" id="Freq" name="Freq">친구추가</button>');
+					$('#btnDiv').html('<button class="btn btn-success" id="Freq" name="Freq">友達要請</button>');
+					alert("拒絶完了");
 				}
 			}
 		})

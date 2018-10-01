@@ -60,6 +60,7 @@ public class T_FriendController {
 				user.setUserId(reqId);
 				user = repository2.selectOne(user);
 				requestList.add(user);
+				System.out.println("아하하하하하하하"+requestList);
 		}
 		
 		List<T_User> friList = new ArrayList<>();					// 친구리스트에 있는 유저들 정보 가져오기
@@ -84,6 +85,7 @@ public class T_FriendController {
 		T_Message message = new T_Message();
 		message.setUserB(userId);
 		List<T_Message> msgList = repository3.messageList(message);
+		
 		
 		model.addAttribute("msgList", msgList);
 		model.addAttribute("requestList", requestList);
@@ -177,12 +179,5 @@ public class T_FriendController {
 		System.out.println(checkList);
 		return checkList;
 	}
-	@ResponseBody
-	@RequestMapping(value="/myFriendList" , method=RequestMethod.POST)
-	public List<T_Friend> myFriendList(HttpSession session){
-		String userId=(String)session.getAttribute("loginId");
-		T_Friend f=new T_Friend(); f.setFriAccepter(userId);
-		List<T_Friend> list=repository.myFriendList(f);
-		return list;
-	}
+	
 }

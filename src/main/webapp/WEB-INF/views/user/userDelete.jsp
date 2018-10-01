@@ -19,7 +19,7 @@
 										<input type="password" id="pw" name="pw" placeholder="パスワード を入力してください" class="input100"/>
 										<span class="focus-input100"></span>
 									</div>
-									<span id="pwHelp" class="form-text">key up 들어가는자리</span>
+									<span id="pwHelp" class="form-text">""</span>
 								</div>
 							</div> <!-- card body  -->
 						</div>
@@ -43,9 +43,10 @@ $('#pw').on('keyup',function(){
 			, success : function(response){
 				console.log(response);
 				if(response != "") {
-					$('#pwHelp').text("password success").css('color','blue');
-					$('#pwdCheckForm').fadeOut(2000);
-					if(!confirm("계정을 삭제하시겠습니까?")){
+					$('#pwHelp').text("success").css('color','blue');
+					$('#pwdCheckForm').fadeOut(10);
+					if(!confirm("アカウントを削除しますか？")){
+						location.href="main";
 						return false;
 					}else{
 						userDelete();
@@ -64,7 +65,7 @@ function userDelete(){
 		, url : 'userDelete'
 		, success : function(response){
 			if(response == 1) {
-				alert('계정삭제가 완료되었습니다.');
+				alert('ありがとうございました。');
 				location.href="index";
 			}
 		}

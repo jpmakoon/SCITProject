@@ -5,7 +5,7 @@
 
 <html>
 <head>
-	<title>로그인 폼</title>
+	<title>ログイン</title>
  	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
