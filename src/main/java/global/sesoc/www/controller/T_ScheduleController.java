@@ -81,7 +81,9 @@ public class T_ScheduleController {
 	//schedule update
 	@RequestMapping(value="/scheduleUpdate" , method=RequestMethod.GET)
 	public String scheduleUpdate(T_Schedule schedule,Model model) { 	//화면 요청
+		System.out.println("1:"+schedule);
 		T_Schedule s=T_ScheduleRepository.selectOneUserSchedule(schedule);
+		System.out.println("ssss"+s);
 		model.addAttribute("schedule",s);
 		return "schedule/scheduleUpdate";
 	}
