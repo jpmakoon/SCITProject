@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ page import="java.util.Date" %>
     <%@ page import="java.text.SimpleDateFormat" %>
     <%
@@ -40,9 +41,7 @@
    rel="stylesheet">
 <script src="schduleResist/dist/assets/js/dashboard.js"></script>
 
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="jquery"
-   src="schduleResist/dist/assets/js/vendors/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" async=""
    data-requirecontext="_" data-requiremodule="selectize"
    src="schduleResist/dist/assets/js/vendors/selectize.min.js"></script>
@@ -219,6 +218,24 @@ html, body {
    
 
 </script>
+<script type="text/javascript">
+$(function(){
+	var title=$("#hiddenschTitle").val();
+	
+	$('#schTitle').val(title);
+	//document.getElementById("schTitle").innerHTML = title;
+	var con=$("#hiddenschContent").val();
+	
+	document.getElementById("schContent").innerHTML = con;
+	var startdate=$("#hiddenstartdate").val();
+	var endDate=$("#hiddenendDate").val();
+	$('#schStartdate').val(startdate);
+	$('#schEnddate').val(endDate);
+	
+});
+	
+
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -240,8 +257,8 @@ html, body {
                                  <div class="form-group">
                                     <label class="form-label">제목</label> <input type="text"
                                     id="schTitle"
-                                       class="form-control" name="schTitle"
-                                       placeholder="${schedule.schTitle}">                                       
+                                       class="form-control" name="schTitle" value=""
+                                        />                                       
                                  </div>
                                  <input type="hidden" id="plaNum" name="plaNum" value="${schedule.plaNum}">
                                  <input type="hidden" id="schNum" name="schNum" value="${schedule.schNum}">
@@ -249,22 +266,38 @@ html, body {
                                  <br>
                                  <div class="form-group">
                                     <label class="form-label">내용 <span
-                                       class="form-label-small">56/100</span></label>
+                                       class="form-label-small"> </span></label>
                                     <textarea class="form-control" id="schContent" name="schContent"
-                                       rows="6" placeholder="${schedule.schContent }"></textarea>
+                                       rows="6"  ></textarea>
+                                       <input type="hidden" id="hiddenschContent" value="${schedule.schContent}">
+                                      <input type="hidden" id="hiddenschTitle" value="${schedule.schTitle}">
+                                      <input type="hidden" id="hiddenstartdate" value="${schedule.schStartdate}">
+                                      <input type="hidden" id="hiddenendDate" value="${schedule.schEnddate}">
                                  </div>
                                  
                                   
 
                                  <div class="form-group">
                                     <label class="form-label">중요도</label>
-                                    <div class="row gutters-xs">
+             
+                                    <div class="row gutters-xs">    
+                                    <c:if test="${schedule.importance!=1 }">                           
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
-                                             type="radio" value="1" class="colorinput-input" >
+                                             type="radio" value="1" class="colorinput-input"  >
                                              <span class="colorinput-color bg-azure">1</span>
                                           </label>
                                        </div>
+                                       </c:if>
+                                         <c:if test="${schedule.importance==1 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="1" class="colorinput-input" checked="checked"  >
+                                             <span class="colorinput-color bg-azure">1</span>
+                                          </label>
+                                       </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance==2}">
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
                                              type="radio" value="2" class="colorinput-input"> 
@@ -272,55 +305,147 @@ html, body {
                                              class="colorinput-color bg-indigo">2</span>
                                           </label>
                                        </div>
+                                       </c:if>
+                                          <c:if test="${schedule.importance==2 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="2" class="colorinput-input" checked="checked"> 
+                                             <span
+                                             class="colorinput-color bg-indigo">2</span>
+                                          </label>
+                                       </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance!=3}">   
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
                                              type="radio" value="3" class="colorinput-input">
                                              <span class="colorinput-color bg-purple">3</span>
                                           </label>
                                        </div>
+                                       </c:if>
+                                          <c:if test="${schedule.importance==3 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="3" class="colorinput-input" checked="checked">
+                                             <span class="colorinput-color bg-purple">3</span>
+                                          </label>
+                                       </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance!=4 }">   
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
                                              type="radio" value="4" class="colorinput-input">
                                              <span class="colorinput-color bg-pink">4</span>
                                           </label>
                                        </div>
+                                       </c:if>
+                                         <c:if test="${schedule.importance==4 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="4" class="colorinput-input" checked="checked">
+                                             <span class="colorinput-color bg-pink">4</span>
+                                          </label>
+                                       </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance!=5 }">   
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
                                              type="radio" value="5" class="colorinput-input">
                                              <span class="colorinput-color bg-red">5</span>
                                           </label>
                                        </div>
+                                       </c:if>
+                                            <c:if test="${schedule.importance==5 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="5" class="colorinput-input" checked="checked">
+                                             <span class="colorinput-color bg-red">5</span>
+                                          </label>
+                                       </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance!=6 }">   
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
                                              type="radio" value="6" class="colorinput-input">
                                              <span class="colorinput-color bg-orange">6</span>
                                           </label>
                                        </div>
+                                       </c:if>
+                                        <c:if test="${schedule.importance==6 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="6" class="colorinput-input" checked="checked">
+                                             <span class="colorinput-color bg-orange">6</span>
+                                          </label>
+                                       </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance!=7 }">   
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
                                              type="radio" value="7" class="colorinput-input">
                                              <span class="colorinput-color bg-yellow">7</span>
                                           </label>
                                        </div>
+                                       </c:if>
+                                        <c:if test="${schedule.importance==7 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="7" class="colorinput-input" checked="checked">
+                                             <span class="colorinput-color bg-yellow">7</span>
+                                          </label>
+                                       </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance!=8}">   
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
                                              type="radio" value="8" class="colorinput-input">
                                              <span class="colorinput-color bg-lime">8</span>
                                           </label>
                                        </div>
+                                       </c:if>
+                                         <c:if test="${schedule.importance==8 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="8" class="colorinput-input" checked="checked"> 
+                                             <span class="colorinput-color bg-lime">8</span>
+                                          </label>
+                                       </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance!=9 }">   
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
                                              type="radio" value="9" class="colorinput-input">
                                              <span class="colorinput-color bg-green">9</span>
                                           </label>
                                        </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance==9 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="9" class="colorinput-input" checked="checked">
+                                             <span class="colorinput-color bg-green">9</span>
+                                          </label>
+                                       </div>
+                                       </c:if>
+                                       <c:if test="${schedule.importance!=10 }">   
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
                                              type="radio" value="10" class="colorinput-input">
                                              <span class="colorinput-color bg-teal">10</span>
                                           </label>
+                                       </div>
+                                       </c:if>
+                                          <c:if test="${schedule.importance==10 }">
+                                       <div class="col-auto">
+                                          <label class="colorinput"> <input name="importance"
+                                             type="radio" value="10" class="colorinput-input" checked="checked">
+                                             <span class="colorinput-color bg-teal">10</span>
+                                          </label>
                                           
                                        </div>
+                                       </c:if>
+                                     
+                                      
                                        <!-- <input type="hidden"  id="importance" name="importance" value=""> -->
                                     </div>
                                  </div>
@@ -336,7 +461,7 @@ html, body {
                                  <div class="form-group">
                                     <label class="form-label">시작 날짜</label>
                                     <div class="row gutters-xs">
-                                      <input type="date" class="form-control" name="schStartdate"  id="schStartdate">
+                                      <input type="date" class="form-control" name="schStartdate"  id="schStartdate" />
                                  
                                     </div>
                                  </div>
@@ -344,7 +469,7 @@ html, body {
                                  <div class="form-group">
                                     <label class="form-label">끝나는 날짜</label>
                                     <div class="row gutters-xs">
-                                      <input type="date" class="form-control" name="schEnddate"  id="schEnddate">
+                                      <input type="date" class="form-control" name="schEnddate"  id="schEnddate" />
                                     </div>
                                  </div>
 
@@ -356,80 +481,258 @@ html, body {
                                  <div class="form-group">
                                     <label class="form-label">카테고리</label>
                                     <div class="selectgroup selectgroup-pills">
+                                    <c:if test="${schedule.category eq 'Beer'}">
+                                    	<label class="selectgroup-item"> <input
+                                          type="radio"  value="Beer" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Beer</span>
+                                       </label> 
+                                    </c:if>
+                                    <c:if test="${schedule.category ne 'Beer'}">
                                        <label class="selectgroup-item"> <input
                                           type="radio"  value="Beer" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Beer</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category eq 'Date'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio" value="Date" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Date</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Date'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio" value="Date" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Date</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                         <c:if test="${schedule.category eq 'Driving'}">
+                                     <label class="selectgroup-item"> <input
+                                          type="radio"  value="Driving" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Driving</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Driving'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Driving" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Driving</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category eq 'Event'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Event" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Event</span>
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category ne 'Event'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Event" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Event</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category eq 'Exercise'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Exercise" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Exercise</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Exercise'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Exercise" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Exercise</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'Family'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Family" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Family</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Family'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Family" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Family</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'Friendship'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Friendship" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Friendship</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Friendship'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Friendship" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Friendship</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'Game'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Game" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Game</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Game'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Game" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Game</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category eq 'Healing'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio" value="Healing" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Healing</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Healing'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio" value="Healing" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Healing</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                          <c:if test="${schedule.category eq 'Meal'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Meal" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Meal</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Meal'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Meal" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Meal</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                         <c:if test="${schedule.category eq 'Movie'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Movie" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Movie</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Movie'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Movie" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Movie</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'Promise'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio" value="Promise" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Promise</span>
+                                       </label> 
+                                       </c:if>
+                                         <c:if test="${schedule.category ne 'Promise'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio" value="Promise" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Promise</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'Reading'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Reading" name="category"
+                                          class="selectgroup-input"  checked="checked"> <span
+                                          class="selectgroup-button">Reading</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Reading'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Reading" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Reading</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'Shopping'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Shopping" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Shopping</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Shopping'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Shopping" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Shopping</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'Study'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Study" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Study</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Study'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Study" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Study</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'Traveling'}">
+                                        <label class="selectgroup-item"> <input
+                                          type="radio"  value="Traveling" name="category"
+                                          class="selectgroup-input" checked="checked"> <span
+                                          class="selectgroup-button">Traveling</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Traveling'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Traveling" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">Traveling</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'Working'}">
+                                       <label class="selectgroup-item"> <input
+                                          type="radio"  value="Working" name="category"
+                                          class="selectgroup-input" value="Beer" checked="checked"> <span
+                                          class="selectgroup-button">Working</span>
+                                       </label> 
+                                       </c:if>
+                                       <c:if test="${schedule.category ne 'Working'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Working" name="category"
                                           class="selectgroup-input" value="Beer"> <span
                                           class="selectgroup-button">Working</span>
-                                       </label> <label class="selectgroup-item"> <input
+                                       </label> 
+                                       </c:if>
+                                        <c:if test="${schedule.category eq 'others'}">
+                                        <label class="selectgroup-item"> <input
+                                          type="radio" value="others" name="category"
+                                          class="selectgroup-input" checked="checked" > <span
+                                          class="selectgroup-button">others</span>
+                                       </label>
+                                       </c:if>
+                                        <c:if test="${schedule.category ne 'others'}">
+                                       <label class="selectgroup-item"> <input
                                           type="radio" value="others" name="category"
                                           class="selectgroup-input" > <span
                                           class="selectgroup-button">others</span>
                                        </label>
-                                       
+                                       </c:if>
                                     <!--    <input type="hidden"  id="category" name="category" value=""> -->
                                     </div>
                                  </div>
@@ -445,7 +748,7 @@ html, body {
                                     <div class="row gutters-xs">
                                        <div class="col">
                                        <input type="text" class="form-control"
-                                        id="schLocation" placeholder="${schedule.schLocation}" name="schLocation">
+                                        id="schLocation" placeholder="${schedule.schLocation}" name="schLocation" value="${schedule.schLocation }">
                                            </div>
                                             <span class="col-auto">
                                        <button class="btn btn-secondary" type="button"
@@ -538,16 +841,30 @@ html, body {
                                  <br>
                                  <div class="form-group">
                                     <div class="form-label">공유 여부</div>
+                                    <c:if test="${schedule.shareable==0}">
                                     <div>
                                        <label
                                           class="custom-control custom-checkbox custom-control-inline">
                                           <input type="checkbox" class="custom-control-input"
-                                          name="shareable" value="" checked="" id ="shareable">
+                                          name="shareable" value=""  id ="shareable">
                                           <span class="custom-control-label">공유함</span>
                                           
                                        </label>
 
                                     </div>
+                                    </c:if>
+                                    <c:if test="${schedule.shareable==1}">
+                                    <div>
+                                       <label
+                                          class="custom-control custom-checkbox custom-control-inline">
+                                          <input type="checkbox" class="custom-control-input"
+                                          name="shareable" value="" checked="checked" id ="shareable">
+                                          <span class="custom-control-label">공유함</span>
+                                          
+                                       </label>
+
+                                    </div>
+                                    </c:if>
                                  </div>
 
 

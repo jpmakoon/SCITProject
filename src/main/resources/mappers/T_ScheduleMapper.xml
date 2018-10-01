@@ -18,9 +18,9 @@
 		schedule.CATEGORY CATEGORY,
 		schedule.SCHLOCATION SCHLOCATION, 
 		SUBSTR(schedule.schstartdate, 4,2) MONTH
-	FROM T_SCHEDULE schedule,T_PLIST plist
-	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
-	ORDER BY PLANUM  
+		FROM T_SCHEDULE schedule,T_PLIST plist
+		WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
+		ORDER BY PLANUM  
 </select>
 <select id="select" parameterType="map" resultType="schedule">
 	SELECT 
@@ -89,7 +89,20 @@
     (SELECT PLANUM FROM T_PLIST WHERE USERID=#{userId})
 	</select>
 	<select id="selectOneUserSchedule" parameterType="schedule" resultType="schedule">
-	SELECT *FROM T_SCHEDULE WHERE SCHNUM=#{schNum}
+	SELECT 
+	 SCHNUM, SCHNUM,
+	 SCHTITLE SCHTITLE,
+     SCHCONTENT SCHCONTENT,
+     TO_CHAR(SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
+     TO_CHAR(SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
+     TO_CHAR(SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
+     IMPORTANCE IMPORTANCE,
+     CHECKED CHECKED,
+     SHAREABLE SHAREABLE,
+     PLANUM PLANUM,
+     CATEGORY CATEGORY,
+     SCHLOCATION SCHLOCATION 
+	FROM T_SCHEDULE WHERE SCHNUM=#{schNum}
 	</select>
 	<select id="selectPlannerSchedule" parameterType="int" resultType="schedule">
 	 select *from T_SCHEDULE WHERE PLANUM=#{plaNum}

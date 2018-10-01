@@ -17,5 +17,27 @@
 	WHERE REQUESTER=#{requester}
 	OR REQACCEPTER=#{reqAccepter}
 	</select>
+	<select id="isCalendarShare" parameterType="string" resultType="request">
+	SELECT *FROM T_REQUEST
+	WHERE ISACCEPTED=0
+	AND REQACCEPTER=#{reqAccepter}
+	</select>
+	<select id="shareCal" parameterType="string" resultType="request">
+	SELECT *FROM T_REQUEST
+	WHERE ISACCEPTED=1
+	AND REQACCEPTER=#{reqAccepter}
+	</select>
+	<update id="calendarAccept" parameterType="request">
+	UPDATE T_REQUEST
+	SET
+	ISACCEPTED=1
+	WHERE REQACCEPTER=#{reqAccepter}
+	AND REQUESTER=#{requester}
+	</update>
+	<delete id="delShareCal" parameterType="request">
+	DELETE FROM T_REQUEST 
+	WHERE REQACCEPTER=#{reqAccepter}
+	AND REQUESTER=#{requester}
+	</delete>
 </mapper>
 

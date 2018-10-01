@@ -6,6 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+.dropdown-item{text-align: right;}
+</style>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>ticks ticks main</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -16,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
+
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -40,6 +44,7 @@ $(function(){
 	
 });
 </script>
+
 <body>
 		<input type="hidden" name="loginId" id="loginId" value="${sessionScope.loginId}">
 		<div class="main-header">
@@ -65,6 +70,16 @@ $(function(){
 						</div>
 					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+					<li class="nav-item dropdown hidden-caret">	<!-------------------------------- calendar toggle ------------------------------>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<img alt="" src="resources/calendar_icon.png" id="isCalendarShare">
+									
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown1" id="calShareList">	<!-- 알림 구현이 끝나면 메세지도 만들기 메세지방보여주기, c:if 새로운 레코드가 추가되면 알려주기 -->
+								
+								
+							</div>
+						</li>
 						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- message toggle ------------------------------>
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-envelope"></i>
@@ -173,28 +188,17 @@ $(function(){
 						</li>
 						<li class="nav-item">
 							<div class="info">
-							<a class="" data-toggle="collapse" href="#sp" aria-expanded="true">
+							<a class="shareCal" data-toggle="collapse" href="#sp" aria-expanded="true">
 									<i class="la la-chain"></i>
 									<span class="user-level">공유 플래너</span>
 									<div class= "caretDiv">
 										<span class="caret" style=""></span>
 									</div>
 							</a>
-							<div class="clearfix"></div>
+							<div class="clearfix" id="calShareUserList"></div>
 
-							<div class="collapse in" id="sp" aria-expanded="true" style="">
-								<ul class="nav">
-									<li>
-										<a href="#profile">
-											<span class="link-collapse">1</span>
-										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">2</span>
-										</a>
-									</li>
-								</ul>
+							<div class="collapse in"  aria-expanded="true" style="">
+								
 							</div>
 						</div>
 						</li>
@@ -243,7 +247,7 @@ $(function(){
 								<p>패턴 관리</p>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item" >
 							<a href="typography.html">
 								<i class="la la-gear"></i>
 								<p>회원 설정</p>
@@ -288,7 +292,21 @@ $(function(){
       });
 	reqCheck();
 });
-
+$(function(){
+	$.ajax({
+		method:'post',
+		url:'isCalendarShare',
+		success:function(r){
+			var shareList='';
+			shareList +='<a class="dropdown-item" href="isShareRequest">calendar 공유리스트</a>';
+			for ( var i in r) {
+				
+				shareList +='<div class="dropdown-item" >'+r[i].requester+'</div>';
+			}
+			$("#calShareList").html(shareList);
+		}
+	});
+});
 function reqCheck(){
 	$.ajax({
 		method : 'post'
@@ -403,7 +421,35 @@ $(document).on("click", "#dangerBtn", function(){
 		})
 	}
 });
-
+$(function(){
+	$('.shareCal').on('click',function(){
+		
+		$.ajax({
+			method:'post',
+			url:'shareCal',
+			contentType : 'application/json; charset=UTF-8',
+			success:function(r){
+				
+				
+				
+				
+				var inputData='';
+				inputData +='<ul class="nav" >';
+				for ( var i in r) {
+					inputData +='<li>';
+					inputData +='<a href="shareCalendar?requester='+r[i].requester+'">';
+					inputData +='<span class="link-collapse">'+r[i].requester+'</span>';
+					inputData +='</a></li>';
+				}
+				inputData +='</ul>';
+				$("#calShareUserList").html(inputData);
+				$("#calShareUserList").removeClass("clearfix").addClass("clearfix_open");
+			}
+		});
+	});
+	
+});
 </script>
+
 </body>
 </html>
