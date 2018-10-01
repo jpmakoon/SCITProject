@@ -2288,7 +2288,7 @@ body {
 }
 .sidebar .nav .nav-item a:hover, .sidebar .nav .nav-item a:focus {
   text-decoration: none;
-  background: #fbfbfb;
+  background: #828080;
 }
 .sidebar .nav .nav-item:hover a:before {
   background: #1d7af3;
@@ -6927,4 +6927,29 @@ body {
   padding-left: 30px;
 }
 
+/* group ========================================================== */
+.groupBtn{
+	padding-bottom: 10px;
+}
+
+#groupDiv{
+	display: flex;
+}
+#group1Div{
+	width: 53%;
+  	height: 755px;
+	color : #343a40;
+	max-height: 100%;
+}
+
+#group2Div{
+  width : 45%;
+  height : 755px;
+  color : #343a40;
+  padding-left: 20px;
+}
+
+.postDiv{
+	margin: 0 auto;
+}
 /*# sourceMappingURL=ready.css.map */

@@ -247,24 +247,6 @@ function replyInsert(){ //컨트롤로 가게 하는 경로
 		     navLinks: true, // can click day/week names to navigate views
 		     selectable: true,
 		     selectHelper: true,
-		     select: function(start, end) {
-		       var title = prompt('스케줄 타이틀:');
-		       
-		        var content = prompt('스케줄 내용:'); 
-		       
-		       var eventData;
-		       if (title) {
-		         eventData = {
-		          
-		           title: title,
-		           content: content, 
-		           start: start,
-		           end: end
-		         };
-		         $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-		       }
-		       $('#calendar').fullCalendar('unselect');
-		     },
 		     editable: true,
 		     eventLimit: true, // allow "more" link when too many events
 		     

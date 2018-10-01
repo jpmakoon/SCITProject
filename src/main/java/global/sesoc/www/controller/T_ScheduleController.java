@@ -62,14 +62,17 @@ public class T_ScheduleController {
 		model.addAttribute("plaNum",s.getPlaNum());
 		return "schedule/insertSchedule";
 	}
+	
+	
 	@RequestMapping(value="/insertSchedule", method=RequestMethod.POST)
-	public String insertSchedule(T_Schedule s,Model model, HttpSession session) {	//schedule insert -- db
+	public String insertSchedule(T_Schedule s, Model model, HttpSession session) {	//schedule insert -- db
 		String userId=(String)session.getAttribute("loginId");
 		
 		List<T_Planner> plannerList=T_PlannerRepository.plannerList(userId);
+		System.out.println("플래너플래너" + plannerList);
 		model.addAttribute("plannerList",plannerList);
 		
-		int result= T_ScheduleRepository.insertSchedule(s);
+		int result = T_ScheduleRepository.insertSchedule(s);
 	
 		return "schedule/plannerList";
 	}

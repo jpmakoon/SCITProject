@@ -6051,7 +6051,6 @@ button.bg-dark:focus {
 
 .d-flex {
   display: -ms-flexbox !important;
-  display: flex !important;
 }
 
 .d-inline-flex {
@@ -7642,7 +7641,7 @@ button.bg-dark:focus {
 
 .ml-auto,
 .mx-auto {
-  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 @media (min-width: 576px) {

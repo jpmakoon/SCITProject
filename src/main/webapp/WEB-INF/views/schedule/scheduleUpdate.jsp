@@ -465,7 +465,51 @@ html, body {
                                        id="place-address"></span>
                                  </div>
 
-                                 <script>
+                                
+
+
+
+                                 <br>
+                                 <div class="form-group">
+                                    <div class="form-label">공유 여부</div>
+                                    <div>
+                                       <label
+                                          class="custom-control custom-checkbox custom-control-inline">
+                                          <input type="checkbox" class="custom-control-input"
+                                          name="shareable" value="" checked="" id ="shareable">
+                                          <span class="custom-control-label">공유함</span>
+                                          
+                                       </label>
+
+                                    </div>
+                                 </div>
+
+
+                              </div>
+                           </div>
+                        </div>
+                        <div class="card-footer text-right">
+                           <div class="d-flex">
+                              <a href="javascript:void(0)" class="btn btn-link">Cancel</a>
+                              <input type="submit" class="btn btn-primary ml-auto" value="Schdule update" />
+                           </div>
+                        </div>
+                     </form>
+
+                  </div>
+
+
+
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+   </div>
+   
+
+ <script>
                                     var infoWindow;
                                     var markers = [];
                                     var map;
@@ -529,50 +573,8 @@ html, body {
                                        }
                                     }
                                  </script>
-                                 <script
-                                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMznx2aLBJ_JHzvyCml6LMwP_yHkigeqc&libraries=places&callback=initMap"
-                                    async defer></script>
-
-
-
-                                 <br>
-                                 <div class="form-group">
-                                    <div class="form-label">공유 여부</div>
-                                    <div>
-                                       <label
-                                          class="custom-control custom-checkbox custom-control-inline">
-                                          <input type="checkbox" class="custom-control-input"
-                                          name="shareable" value="" checked="" id ="shareable">
-                                          <span class="custom-control-label">공유함</span>
-                                          
-                                       </label>
-
-                                    </div>
-                                 </div>
-
-
-                              </div>
-                           </div>
-                        </div>
-                        <div class="card-footer text-right">
-                           <div class="d-flex">
-                              <a href="javascript:void(0)" class="btn btn-link">Cancel</a>
-                              <input type="submit" class="btn btn-primary ml-auto" value="Schdule update" />
-                           </div>
-                        </div>
-                     </form>
-
-                  </div>
-
-
-
-               </div>
-            </div>
-         </div>
-      </div>
-
-
-   </div>
-   
+                                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMznx2aLBJ_JHzvyCml6LMwP_yHkigeqc&libraries=places&callback=initMap" async defer>
+                                 </script>
 </body>
 </html>
+                                

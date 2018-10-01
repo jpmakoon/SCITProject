@@ -14,8 +14,6 @@
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" type="text/css" href="group/styles/bootstrap4/bootstrap.min.css">
-<link href="group/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="group/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="group/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="group/plugins/OwlCarousel2-2.2.1/animate.css">
@@ -28,52 +26,21 @@
 <script src='resources/lib/moment.min.js'></script>
 <script src='resources/calendar/fullcalendar.min.js'></script>
 
-<!-- 각종 버튼들 -->
-   
-   <script src="resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-   <script src="resources/assets/js/core/popper.min.js"></script>
-   <script src="resources/assets/js/core/bootstrap.min.js"></script>
- 
-   <script src="resources/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-   <script src="resources/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-   <script src="resources/assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-   <script src="resources/assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-   <script src="resources/assets/js/plugin/chart-circle/circles.min.js"></script>
-   <script src="resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-   <script src="resources/assets/js/ready.min.js"></script>
-
-
-
 <!-- Dashboard Core -->
-<link href="schduleResist/dist/assets/css/dashboard.css"
-   rel="stylesheet">
+<link href="schduleResist/dist/assets/css/dashboard.css" rel="stylesheet">
 <script src="schduleResist/dist/assets/js/dashboard.js"></script>
 
 
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="selectize"
-   src="schduleResist/dist/assets/js/vendors/selectize.min.js"></script>
-<link type="text/css" rel="stylesheet" charset="UTF-8"
-   href="https://translate.googleapis.com/translate_static/css/translateelement.css">
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="bootstrap"
-   src="schduleResist/dist/assets/js/vendors/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="core"
-   src="schduleResist/dist/assets/js/core.js"></script>
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="input-mask"
-   src="schduleResist/dist/assets/plugins/input-mask/js/jquery.mask.min.js"></script>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="selectize" src="schduleResist/dist/assets/js/vendors/selectize.min.js"></script>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bootstrap" src="schduleResist/dist/assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="core" src="schduleResist/dist/assets/js/core.js"></script>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="input-mask" src="schduleResist/dist/assets/plugins/input-mask/js/jquery.mask.min.js"></script>
 <script type="text/javascript">
 function schCheck() {
     var title=$("#schTitle").val();// #은 아이디, .은 클래스
     var content=$("#schContent").val();
     var startDate=$("#schStartdate").val();
     var endDate=$("#schEnddate").val();
- 
-    
-
- 
     
     if (title.trim().length==0){
        alert("제목을 입력해주세요")
@@ -82,10 +49,8 @@ function schCheck() {
     
     if(content.trim().length==0){
        alert("내용을 입력해주세요");
-       
        return false;
     }
-    
     
     var startDate1=startDate.split("-");
     var startDateNum='';
@@ -115,10 +80,8 @@ function schCheck() {
     alert("마감일을 정해주세요.");
     return false;
     }
-    
-
-       
  }
+ 
 $(function(){
 		
 	   $('.fe-chevron-up').on('click',function(){
@@ -303,8 +266,6 @@ $(function(){
 				$(this).removeClass('fe-chevron-up_opened').addClass('fe-chevron-up');
 			});
 		    
-
-
 	   //플래너 삭제
 	   $(".fe-x").on('click',function(){
 		  var message = confirm("정말로 삭제하시겠습니까?");
@@ -382,8 +343,6 @@ $(function(){
 	                inputData += '</div></div></div></div></div><input type="button" data-rno="'+allnum+'" id="updateSchedule" class="btn btn-primary ml-auto" value="자세히 수정" /></div>';
 	                
 	                $('.scheduleUpdate').html(inputData);
-
-				   
 				}
 			});
 			
@@ -455,9 +414,6 @@ $(function(){
 	     $('.fc-header-toolbar').remove();
 	     $('.fc-view-container').remove();
 	     //calendar 다시 실행시켜야 하는 부분
-	      
-	  
-	        
 	     
 	    /*  var ass = $(".fc-content").parents('a').attr('class');
 	    alert(ass);  */
@@ -534,7 +490,7 @@ $(function(){
 /* #cal{display: flex;} */
 .col-lg-4{width: 200px; }
 .card-header{padding-left:70px;}
-.col-lg-4{
+/* .col-lg-4{
 padding-left:90px;
 width: 300px;}
 .col-lg-4{padding-right: 5px; padding-left: 2px;}
@@ -546,7 +502,7 @@ width: 300px;}
 	}
 	.ctitle{align-items: flex-start;}
 	.closeimg{align-items: flex-end; }
-
+ */
 div.course_mark trans_200{
 	position:absolute;
 	left:700px;
@@ -559,9 +515,9 @@ div.course_mark trans_200{
          <div class="main-panel">
            <div class="content"> 
             <div class="course_mark trans_200" id="plannerInsertBtn" style="position:relative; width:100px; top:50px; left:1000px; ">
-            	<a data-rno="${group.groNum}" class="#" href="insertPlanner" >planner 만들기</a>
-            </div>
-			<br><br>
+            	<a data-rno="${group.groNum}" class="#" href="insertPlanner" >CREATE PLANNER</a></div>
+            <div class="row" style="top:70px">
+			
               <c:forEach var="planner" items="${plannerList }" varStatus="st">
 	             <div class="col-md-2">
               	  	<div class="card card-collapsed">
@@ -579,6 +535,7 @@ div.course_mark trans_200{
                 		</div>
               		</div>
           	</c:forEach>
+          	</div>
             <br><br><br>
  			<div id="cal">
             	<div id="calendar">
@@ -587,6 +544,7 @@ div.course_mark trans_200{
             </div>
           </div>
         </div>
-     </div>
+        </div>
+     
 </body>
 </html>

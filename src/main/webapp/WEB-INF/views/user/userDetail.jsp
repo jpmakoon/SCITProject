@@ -88,7 +88,9 @@
 								</div>
 							</form>
 										<div id="button" class="card-action">
+										<c:if test="${sessionScope.loginId} == ${user.userId}">
 											<input type="button" id="edit" class="btn btn-success" value="Edit" onclick="edit()" />
+										</c:if>
 										</div>
 									</div>
 								</div>
