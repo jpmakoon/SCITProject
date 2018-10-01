@@ -1032,7 +1032,7 @@ pre code {
   .col-md-2 {
     -ms-flex: 0 0 16.66666667%;
     flex: 0 0 16.66666667%;
-    max-width: 16.66666667%;
+    max-width: 20%;
   }
   .col-md-3 {
     -ms-flex: 0 0 25%;

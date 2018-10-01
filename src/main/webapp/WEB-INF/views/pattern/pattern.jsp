@@ -188,9 +188,10 @@ $(document).ready(function() {
    
       //getJson으로 데이터
       $.getJSON("./getCategory", {
-         userId    : sessionId,
+         userId    : userId,
          checked : checked
       }, function(data) {
+    	  console.log("ddddd"+data);
          var i = 0;
          var temp = [];
             $.each(data, function(key, value) {
@@ -278,6 +279,7 @@ $(document).ready(function() {
          }
          createChart();
          secondDiv();
+         console.log("확인"+chartLabels);
       });
    })
    $(document).on('click','#btn2', function(){
@@ -487,6 +489,11 @@ $(document).ready(function() {
            }
         }
         console.log(category);
+        
+        if (cateory.equals(date)) {
+			category = "데이트";
+			alert('변환완료!!!!');
+		}
         
 		$('#secondDiv').html('');
 		var sessionName = $('#sessionName').val();

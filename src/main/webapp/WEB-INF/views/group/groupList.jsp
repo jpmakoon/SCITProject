@@ -18,7 +18,6 @@
 <link rel="stylesheet" type="text/css" href="group/plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="group/styles/courses.css">
 <link rel="stylesheet" type="text/css" href="group/styles/courses_responsive.css">
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.applyUser').on('click',function(){
@@ -29,7 +28,7 @@ $(function(){
 		$.ajax({
 			method:'post',
 			url:'checkGrequest',
-			data:JSON.stringify(sendData),
+// 			data:JSON.stringify(sendData),
 			dataType:'json',
 			contentType:'application/json;charset=utf-8',
 			success:function(r){
@@ -125,7 +124,7 @@ $(function(){
 
          <div class="row">
             <div class="col">
-               <div class="load_more_button"><a href="#">load more</a></div>
+                <div class="load_more_button"><a href="insertGroup">NEW グループ</a></div> 
             </div>
          </div>
       </div>
@@ -134,7 +133,6 @@ $(function(){
    
 </div>
 
-<script src="group/js/jquery-3.3.1.min.js"></script>
 <script src="group/styles/bootstrap4/popper.js"></script>
 <script src="group/styles/bootstrap4/bootstrap.min.js"></script>
 <script src="group/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>

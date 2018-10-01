@@ -32,7 +32,6 @@
 <link rel="stylesheet" type="text/css" href="group/styles/courses_responsive.css">
 
 
-<title>Insert title here</title>
 <script type="text/javascript">
 function checkPlanner() {
 	var title = document.getElementById("plaTitle").value;
@@ -50,13 +49,13 @@ function checkPlanner() {
 		
 		<table>
 			<tr>
-				<td>title </td>
+				<td>プランナー名前 </td>
 				<td><input class="input100" id="plaTitle" type="text" name="plaTitle" ></td>
 			</tr>
 		
 			<tr>
 				<td colspan="2">
-				<input type="submit" value="planner 생성"/>
+				<input type="submit" value="create"/>
 				</td>
 			</tr>
 		</table>

@@ -4,10 +4,8 @@ package global.sesoc.www.controller;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -80,7 +78,9 @@ public class T_ScheduleController {
 	//schedule update
 	@RequestMapping(value="/scheduleUpdate" , method=RequestMethod.GET)
 	public String scheduleUpdate(T_Schedule schedule,Model model) { 	//화면 요청
+		System.out.println("1:"+schedule);
 		T_Schedule s=T_ScheduleRepository.selectOneUserSchedule(schedule);
+		System.out.println("ssss"+s);
 		model.addAttribute("schedule",s);
 		return "schedule/scheduleUpdate";
 	}
@@ -143,11 +143,12 @@ public class T_ScheduleController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/deleteSchedule", method=RequestMethod.POST)
-	public String deleteSchedule(@RequestBody T_Schedule schedule) {
-		
+	public int deleteSchedule(@RequestBody T_Schedule schedule) {
+		System.out.println(schedule);
+		System.out.println(schedule.getSchNum());
 		int result=T_ScheduleRepository.deleteSchedule(schedule.getSchNum());
-		
-		return "삭제했습니다.";
+		System.out.println(result);
+		return result;
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectMixSchedule", method=RequestMethod.POST)

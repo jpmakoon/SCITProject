@@ -1,42 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <%@ page import="java.util.Date" %>
-   <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@include file="../basicFrame.jsp" %>
  <%
     Date nowTime=new Date();
-    SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sf=new SimpleDateFormat("YYYY-MM-DD");
     %>
 <!DOCTYPE html>
 
 <html>
 <head>
 <meta charset="UTF-8">
-
-
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta http-equiv="Content-Language" content="en">
-<meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="theme-color" content="#4188c9">
-<meta name="apple-mobile-web-app-status-bar-style"
-   content="black-translucent">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<link rel="icon" href="schduleResist/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" type="image/x-icon"
-   href="schduleResist/favicon.ico">
-<!-- Generated: 2018-04-16 09:29:05 +0200 -->
-<title>tabler.github.io - a responsive, flat and full featured
-   admin template</title>
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
 
 <link rel="stylesheet" type="text/css" href="group/styles/bootstrap4/bootstrap.min.css">
 <link href="group/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -46,22 +22,13 @@
 <link rel="stylesheet" type="text/css" href="group/styles/courses.css">
 <link rel="stylesheet" type="text/css" href="group/styles/courses_responsive.css">
 
-
 <!-- 캘린더 부분 -->
 <link href='resources/calendar/fullcalendar.min.css' rel='stylesheet' />
 <link href='resources/calendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 <script src='resources/lib/moment.min.js'></script>
-<script src="resources/jquery-3.3.1.min.js"></script>
 <script src='resources/calendar/fullcalendar.min.js'></script>
 
 <!-- 각종 버튼들 -->
-   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-   
-   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-   <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-   <link rel="stylesheet" href="resources/assets/css/ready.css">
-   <link rel="stylesheet" href="resources/assets/css/demo.css">
    
    <script src="resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
    <script src="resources/assets/js/core/popper.min.js"></script>
@@ -74,12 +41,6 @@
    <script src="resources/assets/js/plugin/chart-circle/circles.min.js"></script>
    <script src="resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
    <script src="resources/assets/js/ready.min.js"></script>
-
-
-
-
-
-
 
 
 
@@ -103,6 +64,7 @@
 <script type="text/javascript" charset="utf-8" async=""
    data-requirecontext="_" data-requiremodule="input-mask"
    src="schduleResist/dist/assets/plugins/input-mask/js/jquery.mask.min.js"></script>
+
 <script type="text/javascript">
 function schCheck() {
     var title=$("#schTitle").val();// #은 아이디, .은 클래스
@@ -171,18 +133,6 @@ $(function(){
 	      var inputData='';
 	      inputData+='<input type="button" class="insertSchedule" data-rno="'+plaNum+'" value="스케줄 만들기">';
       		$("#"+plaNum).html(inputData);
-	   	  /*  $.ajax({
-	         method:'post',
-// 	         url:'selectUserPlannerSchedule',
-	         data:JSON.stringify(sendData),
-	         dataType:'json',
-	         contentType:'application/json;charset=utf-8',
-	         success:function(sch){  
-	            	            
-	            
-	         }   	
-	      });  */ 
-	      
 	      
 	      //$(this).removeClass('fe-chevron-up').addClass('fe-chevron-up_opened');
       		 $('#calendar').fullCalendar({
@@ -195,24 +145,6 @@ $(function(){
                  navLinks: true, // can click day/week names to navigate views
                  selectable: true,
                  selectHelper: true,
-                 select: function(start, end) {
-                   var title = prompt('스케줄 타이틀:');
-                   
-                    var content = prompt('스케줄 내용:'); 
-                   
-                   var eventData;
-                   if (title) {
-                     eventData = {
-                      
-                       title: title,
-                       content: content, 
-                       start: start,
-                       end: end
-                     };
-                     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                   }
-                   $('#calendar').fullCalendar('unselect');
-                 },
                  editable: true,
                  eventLimit: true, // allow "more" link when too many events
                  
@@ -241,11 +173,13 @@ $(function(){
                             
                          });
                          var a=$(this).attr('class');
+                        console.log("dd"+a);
                          var b=parseInt(a.substring(57,a.length-13));
+                         console.log(b);
                          var sendData={
                             'schNum':b   
                          };
-                       
+                         console.log(sendData);
                          //ajax 사용해서 db에서 지워주기
                          $.ajax({
                             method:'post',
@@ -253,17 +187,17 @@ $(function(){
                             data:JSON.stringify(sendData),
                             dataType:'json',
                             contentType:'application/json; charset:utf-8',
-                            suceess:function(r){
-                               if(r != 1){
-                            	   alert('삭제 실패');
-                               }
+                            suceess:function(response){
+								if(response == 1){
+									alert('削除されました。');
+								}
                             }
                          });
                          /* code here */
                          ///////////////////////
                          
-                         alert('삭제성공!');
-                         }else
+                         }
+                         else
                             return false;
                      }
                     
@@ -374,6 +308,8 @@ $(function(){
 
 	   //플래너 삭제
 	   $(".fe-x").on('click',function(){
+		  var message = confirm("정말로 삭제하시겠습니까?");
+		  if(message==true){
 		  var plaNum=$(this).parents().parents().parents().parents().children(".card-body").attr('id');
 		  var sendData={'plaNum':plaNum};
 		  
@@ -386,6 +322,9 @@ $(function(){
 			 success:function(res){	 
 			 }
 		  }); 
+		  }
+		  else
+			  return false;
 	   });
 	   
 	   $(document).on('click','.insertSchedule',function(){
@@ -411,35 +350,17 @@ $(function(){
 					inputData += '<div class="page"><div class="page-main"><div class="my-3 my-md-5"><div class="container"><div class="row"><div class="col-12">';
 					inputData +='<div class="card-header"><div class="ctitle"><h3 class="card-title">스케줄 수정</h3></div> <div class="closeimg"><img alt="" src="resources/close.png" class="closeDetail"></div>	';
 					inputData += '</div><div class="card-body"><div class="row"><div class="col-md-6 col-lg-4"><div class="form-group">';
-					inputData += '<label class="form-label">제목</label> <input type="text" id="schTitle" class="form-control" name="schTitle" placeholder="'+sch.schTitle+'"></div>';   
+					inputData += '<label class="form-label">제목</label> <input type="text" id="schTitle" class="form-control" name="schTitle" value="'+sch.schTitle+'"></div>';   
 					inputData +='<input type="hidden" id="plaNum" name="plaNum" value="'+sch.plaNum+'"><input type="hidden" id="schNum" name="schNum" value="'+sch.schNum+'"><br>';
 					inputData +='<div class="form-group"> <label class="form-label">내용 <span class="form-label-small">56/100</span></label>';
-					inputData +='<textarea class="form-control" id="schContent" name="schContent" rows="6" placeholder="'+sch.schContent+'"></textarea></div>';    
-					
-					inputData +='</div><div class="col-md-6 col-lg-4"> <div class="form-group"><label class="form-label">시작 날짜</label><div class="row gutters-xs"> <input type="date" class="form-control" name="schStartdate"  id="schStartdate"></div></div>';         
+					inputData +='<textarea class="form-control" id="schContent" name="schContent" rows="6" >'+sch.schContent+'</textarea>';    
+					inputData +='<input type="hidden" id="hiddenschContent" value="'+sch.schContent+'">';
+					inputData +='<input type="hidden" id="hiddenschTitle" value="'+sch.schTitle+'">';
+					inputData +='<input type="hidden" id="hiddenstartdate" value="'+sch.schStartdate+'">';
+					inputData += '<input type="hidden" id="hiddenendDate" value="'+sch.schEnddate+'"></div>';
+					inputData +='</div><div class="col-md-6 col-lg-4"> <div class="form-group"><label class="form-label">시작 날짜</label><div class="row gutters-xs"> <input type="date" class="form-control" name="schStartdate"  id="schStartdate" value="'+sch.schStartdate+'" /></div></div>';         
 					inputData +='<div class="form-group"><label class="form-label">끝나는 날짜</label><div class="row gutters-xs"><input type="date" class="form-control" name="schEnddate"  id="schEnddate" value="'+sch.schEnddate+'"></div></div>';                                
-					/* inputData +='<div class="form-group"><label class="form-label">카테고리</label><div class="selectgroup selectgroup-pills">';	
-					var cate=['Beer','Date','Driving','Event','Exercise','Family','Friendship','Game','Healing','Meal','Movie','Promise','Reading','Shopping','Study','Traveling','Working','others'];
-	 
-					var inputDataCate='';
-					for (var i = 0; i < cate.length; i++) {
-						inputDataCate += '<label class="selectgroup-item"> <input type="radio"  value="'+cate[i]+'" name="category" class="selectgroup-input" > <span class="selectgroup-button">'+cate[i]+'</span></label>';
-					}	
-					inputData += inputDataCate;
-					inputData +='</div></div></div>'; 
-	                                               
-					inputData +='<div class="col-md-6 col-lg-4"><label class="form-label">위치</label><div class="form-group"><div class="row gutters-xs"><div class="col">';
-					inputData +='<input type="text" class="form-control" id="schLocation" placeholder="'+sch.schLocation+'" name="schLocation"></div>';
-					inputData +='<span class="col-auto"><button class="btn btn-secondary" type="button" onclick="initMap()"><i class="fe fe-search"></i></button></span></div></div>';
-					inputData +='<div id="map"></div><div id="infowindow-content"><span id="place-name" class="title"></span><br> PlaceID <span id="place-id"></span><br><span id="place-address"></span></div>';
-					
 				
-						
-					inputData +='<br><div class="form-group"><div class="form-label">공유 여부</div><div><label class="custom-control custom-checkbox custom-control-inline">';
-	                inputData +='<input type="checkbox" class="custom-control-input" name="shareable" value="" checked="" id ="shareable"> <span class="custom-control-label">공유함</span>';
-	         	    inputData +='</label></div></div></div></div></div><div class="card-footer text-right"><div class="d-flex"><a href="javascript:void(0)" class="btn btn-link">Cancel</a>';
-	             	inputData +='';
-	                inputData +='</div></div> */
 	                inputData +='<input type="button" data-rno="'+allnum+'" id="updateSchedule2" class="btn btn-primary ml-auto" value="Schdule update"  /><br/>';
 	                inputData += '</div></div></div></div></div><input type="button" data-rno="'+allnum+'" id="updateSchedule" class="btn btn-primary ml-auto" value="자세히 수정" /></div>';
 	                
@@ -535,6 +456,7 @@ $(function(){
  	});
 });
 </script>
+
 <style type="text/css">
  #calendar {
    		color:black;
@@ -560,12 +482,6 @@ $(function(){
    height: 300px;
 }
 /* Optional: Makes the sample page fill the window. */
-html, body {
-   height: 100px;
-   margin: 0;
-   padding: 0;
-}
-
 .controls {
    background-color: #fff;
    border-radius: 2px;
@@ -599,7 +515,7 @@ html, body {
 #map #infowindow-content {
    display: inline;
 }
-#cal{display: flex;}
+/* #cal{display: flex;} */
 .col-lg-4{width: 200px; }
 .card-header{padding-left:70px;}
 .col-lg-4{
@@ -615,52 +531,46 @@ width: 300px;}
 	.ctitle{align-items: flex-start;}
 	.closeimg{align-items: flex-end; }
 
+div.course_mark trans_200{
+	position:absolute;
+	left:700px;
+	top:50px;
+}
+
 </style>
 </head>
 <body>
-   
          <div class="main-panel">
-         
-            <div class="content">
-            <div class="container-fluid">
-               <div class="row">
-              
-              <c:forEach var="planner" items="${plannerList }" varStatus="st">
-
-              <div class="col-md-6 col-xl-4">
-                <div class="card card-collapsed">
-                  <div class="card-status bg-blue"></div>
-                  <div class="card-header">
-                    <h3 class="card-title">${planner.plaTitle}</h3>
-                    <div class="card-options">
-                      <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up" ></i></a>
-                      <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x" ></i></a>
-                    </div>
-                  </div>
-                  <div class="card-body" id="${planner.plaNum}">
-                  
-                   
-                         
-                  
-                  </div>
-                </div>
-              </div>
-              
-          </c:forEach>
-           <div class="course_mark trans_200" id="plannerInsertBtn" style="width:100px; "><a data-rno="${group.groNum}" class="#" href="insertPlanner" >planner 만들기</a></div>
-</div>
- 
+           <div class="content"> 
+            <div class="course_mark trans_200" id="plannerInsertBtn" style="position:relative; width:100px; top:50px; left:1000px; ">
+            	<a data-rno="${group.groNum}" class="#" href="insertPlanner" >planner 만들기</a>
             </div>
-            	  
+			<br><br>
+              <c:forEach var="planner" items="${plannerList }" varStatus="st">
+	             <div class="col-md-2">
+              	  	<div class="card card-collapsed">
+                  		<div class="card-status bg-blue"></div>
+                 			<div class="card-header">
+                    			<h3 class="card-title">${planner.plaTitle}</h3>
+                    			<div class="card-options">
+                      				<a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up" ></i></a>
+                      				<a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x" ></i></a>
+                    			</div>
+                  			</div>
+                  			<div class="card-body" id="${planner.plaNum}">
+                  
+                  			</div>
+                		</div>
+              		</div>
+          	</c:forEach>
+            <br><br><br>
  			<div id="cal">
-            <div id="calendar"></div><br/>
-            <div class="scheduleUpdate"></div>
-          	</div>
-               </div>
-             
-           		 </div>
-		
-		
-<script src="assets/js/core/bootstrap.min.js"></script>
+            	<div id="calendar">
+            	</div><br/>
+            <div class="scheduleUpdate">
+            </div>
+          </div>
+        </div>
+     </div>
 </body>
 </html>
