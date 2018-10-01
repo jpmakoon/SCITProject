@@ -13,8 +13,8 @@
          <div class="main-panel">
             <div class="content">
               
-               </div>
-            </div>
+             </div>
+         </div>
 
 <script src="assets/js/core/bootstrap.min.js"></script>
 </body>

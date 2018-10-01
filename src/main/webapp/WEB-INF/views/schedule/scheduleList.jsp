@@ -6,7 +6,6 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>jQuery UI Draggable</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <style>
   #drag_wrap {width:500px; height:300px; border: solid 1px #333; }

@@ -217,13 +217,8 @@ $(function(){
 							<div class="collapse in" id="gr" aria-expanded="true" style="">
 								<ul class="nav">
 									<li>
-										<a href="insertGroup">
-											<span class="link-collapse">1. insertGroup</span>
-										</a>
-									</li>
-									<li>
 										<a href="groupList">
-											<span class="link-collapse">2. groupList</span>
+											<span class="link-collapse">グループリスト</span>
 										</a>
 									</li>
 									<li >

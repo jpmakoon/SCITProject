@@ -1,42 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <%@ page import="java.util.Date" %>
-   <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@include file="../basicFrame.jsp" %>
  <%
     Date nowTime=new Date();
-    SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sf=new SimpleDateFormat("YYYY-MM-DD");
     %>
 <!DOCTYPE html>
 
 <html>
 <head>
 <meta charset="UTF-8">
-
-
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta http-equiv="Content-Language" content="en">
-<meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="theme-color" content="#4188c9">
-<meta name="apple-mobile-web-app-status-bar-style"
-   content="black-translucent">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<link rel="icon" href="schduleResist/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" type="image/x-icon"
-   href="schduleResist/favicon.ico">
-<!-- Generated: 2018-04-16 09:29:05 +0200 -->
-<title>tabler.github.io - a responsive, flat and full featured
-   admin template</title>
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
 
 <link rel="stylesheet" type="text/css" href="group/styles/bootstrap4/bootstrap.min.css">
 <link href="group/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -46,22 +22,13 @@
 <link rel="stylesheet" type="text/css" href="group/styles/courses.css">
 <link rel="stylesheet" type="text/css" href="group/styles/courses_responsive.css">
 
-
 <!-- 캘린더 부분 -->
 <link href='resources/calendar/fullcalendar.min.css' rel='stylesheet' />
 <link href='resources/calendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 <script src='resources/lib/moment.min.js'></script>
-<script src="resources/jquery-3.3.1.min.js"></script>
 <script src='resources/calendar/fullcalendar.min.js'></script>
 
 <!-- 각종 버튼들 -->
-   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-   
-   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-   <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-   <link rel="stylesheet" href="resources/assets/css/ready.css">
-   <link rel="stylesheet" href="resources/assets/css/demo.css">
    
    <script src="resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
    <script src="resources/assets/js/core/popper.min.js"></script>
@@ -74,12 +41,6 @@
    <script src="resources/assets/js/plugin/chart-circle/circles.min.js"></script>
    <script src="resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
    <script src="resources/assets/js/ready.min.js"></script>
-
-
-
-
-
-
 
 
 
@@ -172,18 +133,6 @@ $(function(){
 	      var inputData='';
 	      inputData+='<input type="button" class="insertSchedule" data-rno="'+plaNum+'" value="스케줄 만들기">';
       		$("#"+plaNum).html(inputData);
-	   	  /*  $.ajax({
-	         method:'post',
-// 	         url:'selectUserPlannerSchedule',
-	         data:JSON.stringify(sendData),
-	         dataType:'json',
-	         contentType:'application/json;charset=utf-8',
-	         success:function(sch){  
-	            	            
-	            
-	         }   	
-	      });  */ 
-	      
 	      
 	      //$(this).removeClass('fe-chevron-up').addClass('fe-chevron-up_opened');
       		 $('#calendar').fullCalendar({
@@ -196,24 +145,6 @@ $(function(){
                  navLinks: true, // can click day/week names to navigate views
                  selectable: true,
                  selectHelper: true,
-                 select: function(start, end) {
-                   var title = prompt('스케줄 타이틀:');
-                   
-                    var content = prompt('스케줄 내용:'); 
-                   
-                   var eventData;
-                   if (title) {
-                     eventData = {
-                      
-                       title: title,
-                       content: content, 
-                       start: start,
-                       end: end
-                     };
-                     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                   }
-                   $('#calendar').fullCalendar('unselect');
-                 },
                  editable: true,
                  eventLimit: true, // allow "more" link when too many events
                  
@@ -242,11 +173,13 @@ $(function(){
                             
                          });
                          var a=$(this).attr('class');
+                        console.log("dd"+a);
                          var b=parseInt(a.substring(57,a.length-13));
+                         console.log(b);
                          var sendData={
                             'schNum':b   
                          };
-                       
+                         console.log(sendData);
                          //ajax 사용해서 db에서 지워주기
                          $.ajax({
                             method:'post',
@@ -254,17 +187,17 @@ $(function(){
                             data:JSON.stringify(sendData),
                             dataType:'json',
                             contentType:'application/json; charset:utf-8',
-                            suceess:function(r){
-                               if(r != 1){
-                            	   alert('삭제 실패');
-                               }
+                            suceess:function(response){
+								if(response == 1){
+									alert('削除されました。');
+								}
                             }
                          });
                          /* code here */
                          ///////////////////////
                          
-                         alert('삭제성공!');
-                         }else
+                         }
+                         else
                             return false;
                      }
                     
@@ -375,6 +308,8 @@ $(function(){
 
 	   //플래너 삭제
 	   $(".fe-x").on('click',function(){
+		  var message = confirm("정말로 삭제하시겠습니까?");
+		  if(message==true){
 		  var plaNum=$(this).parents().parents().parents().parents().children(".card-body").attr('id');
 		  var sendData={'plaNum':plaNum};
 		  
@@ -387,6 +322,9 @@ $(function(){
 			 success:function(res){	 
 			 }
 		  }); 
+		  }
+		  else
+			  return false;
 	   });
 	   
 	   $(document).on('click','.insertSchedule',function(){
@@ -544,12 +482,6 @@ $(function(){
    height: 300px;
 }
 /* Optional: Makes the sample page fill the window. */
-html, body {
-   height: 100px;
-   margin: 0;
-   padding: 0;
-}
-
 .controls {
    background-color: #fff;
    border-radius: 2px;
@@ -583,7 +515,7 @@ html, body {
 #map #infowindow-content {
    display: inline;
 }
-#cal{display: flex;}
+/* #cal{display: flex;} */
 .col-lg-4{width: 200px; }
 .card-header{padding-left:70px;}
 .col-lg-4{
@@ -599,52 +531,46 @@ width: 300px;}
 	.ctitle{align-items: flex-start;}
 	.closeimg{align-items: flex-end; }
 
+div.course_mark trans_200{
+	position:absolute;
+	left:700px;
+	top:50px;
+}
+
 </style>
 </head>
 <body>
-   
          <div class="main-panel">
-         
-            <div class="content">
-            <div class="container-fluid">
-               <div class="row">
-              
-              <c:forEach var="planner" items="${plannerList }" varStatus="st">
-
-              <div class="col-md-6 col-xl-4">
-                <div class="card card-collapsed">
-                  <div class="card-status bg-blue"></div>
-                  <div class="card-header">
-                    <h3 class="card-title">${planner.plaTitle}</h3>
-                    <div class="card-options">
-                      <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up" ></i></a>
-                      <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x" ></i></a>
-                    </div>
-                  </div>
-                  <div class="card-body" id="${planner.plaNum}">
-                  
-                   
-                         
-                  
-                  </div>
-                </div>
-              </div>
-              
-          </c:forEach>
-           <div class="course_mark trans_200" id="plannerInsertBtn" style="width:100px; "><a data-rno="${group.groNum}" class="#" href="insertPlanner" >planner 만들기</a></div>
-</div>
- 
+           <div class="content"> 
+            <div class="course_mark trans_200" id="plannerInsertBtn" style="position:relative; width:100px; top:50px; left:1000px; ">
+            	<a data-rno="${group.groNum}" class="#" href="insertPlanner" >planner 만들기</a>
             </div>
-            	  
+			<br><br>
+              <c:forEach var="planner" items="${plannerList }" varStatus="st">
+	             <div class="col-md-2">
+              	  	<div class="card card-collapsed">
+                  		<div class="card-status bg-blue"></div>
+                 			<div class="card-header">
+                    			<h3 class="card-title">${planner.plaTitle}</h3>
+                    			<div class="card-options">
+                      				<a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up" ></i></a>
+                      				<a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x" ></i></a>
+                    			</div>
+                  			</div>
+                  			<div class="card-body" id="${planner.plaNum}">
+                  
+                  			</div>
+                		</div>
+              		</div>
+          	</c:forEach>
+            <br><br><br>
  			<div id="cal">
-            <div id="calendar"></div><br/>
-            <div class="scheduleUpdate"></div>
-          	</div>
-               </div>
-             
-           		 </div>
-		
-		
-<script src="assets/js/core/bootstrap.min.js"></script>
+            	<div id="calendar">
+            	</div><br/>
+            <div class="scheduleUpdate">
+            </div>
+          </div>
+        </div>
+     </div>
 </body>
 </html>

@@ -84,11 +84,7 @@
 											<tr>
 												<td>
 													<div class="searchPhoto">
-<<<<<<< HEAD
-														<img src="download?${friList.originalImage}">
-=======
 														<img src="download?userId=${friList.userId}">
->>>>>>> dev
 													</div>
 												</td>
 												<td colspan="2">

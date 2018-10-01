@@ -12,12 +12,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< HEAD
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-=======
->>>>>>> dev
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,19 +28,19 @@ import global.sesoc.www.util.FileService;
 
 @Controller
 public class T_UserController {
-	
+
 	@Autowired
 	T_UserRepository repository;
 
 	final String uploadPath = "/uploadPath";
-	
-	//회원가입화면요청
+
+	// 회원가입화면요청
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
 	public String signUp() {
 		return "user/signUp";
 	}
-	
-	//로그인
+
+	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(T_User user, HttpSession session, Model model) {
 
@@ -61,8 +55,8 @@ public class T_UserController {
 		}
 		return "main";
 	}
-	
-	//회원가입
+
+	// 회원가입
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	public String signUp(T_User user, Model model, MultipartFile upload) {
 		String savedImage = null;
@@ -76,7 +70,7 @@ public class T_UserController {
 
 		int result = repository.signUp(user);
 
-		if (result != 1) {	
+		if (result != 1) {
 			model.addAttribute("message", "회원가입이 실패하였습니다. 다시 회원가입을 해주세요.");
 		} else {
 			model.addAttribute("message", "회원가입이 성공하였습니다.");
@@ -105,26 +99,6 @@ public class T_UserController {
 		
 		return "redirect:/";
 	}
-<<<<<<< HEAD
-	//내프로필 화면 요청
-    @RequestMapping(value="/userDetail", method=RequestMethod.GET)
-    public String userDetail(HttpSession session, Model model) {
-    	String userId = (String) session.getAttribute("loginId");
-    	T_User user = new T_User();
-    	user.setUserId(userId);
-    	    	
-    	T_User t = repository.selectOne(user);
-    	String p1 = t.getPhone();
-    	String[] p2 = p1.split(",");
-    	String phone1 = p2[0];
-    	String phone2 = p2[1];
-    	model.addAttribute("phone1",phone1);
-    	model.addAttribute("phone2",phone2);
-    	model.addAttribute("user", t);
-    	String mime = null;
-		if(t.getOriginalImage() != null ) {
-			String fullPath= uploadPath + "/"+ t.getSavedImage();
-=======
 
 	// 내프로필 화면 요청
 	@RequestMapping(value = "/userDetail", method = RequestMethod.GET)
@@ -143,7 +117,6 @@ public class T_UserController {
 		String mime = null;
 		if (t.getOriginalImage() != null) {
 			String fullPath = uploadPath + "/" + t.getSavedImage();
->>>>>>> dev
 			try {
 				String type = Files.probeContentType(Paths.get(fullPath));
 				if(type != null && type.contains("image")) {
@@ -174,26 +147,15 @@ public class T_UserController {
 			user.setOriginalImage(originalImage);
 			user.setSavedImage(savedImage);	
 		}
-<<<<<<< HEAD
   		repository.userUpdate(user);
-  		return "redirect:/";
+  		return "redirect:/userDetail";
   	}
   	
-  	@RequestMapping(value="/download", method=RequestMethod.GET)
-	public String download(HttpSession session,T_User t, HttpServletResponse response) {
-  		String userId = (String) session.getAttribute("loginId");
-  		t.setUserId(userId);
-  		T_User user = repository.selectOne(t);
-=======
-		repository.userUpdate(user);
-		return "redirect:/";
-	}
 
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
 	public String download(HttpSession session, T_User t, HttpServletResponse response,String userId) {
 		t.setUserId(userId);
 		T_User user = repository.selectOne(t);
->>>>>>> dev
 		String originalImage = user.getOriginalImage();
 		String fullPath = uploadPath + "/" + user.getSavedImage();
 		try {
@@ -236,7 +198,7 @@ public class T_UserController {
 		T_User t = repository.selectOne(user);
 		return t;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/pwdUpdate", method = RequestMethod.POST)
 	public int pwdUpdate(@RequestBody T_User user, HttpSession session) {
@@ -245,72 +207,53 @@ public class T_UserController {
 		int t = repository.userUpdate(user);
 		return t;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/userDelete", method = RequestMethod.POST)
 	public String userDelete(HttpSession session) {
 		String userId = (String) session.getAttribute("loginId");
 		String result = "";
 		int r = repository.userDelete(userId);
-		if(r == 1) {
+		if (r == 1) {
 			result = "1";
-		}else {
+		} else {
 			result = "0";
 		}
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/usersearch", method = RequestMethod.POST)
 	public String usersearch(String userName, Model model, HttpSession session, T_User user) {
 		String loginId = (String) session.getAttribute("loginId");
 		String loginName = (String) session.getAttribute("loginName");
-		
+
 		System.out.println(userName);
 		user.setUserName(userName);
 		List<T_User> userList = repository.searchName(user);
-		
-		if(userList.size() == 0) {
+
+		if (userList.size() == 0) {
 			user.setUserName(null);
 			String userId = userName;
 			user.setUserId(userId);
 			userList = repository.searchName(user);
 		}
-		
+
 		for (int i = 0; i < userList.size(); i++) {
-			if(userList.get(i).getUserId().equals(loginId) || userList.get(i).getUserName().equals(loginName)){		// 자기이름검색 불가
+			if (userList.get(i).getUserId().equals(loginId) || userList.get(i).getUserName().equals(loginName)) { // 자기이름검색
+																													// 불가
 				userList.remove(i);
 			}
 		}
-
-			final String USER_AGENT = "Mozilla/5.0";
-
-		    // 1. URL 선언
-		    String connUrl = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=" + userName;
-
-		    Connection conn = Jsoup
-                    .connect(connUrl)
-                    .header("Content-Type", "application/json;charset=UTF-8")
-                    .userAgent(USER_AGENT)
-                    .method(Connection.Method.GET)
-                    .ignoreContentType(true);
-
-		    // 2. HTML 가져오기
-		    Document doc = null;
-			try {
-				doc = conn.get();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    // TODO POST의 data 값은 Jsoup.data(...) 을 사용하시면 됩니다.
-		    
-		    // 3. 가져온 HTML Document 를 확인하기
-//			System.out.println(doc.select("ul.list_place_col1.type_2col").toString());
-			System.out.println(doc.select("div.ftv_lst").toString());
-		
 		model.addAttribute("searchWord", userName);
 		model.addAttribute("list", userList);
 		return "friend/searchResult";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/villageUpload", method = RequestMethod.GET)
+	public String villageUpload(HttpSession session, String village) {
+		String result = "";
+		session.setAttribute("village", village);
+		return result;
+	}
 }

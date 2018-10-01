@@ -179,5 +179,13 @@ public class T_FriendController {
 		System.out.println(checkList);
 		return checkList;
 	}
+	@ResponseBody
+	@RequestMapping(value="/myFriendList" , method=RequestMethod.POST)
+	public List<T_Friend> myFriendList(HttpSession session){
+		String userId=(String)session.getAttribute("loginId");
+		T_Friend f=new T_Friend(); f.setFriAccepter(userId);
+		List<T_Friend> list=repository.myFriendList(f);
+		return list;
+	}
 	
 }

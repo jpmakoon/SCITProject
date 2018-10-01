@@ -1,64 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@include file="../basicFrame.jsp" %>
 <!DOCTYPE html>
-
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
+<title>Create a Group</title>
+
+<style>
+
+#createGroup{
+	margin-left: 25%;
+	margin-right: 0;
+	margin-top: 30px;
+	padding: 0 auto;
+	color : black;	
+}
+.d-flex{
+	margin-left: 30%;
+}
+#cgbtn{
+	margin-right: 35px;
+}
+
+#groIntro{
+	resize : none;
+}
+
+#groupInsForm{
+	margin: 0 auto;
+}
+</style>
 <script type="text/javascript">
 $(function(){
+	
+	$('#groName').focus();
+	
 	function checkGroup(){
 		var groName=$('#groName').val();
-		   
-		   var groIntro=$('#groIntro').val();
-		   if(groName.length==0){
-		      alert("그룹명을 입력해주세요.");
-		      return false;
-		   }
-		   if(groIntro.length==0){
-		      alert("소개글을 입력햐주세요.");
-		      return false;
-		   }
+		var groIntro=$('#groIntro').val();
+		if(groName.length==0){
+			alert("グループ名を入れてください。");
+			return false;
+		}
+		if(groIntro.length==0){
+			alert("グループ紹介を書いてください。");
+			return false;
+		}
 	}
-	
-   
-   
 });
+
 </script>
-
-
+<title>Create a Group</title>
 </head>
 <body>
-   
-         <div class="main-panel">
-            <div class="content">
-               <form action="insertGroup" method="post" enctype="multipart/form-data" onsubmit="return checkGroup()">
-<table>
-   <tr>
-      <th>그룹 명</th>
-      <td><input type="text" id="groName" name="groName" placeholder="그룹 이름"/></td>
-   </tr>
-   
-   <tr>
-      <th>그룹 이미지</th>
-      <td><input type="file" id="upload" name="upload"></td>
-   </tr>      
-   <tr>
-      <th>그룹 소개</th>
-      <td><textarea rows="10" cols="100" id="groIntro" name="groIntro"></textarea></td>
-   </tr>
-   <tr>
-   <th colspan="2"><input type="submit" value="그룹 생성"/>
-   </th>
-   </tr>
-</table>
-</form>
-               
-               </div>
-            </div>
-
-<script src="assets/js/core/bootstrap.min.js"></script>
+	<div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="col-md-5"id="createGroup" >
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Create a Group</div>
+						</div>
+						<form action="insertGroup" method="post" enctype="multipart/form-data" onsubmit="return checkGroup()">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-8" id="groupInsForm">
+										<div class="form-group">
+											<label class="form-label">グループ名</label>
+											<input type="text" id="groName" class="form-control" name="groName" placeholder="グループ名">
+										</div>
+										<input type="hidden" id="groName" name="groName" value="${groName}">
+										<div class="form-group">
+											<label class="form-label">グループイメージ</label>
+											<input type="file" id="upload" name="upload">
+										</div>
+										<div class="form-group">
+											<label class="form-label">グループ紹介 </label>
+												<textarea class="form-control" id="groIntro" name="groIntro" rows="6" placeholder="グループ紹介"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-footer text-right" >
+								<div class="d-flex">
+									<input type="button" id="cgbtn" class="btn btn-danger" value="取り消し" onclick="history.back(-1);"> 
+<!-- 									<a href="javascript:void(0)" class="btn btn-link">取り消し</a> -->
+									<input type="submit" class="btn btn-success" value="グループ生成" />
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

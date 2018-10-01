@@ -12,52 +12,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta http-equiv="Content-Language" content="en">
-<meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="theme-color" content="#4188c9">
-<meta name="apple-mobile-web-app-status-bar-style"
-   content="black-translucent">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<link rel="icon" href="schduleResist/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" type="image/x-icon"
-   href="schduleResist/favicon.ico">
-<!-- Generated: 2018-04-16 09:29:05 +0200 -->
-<title>tabler.github.io - a responsive, flat and full featured
-   admin template</title>
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-
 <!-- Dashboard Core -->
 <link href="schduleResist/dist/assets/css/dashboard.css"
    rel="stylesheet">
 <script src="schduleResist/dist/assets/js/dashboard.js"></script>
-
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="jquery"
-   src="schduleResist/dist/assets/js/vendors/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="selectize"
-   src="schduleResist/dist/assets/js/vendors/selectize.min.js"></script>
-<link type="text/css" rel="stylesheet" charset="UTF-8"
-   href="https://translate.googleapis.com/translate_static/css/translateelement.css">
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="bootstrap"
-   src="schduleResist/dist/assets/js/vendors/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="core"
-   src="schduleResist/dist/assets/js/core.js"></script>
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="input-mask"
-   src="schduleResist/dist/assets/plugins/input-mask/js/jquery.mask.min.js"></script>
-
 
 <style>
 /* Always set the map height explicitly to define the size of the div
@@ -349,75 +307,75 @@ html, body {
                                        <label class="selectgroup-item"> <input
                                           type="radio"  value="Beer" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Beer</span>
+                                          class="selectgroup-button">회식</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio" value="Date" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Date</span>
+                                          class="selectgroup-button">데이트</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Driving" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Driving</span>
+                                          class="selectgroup-button">드라이브</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Event" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Event</span>
+                                          class="selectgroup-button">이벤트</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Exercise" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Exercise</span>
+                                          class="selectgroup-button">운동</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Family" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Family</span>
+                                          class="selectgroup-button">가족</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Friendship" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Friendship</span>
+                                          class="selectgroup-button">친구</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Game" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Game</span>
+                                          class="selectgroup-button">게임</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio" value="Healing" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Healing</span>
+                                          class="selectgroup-button">힐링</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Meal" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Meal</span>
+                                          class="selectgroup-button">식사</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Movie" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Movie</span>
+                                          class="selectgroup-button">영화</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio" value="Promise" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Promise</span>
+                                          class="selectgroup-button">약속</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Reading" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Reading</span>
+                                          class="selectgroup-button">독서</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Shopping" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Shopping</span>
+                                          class="selectgroup-button">쇼핑</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Study" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Study</span>
+                                          class="selectgroup-button">공부</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Traveling" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">Traveling</span>
+                                          class="selectgroup-button">여행</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Working" name="category"
                                           class="selectgroup-input" value="Beer"> <span
-                                          class="selectgroup-button">Working</span>
+                                          class="selectgroup-button">근무</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio" value="others" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">others</span>
+                                          class="selectgroup-button">기타</span>
                                        </label>
                                        
                                     <!--    <input type="hidden"  id="category" name="category" value=""> -->

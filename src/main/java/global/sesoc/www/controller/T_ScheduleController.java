@@ -4,10 +4,8 @@ package global.sesoc.www.controller;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -145,11 +143,12 @@ public class T_ScheduleController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/deleteSchedule", method=RequestMethod.POST)
-	public String deleteSchedule(@RequestBody T_Schedule schedule) {
-		
+	public int deleteSchedule(@RequestBody T_Schedule schedule) {
+		System.out.println(schedule);
+		System.out.println(schedule.getSchNum());
 		int result=T_ScheduleRepository.deleteSchedule(schedule.getSchNum());
-		
-		return "삭제했습니다.";
+		System.out.println(result);
+		return result;
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectMixSchedule", method=RequestMethod.POST)
