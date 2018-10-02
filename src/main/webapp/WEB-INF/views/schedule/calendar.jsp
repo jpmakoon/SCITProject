@@ -8,8 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-    
-
     #calendar {
    		 color:black;
         max-width: 900px;
@@ -44,49 +42,23 @@
 <link href='resources/calendar/fullcalendar.min.css' rel='stylesheet' />
 <link href='resources/calendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 <script src='resources/lib/moment.min.js'></script>
-<script src="resources/jquery-3.3.1.min.js"></script>
 <script src='resources/calendar/fullcalendar.min.js'></script>
 
-<!-- 각종 버튼들 -->
-   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-   <title>Components - Ready Bootstrap Dashboard</title>
-   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-   <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-   <link rel="stylesheet" href="resources/assets/css/ready.css">
-   <link rel="stylesheet" href="resources/assets/css/demo.css">
-   
-   <script src="resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-   <script src="resources/assets/js/core/popper.min.js"></script>
-   <script src="resources/assets/js/core/bootstrap.min.js"></script>
-
-   <script src="resources/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-   <script src="resources/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-   <script src="resources/assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-   <script src="resources/assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-   <script src="resources/assets/js/plugin/chart-circle/circles.min.js"></script>
-   <script src="resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-   <script src="resources/assets/js/ready.min.js"></script>
-   
-      <script>
-      $( function() {
-         $( "#slider" ).slider({
-            range: "min",
-            max: 100,
-            value: 40,
-         });
-         $( "#slider-range" ).slider({
-            range: true,
-            min: 0,
-            max: 500,
-            values: [ 75, 300 ]
-         });
-      } );
-   </script>
-   
-
 <script>
-   
+$( function() {
+    $( "#slider" ).slider({
+       range: "min",
+       max: 100,
+       value: 40,
+    });
+    $( "#slider-range" ).slider({
+       range: true,
+       min: 0,
+       max: 500,
+       values: [ 75, 300 ]
+    });
+ });
+ 
   $(document).ready(function() {
      
 	  var fullDate = new Date();
@@ -102,24 +74,6 @@
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectHelper: true,
-      select: function(start, end) {
-        var title = prompt('스케줄 타이틀:');
-        
-         var content = prompt('스케줄 내용:'); 
-        
-        var eventData;
-        if (title) {
-          eventData = {
-           
-            title: title,
-            content: content, 
-            start: start,
-            end: end
-          };
-          $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-        }
-        $('#calendar').fullCalendar('unselect');
-      },
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       
@@ -593,9 +547,9 @@
 </head>
 <body>
 	
-			<div class="main-panel" >
-				<div class="content"  >
-					 <!-- 선택할 친구를 불러올 수있게 -->
+<div class="main-panel" >
+	<div class="content"  >
+	<!-- 선택할 친구를 불러올 수있게 -->
 	 <select>
    <c:forEach var="fList" items="${fList }">
       <option class="friendId" value="${fList.friRequester}">${fList.friRequester}</option>
@@ -618,9 +572,7 @@
       <div class="mixCalendar"></div>
    </div>
 
-  
-   
-
-<script src="assets/js/core/bootstrap.min.js"></script>
+  </div>
+</div>
 </body>
 </html>

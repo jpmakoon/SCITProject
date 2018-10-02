@@ -19,35 +19,6 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<<<<<<< HEAD
-
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('.groupManual').on('click',function(){
-		var isAccepted='';
-		isAccepted +='<a href="groupApply">';
-		isAccepted +='<span class="link-collapse">## 그룹 신청이 왔습니다!!!##</span>';
-		isAccepted +='</a>';
-		 $.ajax({
-			method:'post',
-			url:'isAccepted',
-			contentType:'application/json;charset=json',
-			success:function(r){
-				if(r==1){
-					$("#a").html(isAccepted);
-				}
-			}
-		}); 
-	});
-	////
-	
-	
-});
-</script>
-
-=======
->>>>>>> e9007b27329120203c324ed923585ff29a6e92e9
 <body>
 	<input type="hidden" name="loginId" id="loginId" value="${sessionScope.loginId}">
 		<div class="main-header">
@@ -240,17 +211,7 @@ $(function(){
 						<li class="nav-item">
 							<a href="pattern">
 								<i class="la la-pie-chart"></i>
-<<<<<<< HEAD
-								<p>패턴 관리</p>
-							</a>
-						</li>
-						<li class="nav-item" >
-							<a href="typography.html">
-								<i class="la la-gear"></i>
-								<p>회원 설정</p>
-=======
-								<span class="user-level">パタン管理</span>
->>>>>>> e9007b27329120203c324ed923585ff29a6e92e9
+								<span class="user-level">パターン管理</span>
 							</a>
 						</li>
 					</ul>
@@ -327,9 +288,6 @@ function reqCheck(){
 	})
 }
 
-function mainPhoto(){
-	
-}
 
 function reqOutput(response){
 	var reqSignal = '<i class="la la-bell"></i><span class="notification reqNotify">!</span>';
@@ -429,7 +387,6 @@ $(document).on("click", "#dangerBtn", function(){
 		})
 	}
 });
-<<<<<<< HEAD
 $(function(){
 	$('.shareCal').on('click',function(){
 		
@@ -456,7 +413,7 @@ $(function(){
 			}
 		});
 	});
-=======
+});
 
 $(function(){
 	$('.groupManual').on('click',function(){
@@ -475,11 +432,11 @@ $(function(){
 			}
 		}); 
 	});
-	////
-	
->>>>>>> e9007b27329120203c324ed923585ff29a6e92e9
-	
 });
+
+function mainPhoto(){
+	
+}
 </script>
 
 </body>

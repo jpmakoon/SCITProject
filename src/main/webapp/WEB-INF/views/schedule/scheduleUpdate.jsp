@@ -876,15 +876,9 @@ $(function(){
                                        }
                                     }
                                  </script>
-<<<<<<< HEAD
-                                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMznx2aLBJ_JHzvyCml6LMwP_yHkigeqc&libraries=places&callback=initMap" async defer>
-                                 </script>
-=======
                                  <script
                                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMznx2aLBJ_JHzvyCml6LMwP_yHkigeqc&libraries=places&callback=initMap"
                                     async defer></script>
-
-
 
                                  <br>
                                  <div class="form-group">
@@ -939,7 +933,6 @@ $(function(){
 
    </div>
    
->>>>>>> origin/feature
 </body>
 </html>
                                 

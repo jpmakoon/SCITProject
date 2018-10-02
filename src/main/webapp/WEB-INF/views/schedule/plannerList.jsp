@@ -14,6 +14,8 @@
 <head>
 <meta charset="UTF-8">
 
+<link rel="stylesheet" type="text/css" href="group/styles/bootstrap4/bootstrap.min.css">
+<link href="group/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="group/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="group/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="group/plugins/OwlCarousel2-2.2.1/animate.css">
@@ -26,17 +28,28 @@
 <script src='resources/lib/moment.min.js'></script>
 <script src='resources/calendar/fullcalendar.min.js'></script>
 
+<!-- 각종 버튼들 -->
+   
+   <script src="resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+   <script src="resources/assets/js/core/popper.min.js"></script>
+   <script src="resources/assets/js/core/bootstrap.min.js"></script>
+ 
+   <script src="resources/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+   <script src="resources/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+   <script src="resources/assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
+   <script src="resources/assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
+   <script src="resources/assets/js/plugin/chart-circle/circles.min.js"></script>
+   <script src="resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+   <script src="resources/assets/js/ready.min.js"></script>
+
+
+
 <!-- Dashboard Core -->
-<link href="schduleResist/dist/assets/css/dashboard.css" rel="stylesheet">
+<link href="schduleResist/dist/assets/css/dashboard.css"
+   rel="stylesheet">
 <script src="schduleResist/dist/assets/js/dashboard.js"></script>
 
 
-<<<<<<< HEAD
-<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="selectize" src="schduleResist/dist/assets/js/vendors/selectize.min.js"></script>
-<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bootstrap" src="schduleResist/dist/assets/js/vendors/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="core" src="schduleResist/dist/assets/js/core.js"></script>
-<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="input-mask" src="schduleResist/dist/assets/plugins/input-mask/js/jquery.mask.min.js"></script>
-=======
 <script type="text/javascript" charset="utf-8" async=""
    data-requirecontext="_" data-requiremodule="selectize"
    src="schduleResist/dist/assets/js/vendors/selectize.min.js"></script>
@@ -51,14 +64,16 @@
 <script type="text/javascript" charset="utf-8" async=""
    data-requirecontext="_" data-requiremodule="input-mask"
    src="schduleResist/dist/assets/plugins/input-mask/js/jquery.mask.min.js"></script>
-
->>>>>>> origin/feature
 <script type="text/javascript">
 function schCheck() {
     var title=$("#schTitle").val();// #은 아이디, .은 클래스
     var content=$("#schContent").val();
     var startDate=$("#schStartdate").val();
     var endDate=$("#schEnddate").val();
+ 
+    
+
+ 
     
     if (title.trim().length==0){
        alert("제목을 입력해주세요")
@@ -67,8 +82,10 @@ function schCheck() {
     
     if(content.trim().length==0){
        alert("내용을 입력해주세요");
+       
        return false;
     }
+    
     
     var startDate1=startDate.split("-");
     var startDateNum='';
@@ -98,8 +115,10 @@ function schCheck() {
     alert("마감일을 정해주세요.");
     return false;
     }
+    
+
+       
  }
- 
 $(function(){
 		
 	   $('.fe-chevron-up').on('click',function(){
@@ -284,6 +303,8 @@ $(function(){
 				$(this).removeClass('fe-chevron-up_opened').addClass('fe-chevron-up');
 			});
 		    
+
+
 	   //플래너 삭제
 	   $(".fe-x").on('click',function(){
 		  var message = confirm("정말로 삭제하시겠습니까?");
@@ -328,21 +349,41 @@ $(function(){
 					inputData += '<div class="page"><div class="page-main"><div class="my-3 my-md-5"><div class="container"><div class="row"><div class="col-12">';
 					inputData +='<div class="card-header"><div class="ctitle"><h3 class="card-title">스케줄 수정</h3></div> <div class="closeimg"><img alt="" src="resources/close.png" class="closeDetail"></div>	';
 					inputData += '</div><div class="card-body"><div class="row"><div class="col-md-6 col-lg-4"><div class="form-group">';
-					inputData += '<label class="form-label">제목</label> <input type="text" id="schTitle" class="form-control" name="schTitle" value="'+sch.schTitle+'"></div>';   
+					inputData += '<label class="form-label">제목</label> <input type="text" id="schTitle" class="form-control" name="schTitle" placeholder="'+sch.schTitle+'"></div>';   
 					inputData +='<input type="hidden" id="plaNum" name="plaNum" value="'+sch.plaNum+'"><input type="hidden" id="schNum" name="schNum" value="'+sch.schNum+'"><br>';
 					inputData +='<div class="form-group"> <label class="form-label">내용 <span class="form-label-small">56/100</span></label>';
-					inputData +='<textarea class="form-control" id="schContent" name="schContent" rows="6" >'+sch.schContent+'</textarea>';    
-					inputData +='<input type="hidden" id="hiddenschContent" value="'+sch.schContent+'">';
-					inputData +='<input type="hidden" id="hiddenschTitle" value="'+sch.schTitle+'">';
-					inputData +='<input type="hidden" id="hiddenstartdate" value="'+sch.schStartdate+'">';
-					inputData += '<input type="hidden" id="hiddenendDate" value="'+sch.schEnddate+'"></div>';
-					inputData +='</div><div class="col-md-6 col-lg-4"> <div class="form-group"><label class="form-label">시작 날짜</label><div class="row gutters-xs"> <input type="date" class="form-control" name="schStartdate"  id="schStartdate" value="'+sch.schStartdate+'" /></div></div>';         
+					inputData +='<textarea class="form-control" id="schContent" name="schContent" rows="6" placeholder="'+sch.schContent+'"></textarea></div>';    
+					
+					inputData +='</div><div class="col-md-6 col-lg-4"> <div class="form-group"><label class="form-label">시작 날짜</label><div class="row gutters-xs"> <input type="date" class="form-control" name="schStartdate"  id="schStartdate"></div></div>';         
 					inputData +='<div class="form-group"><label class="form-label">끝나는 날짜</label><div class="row gutters-xs"><input type="date" class="form-control" name="schEnddate"  id="schEnddate" value="'+sch.schEnddate+'"></div></div>';                                
+					/* inputData +='<div class="form-group"><label class="form-label">카테고리</label><div class="selectgroup selectgroup-pills">';	
+					var cate=['Beer','Date','Driving','Event','Exercise','Family','Friendship','Game','Healing','Meal','Movie','Promise','Reading','Shopping','Study','Traveling','Working','others'];
+	 
+					var inputDataCate='';
+					for (var i = 0; i < cate.length; i++) {
+						inputDataCate += '<label class="selectgroup-item"> <input type="radio"  value="'+cate[i]+'" name="category" class="selectgroup-input" > <span class="selectgroup-button">'+cate[i]+'</span></label>';
+					}	
+					inputData += inputDataCate;
+					inputData +='</div></div></div>'; 
+	                                               
+					inputData +='<div class="col-md-6 col-lg-4"><label class="form-label">위치</label><div class="form-group"><div class="row gutters-xs"><div class="col">';
+					inputData +='<input type="text" class="form-control" id="schLocation" placeholder="'+sch.schLocation+'" name="schLocation"></div>';
+					inputData +='<span class="col-auto"><button class="btn btn-secondary" type="button" onclick="initMap()"><i class="fe fe-search"></i></button></span></div></div>';
+					inputData +='<div id="map"></div><div id="infowindow-content"><span id="place-name" class="title"></span><br> PlaceID <span id="place-id"></span><br><span id="place-address"></span></div>';
+					
 				
+						
+					inputData +='<br><div class="form-group"><div class="form-label">공유 여부</div><div><label class="custom-control custom-checkbox custom-control-inline">';
+	                inputData +='<input type="checkbox" class="custom-control-input" name="shareable" value="" checked="" id ="shareable"> <span class="custom-control-label">공유함</span>';
+	         	    inputData +='</label></div></div></div></div></div><div class="card-footer text-right"><div class="d-flex"><a href="javascript:void(0)" class="btn btn-link">Cancel</a>';
+	             	inputData +='';
+	                inputData +='</div></div> */
 	                inputData +='<input type="button" data-rno="'+allnum+'" id="updateSchedule2" class="btn btn-primary ml-auto" value="Schdule update"  /><br/>';
 	                inputData += '</div></div></div></div></div><input type="button" data-rno="'+allnum+'" id="updateSchedule" class="btn btn-primary ml-auto" value="자세히 수정" /></div>';
 	                
 	                $('.scheduleUpdate').html(inputData);
+
+				   
 				}
 			});
 			
@@ -414,6 +455,9 @@ $(function(){
 	     $('.fc-header-toolbar').remove();
 	     $('.fc-view-container').remove();
 	     //calendar 다시 실행시켜야 하는 부분
+	      
+	  
+	        
 	     
 	    /*  var ass = $(".fc-content").parents('a').attr('class');
 	    alert(ass);  */
@@ -429,7 +473,6 @@ $(function(){
  	});
 });
 </script>
-
 <style type="text/css">
  #calendar {
    		color:black;
@@ -491,7 +534,7 @@ $(function(){
 /* #cal{display: flex;} */
 .col-lg-4{width: 200px; }
 .card-header{padding-left:70px;}
-/* .col-lg-4{
+.col-lg-4{
 padding-left:90px;
 width: 300px;}
 .col-lg-4{padding-right: 5px; padding-left: 2px;}
@@ -503,7 +546,7 @@ width: 300px;}
 	}
 	.ctitle{align-items: flex-start;}
 	.closeimg{align-items: flex-end; }
- */
+
 div.course_mark trans_200{
 	position:absolute;
 	left:700px;
@@ -516,9 +559,9 @@ div.course_mark trans_200{
          <div class="main-panel">
            <div class="content"> 
             <div class="course_mark trans_200" id="plannerInsertBtn" style="position:relative; width:100px; top:50px; left:1000px; ">
-            	<a data-rno="${group.groNum}" class="#" href="insertPlanner" >CREATE PLANNER</a></div>
-            <div class="row" style="top:70px">
-			
+            	<a data-rno="${group.groNum}" class="#" href="insertPlanner" >planner 만들기</a>
+            </div>
+			<br><br>
               <c:forEach var="planner" items="${plannerList }" varStatus="st">
 	             <div class="col-md-2">
               	  	<div class="card card-collapsed">
@@ -536,7 +579,6 @@ div.course_mark trans_200{
                 		</div>
               		</div>
           	</c:forEach>
-          	</div>
             <br><br><br>
  			<div id="cal">
             	<div id="calendar">
@@ -545,7 +587,6 @@ div.course_mark trans_200{
             </div>
           </div>
         </div>
-        </div>
-     
+     </div>
 </body>
 </html>
