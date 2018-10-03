@@ -312,5 +312,20 @@ public class T_ScheduleController {
       return result;
       
    }
+   
+	@RequestMapping(value="/shareScheduleUpdate" , method=RequestMethod.POST)
+	public String shareScheduleUpdate(Model model,T_Schedule schedule, String friId,HttpSession session) {		//schedule update -- db
+		String userId=(String)session.getAttribute("loginId");	
+		T_Request request=new T_Request();
+		request.setReqAccepter(userId);  request.setReqAccepter(friId);
+		model.addAttribute("req",request);
+		
+		int result=T_ScheduleRepository.updateSchedule(schedule);
+		
+		List<T_Schedule> list=T_ScheduleRepository.selectPlannerSchedule(schedule.getPlaNum()); //userId를 session의 loginId로
+		model.addAttribute("plaNum",schedule.getPlaNum());
+		model.addAttribute("schdulelist",list);
+		return "redirect:/shareCalendar";
+	}
 }
 

@@ -34,9 +34,9 @@ public class T_GrequestRepository {
       List<T_GrequestUser> list=mapper.selectGreqUsers(userId);
       return list;
    }
-   public int applySuccess(int greqNum) {
+   public int applySuccess(T_Grequest grequest) {
       T_GrequestMapper mapper=session.getMapper(T_GrequestMapper.class);
-      int result=mapper.applySuccess(greqNum);
+      int result=mapper.applySuccess(grequest);
       return result;
    }
    public T_Grequest selectGrequest2(T_Grequest gRequest) {
@@ -44,9 +44,9 @@ public class T_GrequestRepository {
       T_Grequest g=mapper.selectGrequest2(gRequest);
       return g;
    }
-   public int applyCancel(int greqNum) {
+   public int applyCancel(T_Grequest gRequest) {
       T_GrequestMapper mapper=session.getMapper(T_GrequestMapper.class);
-      int result=mapper.applyCancel(greqNum);
+      int result=mapper.applyCancel(gRequest);
       return result;
    }
    

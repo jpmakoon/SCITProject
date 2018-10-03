@@ -12,6 +12,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#4188c9">
+<meta name="apple-mobile-web-app-status-bar-style"
+   content="black-translucent">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<link rel="icon" href="schduleResist/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" type="image/x-icon"
+   href="schduleResist/favicon.ico">
+<!-- Generated: 2018-04-16 09:29:05 +0200 -->
+<title>tabler.github.io - a responsive, flat and full featured
+   admin template</title>
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+
 <!-- Dashboard Core -->
 <link href="schduleResist/dist/assets/css/dashboard.css"
    rel="stylesheet">
@@ -196,24 +220,24 @@ html, body {
 </script>
 <script type="text/javascript">
 $(function(){
-   var title=$("#hiddenschTitle").val();
+	var title=$("#hiddenschTitle").val();
 
-    $('#schTitle').val(title);
-   
-   //document.getElementById("schTitle").innerHTML = title;
-   var con=$("#hiddenschContent").val();
-   
-   document.getElementById("schContent").innerHTML = con;
-   var startdate=$("#hiddenstartdate").val();
-   var endDate=$("#hiddenendDate").val();
-   $('#schStartdate').val(startdate);
-   $('#schEnddate').val(endDate);
-   
+ 	$('#schTitle').val(title);
+	
+	//document.getElementById("schTitle").innerHTML = title;
+	var con=$("#hiddenschContent").val();
+	
+	document.getElementById("schContent").innerHTML = con;
+	var startdate=$("#hiddenstartdate").val();
+	var endDate=$("#hiddenendDate").val();
+	$('#schStartdate').val(startdate);
+	$('#schEnddate').val(endDate);
+	
 });
-   
+	
 
 </script>
-<title>スケジュール修正</title>
+<title>Insert title here</title>
 </head>
 <body>
    <div class="page">
@@ -223,24 +247,30 @@ $(function(){
             <div class="container">
                <div class="row">
                   <div class="col-12">
+                  <c:if test="${friId ==null }">
                      <form action="scheduleUpdate" method="post" onsubmit="return checkSchedule()">
+                     </c:if>
+                     <c:if test="${friId !=null }">
+                     <form action="shareScheduleUpdate" method="post" onsubmit="return checkSchedule()">
+                     </c:if>
                         <div class="card-header">
-                           <h3 class="card-title">タイトル</h3>
+                           <h3 class="card-title">스케줄 등록</h3>
                         </div>
                         <div class="card-body">
                            <div class="row">
                               <div class="col-md-6 col-lg-4">
 
                                  <div class="form-group">
-                                    <label class="form-label">タイトル</label> 
+                                    <label class="form-label">제목</label> 
                                     <input type="text" id="schTitle" class="form-control" name="schTitle" value="" />                                       
                                  </div>
+                                 <input type="hidden" name="friId" value="${friId }">
                                  <input type="hidden" id="plaNum" name="plaNum" value="${schedule.plaNum}">
                                  <input type="hidden" id="schNum" name="schNum" value="${schedule.schNum}">
 
                                  <br>
                                  <div class="form-group">
-                                    <label class="form-label">内容 <span
+                                    <label class="form-label">내용 <span
                                        class="form-label-small"> </span></label>
                                     <textarea class="form-control" id="schContent" name="schContent" rows="6"  ></textarea>
                                        <input type="hidden" id="hiddenschContent" value="${schedule.schContent}">
@@ -252,7 +282,7 @@ $(function(){
                                   
 
                                  <div class="form-group">
-                                    <label class="form-label">重要度</label>
+                                    <label class="form-label">중요도</label>
              
                                     <div class="row gutters-xs">    
                                     <c:if test="${schedule.importance!=1 }">                           
@@ -447,11 +477,16 @@ $(function(){
                                     </div>
                                  </div>
 
+                              
+                              
+                              
+
+
                                  <div class="form-group">
                                     <label class="form-label">카테고리</label>
                                     <div class="selectgroup selectgroup-pills">
                                     <c:if test="${schedule.category eq 'Beer'}">
-                                       <label class="selectgroup-item"> <input
+                                    	<label class="selectgroup-item"> <input
                                           type="radio"  value="Beer" name="category"
                                           class="selectgroup-input" checked="checked"> <span
                                           class="selectgroup-button">Beer</span>
@@ -591,7 +626,7 @@ $(function(){
                                        </label> 
                                        </c:if>
                                          <c:if test="${schedule.category eq 'Movie'}">
-										<label class="selectgroup-item"> <input
+                                       <label class="selectgroup-item"> <input
                                           type="radio"  value="Movie" name="category"
                                           class="selectgroup-input" checked="checked"> <span
                                           class="selectgroup-button">Movie</span>

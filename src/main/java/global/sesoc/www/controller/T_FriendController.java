@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.www.dao.T_FriendRepository;
+import global.sesoc.www.dao.T_GrequestRepository;
 import global.sesoc.www.dao.T_MessageRepository;
 import global.sesoc.www.dao.T_RequestRepository;
 import global.sesoc.www.dao.T_UserRepository;
 import global.sesoc.www.dto.T_Friend;
+import global.sesoc.www.dto.T_Grequest;
 import global.sesoc.www.dto.T_Message;
 import global.sesoc.www.dto.T_Request;
 import global.sesoc.www.dto.T_User;
@@ -36,6 +38,9 @@ public class T_FriendController {
 	
 	@Autowired
 	T_RequestRepository repository4;
+	
+	@Autowired
+	T_GrequestRepository repository5;
 	
 	//친구리스트 보여주기
 	@RequestMapping(value = "/friendList", method = RequestMethod.GET)
@@ -191,7 +196,15 @@ public class T_FriendController {
 			user.setEmail("1");
 			checkList.add(user);
 		}
-			
+		
+		List<T_Grequest> greList =repository5.groupAccept(userId);
+		for (int i = 0; i < greList.size(); i++) {
+			T_User user = new T_User();
+			user.setUserId(greList.get(i).getgRequester());
+			user = repository2.selectOne(user);
+			user.setEmail("2");
+			checkList.add(user);
+		}
 		
 		System.out.println(checkList);
 		return checkList;

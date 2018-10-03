@@ -93,19 +93,19 @@ public class T_GrequestController {
 
    @ResponseBody
    @RequestMapping(value = "/applySuccess", method = RequestMethod.POST)
-   public int applySuccess(@RequestBody T_Grequest gRequest) {
-      T_GRequestRepository.applySuccess(gRequest.getGreqNum());
-      T_Grequest greq = T_GRequestRepository.selectGrequest2(gRequest);
-      T_Group group = new T_Group();
-      group.setGroNum(greq.getGroNum());
-      int result = T_GroupRepository.plusUserCount(group);
+   public int applySuccess(@RequestBody T_Grequest gRequest, HttpSession session) {
+      String userId = (String) session.getAttribute("loginId");
+      gRequest.setGreqAccepter(userId);
+      int result = T_GRequestRepository.applySuccess(gRequest);
       return result;
    }
 
    @ResponseBody
    @RequestMapping(value = "/applyCancel", method = RequestMethod.POST)
-   public int applyCancel(@RequestBody T_Grequest gRequest) {
-      int result = T_GRequestRepository.applyCancel(gRequest.getGreqNum());
+   public int applyCancel(@RequestBody T_Grequest gRequest, HttpSession session) {
+	  String userId = (String) session.getAttribute("loginId");
+	  gRequest.setGreqAccepter(userId);
+	  int result = T_GRequestRepository.applyCancel(gRequest);
       return result;
    }
 

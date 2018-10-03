@@ -19,7 +19,7 @@
    SELECT *FROM T_GREQUEST WHERE GRONUM=#{groNum}
    </select>
    <select id="groupAccept" resultType="grequest" parameterType="string">
-   SELECT *FROM T_GREQUEST WHERE GREQACCEPTER=#{greqAccepter} AND ISGREQACCEPTED=0
+   SELECT * FROM T_GREQUEST WHERE GREQACCEPTER=#{greqAccepter} AND ISGREQACCEPTED=0
    </select>
    
    <select id="selectGreqUsers" parameterType="string" resultType="greqUser">
@@ -44,19 +44,19 @@
    AND t_grequest.GREQACCEPTER=#{greqAccepter}
    </select>
    
-   <update id="applySuccess" parameterType="int">
+   <update id="applySuccess" parameterType="grequest">
    UPDATE T_GREQUEST
    SET 
    ISGREQACCEPTED=1
    WHERE
-   GREQNUM=#{greqNum}
+   GREQUESTER=#{gRequester} AND GREQACCEPTER=#{greqAccepter}
    </update>
    <select id="selectGrequest2" parameterType="grequest" resultType="grequest">
    SELECT *FROM T_GREQUEST WHERE GREQNUM=#{greqNum}
    </select>
    
-   <delete id="applyCancel" parameterType="int">
-   delete T_GREQUEST WHERE GREQNUM=#{greqNum}
+   <delete id="applyCancel" parameterType="grequest">
+   delete T_GREQUEST WHERE GREQUESTER=#{gRequester} AND GREQACCEPTER=#{greqAccepter}
    </delete>
    
    <select id="checkInvite" parameterType="grequest" resultType="grequest">
@@ -84,4 +84,5 @@
    WHERE GRONUM=#{groNum}
    AND ISGREQACCEPTED=1
    </select>
+   
 </mapper>

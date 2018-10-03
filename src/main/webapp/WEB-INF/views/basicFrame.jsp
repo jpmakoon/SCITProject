@@ -164,32 +164,10 @@
 						</div>
 						</li>
 						<li class="nav-item">
-							<div class="info">
-							<a class="groupManual" data-toggle="collapse" href="#gr" aria-expanded="true">
-									<i class="la la-group"></i>
-									<span class="user-level uLevel2">グループ</span>
-									<div class= "caretDiv">
- 										<span class="caret" style=""></span>
-									</div>
+							<a href="groupList">
+								<i class="la la-drupal"></i>
+								<span class="user-level">グループ</span>
 							</a>
-							<div class="clearfix"></div>
-
-							<div class="collapse in" id="gr" aria-expanded="true" style="">
-								<ul class="nav">
-									<li>
-										<a href="groupList">
-											<span class="link-collapse">グループリスト</span>
-										</a>
-									</li>
-									<li >
-										<a href="myGroupList">
-											<span class="link-collapse">3. myGroup</span>
-										</a>
-									</li>
-										<li id="a"><!-- ##group 신청## --></li>
-								</ul>
-							</div>
-						</div>
 						</li>
 						<li class="nav-item">
 							<a href="friendList">
@@ -281,7 +259,9 @@ function reqOutput(response){
 			reqAll += '<button class="btn btn-danger" id="refuseBtn">拒絶</button>';
 			reqAll += '</div>';
 			reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
-		}else{
+		}
+		
+		if(response[i].email == '0'){
 			reqAll += '<span class="time"> &nbsp;'+response[i].userName+'様の友達申請</span>';
 			reqAll += '<div id="btnDiv">';
 			reqAll += '<input type="button" id="successBtn" class="btn btn-success" value="承諾"> &nbsp;';
@@ -289,6 +269,14 @@ function reqOutput(response){
 			reqAll += '</div>';
 			reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
 			
+		}
+		if ( response[i].email =='2'){
+			reqAll += '<span class="time"> &nbsp;'+response[i].userName+'様のグループ招待</span>';
+			reqAll += '<div id="btnDiv">';
+			reqAll += '<input type="button" id="groAccBtn" class="btn btn-info" value="承諾"> &nbsp;';
+			reqAll += '<button class="btn btn-danger" id="rejectBtn">拒絶</button>';
+			reqAll += '</div>';
+			reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
 		}
 		reqAll += '</div>';
 		reqAll += '</div>';
@@ -309,6 +297,64 @@ $(document).on("click", '#searchBtn', function(){
 });
 
 
+$(document).on("click", "#groAccBtn", function(){
+	if(!confirm("承諾しますか?")){
+		return false;
+	}else{
+		var gRequester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"gRequester" : gRequester}
+		$(this).parent().parent().parent().fadeOut(1500);
+		
+		if($('.notif-center').length == 0){
+			$('#reqSignal').parent().remove();
+		}
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'applySuccess'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("招待されました。");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
+});
+
+$(document).on("click", "#rejectBtn", function(){
+	if(!confirm("拒絶しますか?")){
+		return false;
+	}else{
+		var gRequester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"gRequester" : gRequester}
+		$(this).parent().parent().parent().fadeOut(1500);
+		
+		if($('.notif-center').length == 0){
+			$('#reqSignal').parent().remove();
+		}
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'applyCancel'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("削除完了");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
+});
+
 $(document).on("click", "#shareBtn", function(){
 	if(!confirm("承諾しますか?")){
 		return false;
@@ -321,6 +367,10 @@ $(document).on("click", "#shareBtn", function(){
 			$('#reqSignal').parent().remove();
 		}
 		
+		if($('.notif-center').length == 0){
+			
+			$('#reqSignal').parent().remove();
+		}
 		$.ajax({
 			method : 'post'
 			, url  : 'calendarAccept'
@@ -347,6 +397,11 @@ $(document).on("click", "#refuseBtn", function(){
 		
 		$(this).parent().parent().parent().fadeOut(1500);
 		
+		if($('.notif-center').length == 0){
+			
+			$('#reqSignal').parent().remove();
+		}
+		
 		$.ajax({
 			method : 'post'
 			, url  : 'delShareCal'
@@ -355,7 +410,7 @@ $(document).on("click", "#refuseBtn", function(){
 			, contentType : 'application/json; charset=UTF-8'
 			, success : function(response){
 				if(response == 1){
-					alert("削除完了.");
+					alert("削除完了");
 				}else{
 					alert('다시 시도해주세요');
 				}
@@ -453,24 +508,6 @@ $(function(){
 	});
 });
 
-$(function(){
-	$('.groupManual').on('click',function(){
-		var isAccepted='';
-		isAccepted +='<a href="groupApply">';
-		isAccepted +='<span class="link-collapse">## グループ申請があります!!!##</span>';
-		isAccepted +='</a>';
-		 $.ajax({
-			method:'post',
-			url:'isAccepted',
-			contentType:'application/json;charset=json',
-			success:function(r){
-				if(r==1){
-					$("#a").html(isAccepted);
-				}
-			}
-		}); 
-	});
-});
 
 $(document).on("click", "#friDelBtn", function(){
 	if(!confirm("削除しますか？")){

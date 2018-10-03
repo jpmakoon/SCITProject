@@ -11,9 +11,9 @@ public interface T_GrequestMapper {
    public List<T_Grequest> selectGrequest(T_Grequest gRequest);
    public List<T_Grequest> groupAccept(String accepter);
    public List<T_GrequestUser> selectGreqUsers(String userId);
-   public int applySuccess(int greqNum);
+   public int applySuccess(T_Grequest grequest);
    public T_Grequest selectGrequest2(T_Grequest gRequest);
-   public int applyCancel(int greqNum);
+   public int applyCancel(T_Grequest gRequest);
    public List<T_Grequest> checkInvite(T_Grequest grequest);
    public int groupMemberDelete(T_Grequest grequest);
    public int deleteGroupGrequest(int groNum);
