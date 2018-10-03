@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.www.dao.T_GroupMapper">
-	<insert id="insertGroup" parameterType="group">
-	INSERT INTO T_GROUP
-	(
+   <insert id="insertGroup" parameterType="group">
+   INSERT INTO T_GROUP
+   (
     GRONUM,
     USERID, 
     GRONAME,
@@ -12,52 +12,59 @@
     ,ORIGINALIMAGE,
     SAVEDIMAGE
     </if>
-	)VALUES(
+   )VALUES(
     T_GROUP_SEQ.NEXTVAL,
     #{userId},
     #{groName},
     #{groIntro}
     <if test="originalImage!=null and savedImage!=null">
     ,#{originalImage},
-	#{savedImage}
+   #{savedImage}
     </if>
     )
-	</insert>
-	<select id="selectAllGroup" resultType="group">
-	SELECT *from T_GROUP
-	</select>
-	
-	<select id="selectOneGroup" resultType="group" parameterType="group">
-	SELECT *from T_GROUP 
+   </insert>
+   <select id="selectAllGroup" resultType="group">
+   SELECT *from T_GROUP
+   </select>
+   
+   <select id="selectOneGroup" resultType="group" parameterType="group">
+   SELECT *from T_GROUP 
     WHERE GRONUM=#{groNum}
-	</select>
-	<select id="selectMyGroupList" resultType="group" parameterType="group">
-	SELECT *FROM T_GROUP
-   	WHERE GRONUM IN
+   </select>
+   <select id="selectMyGroupList" resultType="group" parameterType="group">
+   SELECT *FROM T_GROUP
+      WHERE GRONUM IN
     (SELECT DISTINCT GRONUM FROM T_GREQUEST
     WHERE
-    #{userId} IN (GREQACCEPTER,GREQUESTER))
-	</select>
-	
-	<update id="plusUserCount" parameterType="group">
-	UPDATE T_GROUP
-	SET
-	USERCOUNT = USERCOUNT+1
-	WHERE 
-	GRONUM=#{groNum}
-	</update>
-	
-	<select id="checkApplyGroup" parameterType="map" resultType="int">
-	SELECT DISTINCT t_grequest.GRONUM FROM T_GREQUEST t_grequest,T_GROUP t_group
-	WHERE 
-	t_grequest.GRONUM=t_group.GRONUM
-	AND t_grequest.ISGREQACCEPTED=1
-	AND t_grequest.GREQACCEPTER=#{loginId}
-	OR t_grequest.GREQUESTER=#{loginId}
-	</select>
-	
-	<delete id="deleteGroup" parameterType="int">
-	DELETE T_GROUP WHERE GRONUM=#{groNum}
-	</delete>
+    USERID IN (#{userId},#{userId}))
+   </select>
+   
+   <update id="plusUserCount" parameterType="group">
+   UPDATE T_GROUP
+   SET
+   USERCOUNT = USERCOUNT+1
+   WHERE 
+   GRONUM=#{groNum}
+   </update>
+      <update id="miusUserCount" parameterType="group">
+   UPDATE T_GROUP
+   SET
+   USERCOUNT = USERCOUNT-1
+   WHERE 
+   GRONUM=#{groNum}
+   </update>
+   <select id="checkApplyGroup" parameterType="map" resultType="int">
+   SELECT DISTINCT t_grequest.GRONUM 
+   FROM T_GREQUEST t_grequest,T_GROUP t_group
+   WHERE 
+   t_grequest.GRONUM=t_group.GRONUM
+   AND t_group.GRONUM IN 
+   (SELECT GRONUM FROM T_GREQUEST WHERE ISGREQACCEPTED=1)
+   AND t_group.GRONUM IN
+    (SELECT GRONUM FROM T_GREQUEST WHERE GREQACCEPTER=#{loginId} OR GREQUESTER=#{loginId})
+   </select>
+   
+   <delete id="deleteGroup" parameterType="int">
+   DELETE T_GROUP WHERE GRONUM=#{groNum}
+   </delete>
 </mapper>
-

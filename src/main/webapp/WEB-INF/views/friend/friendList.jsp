@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>友達及びメッセージ</title>
 </head>
 <body>
 	<div class="main-panel">
@@ -34,7 +34,7 @@
 											<tr>
 												<td>
 													<div class="searchPhoto">
-														<img src="download?originalImage=${requestList.originalImage}+savedImage=${requestList.savedImage}">
+														<img src="download?userId=${requestList.userId}">
 													</div>
 												</td>
 												<td colspan="2">
@@ -98,7 +98,7 @@
 												</td>
 												<td>
 													<div id="btnDiv">
-														<button class="btn btn-danger" id="refuseBtn">友達削除</button>
+														<button class="btn btn-danger" id="friDelBtn">友達削除</button>
 														<button class="btn btn-warning" id="messageBtn">メッセージ</button>
 													</div>
 														<input type="hidden" class="accepter" value="${friList.userId}">
@@ -180,11 +180,11 @@ $(document).on('click', '#messageBtn', function(){
 });
 function chatOneConnect(receiveuserid){
 	var url = 'messageList?receiveuserid='+receiveuserid;
-	var openWin = window.open(url, 'testWindow', 'width=450, height=350, scrollbars=no');
+	var openWin = window.open(url, 'testWindow', 'width=450, height=500, scrollbars=no');
 }
-function chatOneAppend(msg, senduserId, receiveuserid, date){
-	var url = 'messageList?senduserId='+senduserId+'&receiveuserid='+receiveuserid+'&msg='+msg+'&date='+date;
-	var openWin = window.open(url, 'testWindow', 'width=450, height=380, scrollbars=no');
+function chatOneAppend(message, senduserId, receiveuserid, date){
+	var url = 'messageList?senduserId='+senduserId+'&receiveuserid='+receiveuserid+'&msg='+message+'&date='+date;
+	var openWin = window.open(url, 'testWindow', 'width=450, height=500, scrollbars=no');
 }
 function send(msg) {
 	sock.send(msg + "-" + userId);
@@ -199,7 +199,7 @@ $(function(){
 });
 
 $(document).on("click", "#acceptBtn", function(){
-if(!confirm("수락하시겠습니까?")){
+if(!confirm("承諾しますか?")){
 	return false;
 }else{
 	var friRequester = $(this).parent().parent().children('.accepter').val();
@@ -224,56 +224,8 @@ if(!confirm("수락하시겠습니까?")){
 }
 });
 
-$(document).on("click", "#refuseBtn", function(){
-	if(!confirm("拒絶しますか?")){
-		return false;
-	}else{
-		var friRequester = $(this).parent().parent().children('.accepter').val();
-		var sendData = {"friRequester" : friRequester}
-		
-		$(this).parent().parent().parent().fadeOut(1500);
-		
-		$.ajax({
-			method : 'post'
-			, url  : 'friDelete'
-			, data : JSON.stringify(sendData)
-			, dataType : 'text'
-			, contentType : 'application/json; charset=UTF-8'
-			, success : function(response){
-				if(response == 1){
-					alert("拒絶完了");
-				}else{
-					alert('다시 시도해주세요');
-				}
-			}
-		})
-	}
-});
-$(document).on("click", "#deleteBtn", function(){
-	if(!confirm("削除しますか")){
-		return false;
-	}else{
-		var messageNum = $(this).parent().parent().children('.accepter').val();
-		var sendData = {"messageNum" : messageNum}
-		
- 		$(this).parent().parent().parent().fadeOut(1500);
-		
-		$.ajax({
-			method : 'post'
-			, url  : 'msgDelete'
-			, data : messageNum
-			, dataType : 'text'
-			, contentType : 'application/json; charset=UTF-8'
-			, success : function(response){
-				if(response == 1){
-					alert("削除完了");
-				}else{
-					alert('다시 시도해주세요');
-				}
-			}
-		})
-	}
-});
+
+
 </script>
 </body>
 

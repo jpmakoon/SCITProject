@@ -21,12 +21,12 @@ public class T_MessageController {
 	
 	//메세지 화면 보기
 	@RequestMapping(value = "/messageList", method = RequestMethod.GET)
-	public String messageList(HttpSession session, String senduserId, String receiveuserid, String msgNum, String date, Model model) {
+	public String messageList(HttpSession session, String senduserId, String receiveuserid, String msg, String date, Model model) {
 		String userId = (String)session.getAttribute("loginId");
 		model.addAttribute("userId", userId);
 		model.addAttribute("senduserId", senduserId);
 		model.addAttribute("receiveuserid", receiveuserid);
-		model.addAttribute("msgNum", msgNum);
+		model.addAttribute("msg", msg);
 		model.addAttribute("date", date);
 		return "messenger/messageWindow";
 	}	

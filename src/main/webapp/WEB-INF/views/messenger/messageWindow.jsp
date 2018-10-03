@@ -112,9 +112,16 @@ function onClose(){
 				<h4 class="receiver2">宛先 : ${receiveuserid}</h4>
 			</div>
 		</c:if>
-		<div id="in">
-			<textarea style="height: 230px; width: 370px; " id="msgU" class="form-control" placeholder="メッセージを入れてください。" maxlength="1000"></textarea>
-		</div>
+		<c:if test="${date!=null}">
+      <div id="in">
+         <textarea style="height: 230px; width: 370px; " class="form-control" placeholder="${msg}" maxlength="1000"></textarea>
+      </div>
+      </c:if>
+      <c:if test="${date==null}">
+      <div id="in">
+         <textarea style="height: 230px; width: 370px; " id="msgU" class="form-control" placeholder="メッセージを入れてください。" maxlength="1000"></textarea>
+      </div>
+      </c:if>
 		<div>
 			<c:if test="${date==null}">
 				<div class="row">

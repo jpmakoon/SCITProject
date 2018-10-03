@@ -39,5 +39,8 @@ AND GRONUM=#{groNum}
 <delete id="deleteGroupBoard" parameterType="int">
 DELETE T_BOARD WHERE GRONUM=#{groNum}
 </delete>
-</mapper>
 
+<delete id="deleteBoard" parameterType="int">
+DELETE T_BOARD WHERE BOANUM=#{boaNum}
+</delete>
+</mapper>

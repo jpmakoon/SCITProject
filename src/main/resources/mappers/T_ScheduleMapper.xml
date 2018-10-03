@@ -3,54 +3,54 @@
 <mapper namespace="global.sesoc.www.dao.T_ScheduleMapper">
 
 <select id="selectCategory" parameterType="schedule" resultType="map">
-	SELECT 
-		schedule.SCHNUM SCHNUM,
-		plist.USERID USERID,
-		schedule.SCHTITLE SCHTITLE,
-		schedule.SCHCONTENT SCHCONTENT,
-		TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
-		TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
-		TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
-		schedule.IMPORTANCE IMPORTANCE,
-		schedule.CHECKED CHECKED,
-		schedule.SHAREABLE SHAREABLE,
-		schedule.PLANUM PLANUM,
-		schedule.CATEGORY CATEGORY,
-		schedule.SCHLOCATION SCHLOCATION, 
-		SUBSTR(schedule.schstartdate, 4,2) MONTH
-		FROM T_SCHEDULE schedule,T_PLIST plist
-		WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
-		ORDER BY PLANUM  
+   SELECT 
+      schedule.SCHNUM SCHNUM,
+      plist.USERID USERID,
+      schedule.SCHTITLE SCHTITLE,
+      schedule.SCHCONTENT SCHCONTENT,
+      TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
+      TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
+      TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
+      schedule.IMPORTANCE IMPORTANCE,
+      schedule.CHECKED CHECKED,
+      schedule.SHAREABLE SHAREABLE,
+      schedule.PLANUM PLANUM,
+      schedule.CATEGORY CATEGORY,
+      schedule.SCHLOCATION SCHLOCATION, 
+      SUBSTR(schedule.schstartdate, 4,2) MONTH
+      FROM T_SCHEDULE schedule,T_PLIST plist
+      WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
+      ORDER BY PLANUM  
 </select>
 <select id="select" parameterType="map" resultType="schedule">
-	SELECT 
-		schedule.SCHNUM SCHNUM,
-		plist.USERID USERID,
-		schedule.SCHTITLE SCHTITLE,
-		schedule.SCHCONTENT SCHCONTENT,
-		TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
-		TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
-		TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
-		schedule.IMPORTANCE IMPORTANCE,
-		schedule.CHECKED CHECKED,
-		schedule.SHAREABLE SHAREABLE,
-		schedule.PLANUM PLANUM,
-		schedule.CATEGORY CATEGORY,
-		schedule.SCHLOCATION SCHLOCATION, 
-		SUBSTR(schedule.schstartdate, 4,2) MONTH
-	FROM T_SCHEDULE schedule,T_PLIST plist
-	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId} AND schedule.CHECKED=#{checked}
-	ORDER BY CATEGORY  
+   SELECT 
+      schedule.SCHNUM SCHNUM,
+      plist.USERID USERID,
+      schedule.SCHTITLE SCHTITLE,
+      schedule.SCHCONTENT SCHCONTENT,
+      TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
+      TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
+      TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
+      schedule.IMPORTANCE IMPORTANCE,
+      schedule.CHECKED CHECKED,
+      schedule.SHAREABLE SHAREABLE,
+      schedule.PLANUM PLANUM,
+      schedule.CATEGORY CATEGORY,
+      schedule.SCHLOCATION SCHLOCATION, 
+      SUBSTR(schedule.schstartdate, 4,2) MONTH
+   FROM T_SCHEDULE schedule,T_PLIST plist
+   WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId} AND schedule.CHECKED=#{checked}
+   ORDER BY CATEGORY  
 </select>
 <select id="selectCount" parameterType="map" resultType="string">
-	SELECT COUNT(schedule.SCHNUM) COUNT
-	FROM T_SCHEDULE schedule,T_PLIST plist
-	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
+   SELECT COUNT(schedule.SCHNUM) COUNT
+   FROM T_SCHEDULE schedule,T_PLIST plist
+   WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
 </select>
 <select id="selectCountUnChecked" parameterType="map" resultType="string">
-	SELECT COUNT(schedule.SCHNUM) COUNT
-	FROM T_SCHEDULE schedule,T_PLIST plist
-	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId} AND schedule.CHECKED = 0
+   SELECT COUNT(schedule.SCHNUM) COUNT
+   FROM T_SCHEDULE schedule,T_PLIST plist
+   WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId} AND schedule.CHECKED = 0
 </select>
 
 <insert id="insertSchedule" parameterType="schedule">
@@ -82,16 +82,44 @@
     #{schLocation}
     )
    </insert>
-	
-	<select id="selectUserSchedule" parameterType="string" resultType="schedule">
-	SELECT *FROM T_SCHEDULE
+   <insert id="insertShareSchedule" parameterType="schedule">
+   INSERT INTO T_SCHEDULE(
+    SCHNUM,
+   SCHTITLE,
+   SCHCONTENT,
+   SCHREGDATE,
+   SCHSTARTDATE,
+   SCHENDDATE,
+   IMPORTANCE,
+   CHECKED,
+   SHAREABLE,
+   PLANUM,
+   CATEGORY,
+   SCHLOCATION
+    )VALUES(
+    T_SCHEDULE_SEQ.NEXTVAL,
+    #{schTitle},
+    #{schContent},
+    #{schRegdate},
+    #{schStartdate},
+    #{schEnddate},
+    #{importance},
+    #{checked},
+    #{shareable},
+    #{plaNum},
+    #{category},
+    #{schLocation}
+    )
+   </insert>
+   <select id="selectUserSchedule" parameterType="string" resultType="schedule">
+   SELECT *FROM T_SCHEDULE
     WHERE PLANUM=
     (SELECT PLANUM FROM T_PLIST WHERE USERID=#{userId})
-	</select>
-	<select id="selectOneUserSchedule" parameterType="schedule" resultType="schedule">
-	SELECT 
-	 SCHNUM, SCHNUM,
-	 SCHTITLE SCHTITLE,
+   </select>
+   <select id="selectOneUserSchedule" parameterType="schedule" resultType="schedule">
+   SELECT 
+    SCHNUM, SCHNUM,
+    SCHTITLE SCHTITLE,
      SCHCONTENT SCHCONTENT,
      TO_CHAR(SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
      TO_CHAR(SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
@@ -102,13 +130,13 @@
      PLANUM PLANUM,
      CATEGORY CATEGORY,
      SCHLOCATION SCHLOCATION 
-	FROM T_SCHEDULE WHERE SCHNUM=#{schNum}
-	</select>
-	<select id="selectPlannerSchedule" parameterType="int" resultType="schedule">
-	 select *from T_SCHEDULE WHERE PLANUM=#{plaNum}
-	</select>
-	
-	<update id="updateSchedule" parameterType="schedule">
+   FROM T_SCHEDULE WHERE SCHNUM=#{schNum}
+   </select>
+   <select id="selectPlannerSchedule" parameterType="int" resultType="schedule">
+    select *from T_SCHEDULE WHERE PLANUM=#{plaNum}
+   </select>
+   
+   <update id="updateSchedule" parameterType="schedule">
    UPDATE T_SCHEDULE
     SET 
     SCHTITLE=#{schTitle},
@@ -122,8 +150,8 @@
     WHERE 
     SCHNUM=#{schNum}
    </update>
-	<update id="updateSchedule1" parameterType="schedule">
-	 UPDATE T_SCHEDULE
+   <update id="updateSchedule1" parameterType="schedule">
+    UPDATE T_SCHEDULE
     SET 
     SCHTITLE=#{schTitle},
     SCHCONTENT=#{schContent},
@@ -131,15 +159,15 @@
     SCHENDDATE=#{schEnddate}
     WHERE 
     SCHNUM=#{schNum}
-	</update>
-	<delete id="deletePlanner_Schedule" parameterType="int">
-	DELETE T_SCHEDULE WHERE PLANUM=#{plaNum}
-	</delete>
-	<delete id="deleteSchedule" parameterType="int">
-	DELETE T_SCHEDULE WHERE SCHNUM=#{schNum}
-	</delete>
-	<select id="selectUserAllSchedule" resultType="schedule" parameterType="string">
-	    SELECT schedule.SCHNUM SCHNUM,
+   </update>
+   <delete id="deletePlanner_Schedule" parameterType="int">
+   DELETE T_SCHEDULE WHERE PLANUM=#{plaNum}
+   </delete>
+   <delete id="deleteSchedule" parameterType="int">
+   DELETE T_SCHEDULE WHERE SCHNUM=#{schNum}
+   </delete>
+   <select id="selectUserAllSchedule" resultType="schedule" parameterType="string">
+       SELECT schedule.SCHNUM SCHNUM,
             schedule.SCHTITLE SCHTITLE,
             schedule.SCHCONTENT SCHCONTENT,
             TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
@@ -151,13 +179,13 @@
             schedule.PLANUM PLANUM,
             schedule.CATEGORY CATEGORY,
             schedule.SCHLOCATION SCHLOCATION 
-   		 FROM T_SCHEDULE schedule,T_PLIST plist 
-  		  where schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
-   		 order by PLANUM
-	</select>
-	
-	<select id="selectUserPlannerSchedule" resultType="schedule" parameterType="map">
-	  SELECT schedule.SCHNUM SCHNUM,
+          FROM T_SCHEDULE schedule,T_PLIST plist 
+          where schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
+          order by PLANUM
+   </select>
+   
+   <select id="selectUserPlannerSchedule" resultType="schedule" parameterType="map">
+     SELECT schedule.SCHNUM SCHNUM,
             schedule.SCHTITLE SCHTITLE,
             schedule.SCHCONTENT SCHCONTENT,
             TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
@@ -173,9 +201,9 @@
     where schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
         AND schedule.PLANUM=#{plaNum}
     order by PLANUM
-	</select>
-	<select id="selectMixSchedule" parameterType="map" resultType="schedule">
-	   SELECT schedule.SCHNUM SCHNUM,
+   </select>
+   <select id="selectMixSchedule" parameterType="map" resultType="schedule">
+      SELECT schedule.SCHNUM SCHNUM,
             schedule.SCHTITLE SCHTITLE,
             schedule.SCHCONTENT SCHCONTENT,
             TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
@@ -185,7 +213,7 @@
             schedule.CHECKED CHECKED,
             schedule.SHAREABLE SHAREABLE,
             schedule.PLANUM PLANUM,
-            schedule.CATEGORY CATERGORY,
+            schedule.CATEGORY CATEGORY,
             schedule.SCHLOCATION SCHLOCATION
     FROM T_SCHEDULE schedule,T_PLIST plist 
     where 
@@ -193,19 +221,19 @@
     AND plist.USERID in(#{loginId},#{friendId})
     AND schedule.SHAREABLE=1
     order by PLANUM
-	
-	</select>
-	
-	<select id="selectGroupSchedule" parameterType="int" resultType="schedule">
-	SELECT *FROM T_SCHEDULE
-	WHERE PLANUM IN
-	(SELECT PLANUM FROM T_PLIST
-	WHERE GRONUM=#{groNum})
-	</select>
-	
-	<select id="selectCategoryP" parameterType="string" resultType="schedule"> <!-- 전체 스케줄 가지고 오는 그래프 -->
+   
+   </select>
+   
+   <select id="selectGroupSchedule" parameterType="int" resultType="schedule">
+   SELECT *FROM T_SCHEDULE
+   WHERE PLANUM IN
+   (SELECT PLANUM FROM T_PLIST
+   WHERE GRONUM=#{groNum})
+   </select>
+   
+   <select id="selectCategoryP" parameterType="string" resultType="schedule"> <!-- 전체 스케줄 가지고 오는 그래프 -->
  SELECT schedule.SCHNUM SCHNUM,
- 		plist.USERID USERID,
+       plist.USERID USERID,
             schedule.SCHTITLE SCHTITLE,
             schedule.SCHCONTENT SCHCONTENT,
             TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
@@ -233,7 +261,7 @@ delete
 
 <select id="selectCategoryMoon" parameterType="string" resultType="schedule"><!-- 오늘 포함된 스케중  -->
  SELECT schedule.SCHNUM SCHNUM,
- 		plist.USERID USERID,
+       plist.USERID USERID,
             schedule.SCHTITLE SCHTITLE,
             schedule.SCHCONTENT SCHCONTENT,
             TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
@@ -259,4 +287,3 @@ delete
 </update>
 
 </mapper>
-

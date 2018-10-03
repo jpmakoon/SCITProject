@@ -1,6 +1,7 @@
 package global.sesoc.www.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import global.sesoc.www.dto.T_Request;
 
@@ -15,5 +16,5 @@ public interface T_RequestMapper {
 	
 	public int delShareCal(T_Request request);
 	
-	public List<T_Request>shareCal(String userId);
+	public List<T_Request>shareCal(Map<String, String> map);
 }

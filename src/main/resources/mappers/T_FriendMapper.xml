@@ -28,11 +28,13 @@
 		DELETE FROM T_FRIEND WHERE FRIREQUESTER = #{friRequester} AND FRIACCEPTER = #{friAccepter}
 	</delete>
 	
-	
-	<select id="myFriendList" parameterType="friend" resultType="friend">
-		SELECT * FROM T_FRIEND
-		WHERE 
-		FRIACCEPTER = #{friAccepter}
-		AND ISACCEPTED=1
+	<select id="myFriendList" parameterType="map" resultType="friend">
+      SELECT * FROM T_FRIEND
+      WHERE 
+      (FRIACCEPTER = #{friAccepter}
+      AND ISACCEPTED=1)
+      OR(
+      FRIREQUESTER = #{friRequester}
+      AND ISACCEPTED=1)
 	</select>
 </mapper>

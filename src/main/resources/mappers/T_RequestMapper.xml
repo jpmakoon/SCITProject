@@ -15,18 +15,24 @@
 	<select id="checkShare" parameterType="request" resultType="request">
 	SELECT *FROM T_REQUEST
 	WHERE REQUESTER=#{requester}
-	OR REQACCEPTER=#{reqAccepter}
+	AND REQACCEPTER=#{reqAccepter}
 	</select>
 	<select id="isCalendarShare" parameterType="string" resultType="request">
 	SELECT *FROM T_REQUEST
 	WHERE ISACCEPTED=0
 	AND REQACCEPTER=#{reqAccepter}
 	</select>
-	<select id="shareCal" parameterType="string" resultType="request">
-	SELECT *FROM T_REQUEST
-	WHERE ISACCEPTED=1
-	AND REQACCEPTER=#{reqAccepter}
-	</select>
+   <select id="shareCal" parameterType="map" resultType="request">
+   SELECT *FROM T_REQUEST
+   WHERE (
+    ISACCEPTED=1
+   AND 
+   REQACCEPTER=#{reqAccepter}
+   ) OR (
+    ISACCEPTED=1
+   AND 
+    REQUESTER=#{requester})
+   </select>
 	<update id="calendarAccept" parameterType="request">
 	UPDATE T_REQUEST
 	SET

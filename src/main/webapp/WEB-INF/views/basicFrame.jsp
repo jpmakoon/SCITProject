@@ -43,22 +43,12 @@
 						</div>
 					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-					<li class="nav-item dropdown hidden-caret">	<!-------------------------------- calendar toggle ------------------------------>
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img alt="" src="resources/calendar_icon.png" id="isCalendarShare">
-									
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown1" id="calShareList">	<!-- 알림 구현이 끝나면 메세지도 만들기 메세지방보여주기, c:if 새로운 레코드가 추가되면 알려주기 -->
-								
-								
-							</div>
-						</li>
-						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- message toggle ------------------------------>
-							<a class="nav-link dropdown-toggle" href="friendList" id="navbarDropdown1" role="button">
-								<i class="la la-envelope"></i>
-								<span class="notification messageNotify" id="msgCount"></span>		<!-- 새로운 메세지가 있으면 ! 표시-->
-							</a>
-						</li>
+					  <li class="nav-item dropdown hidden-caret">   <!-------------------------------- message toggle ------------------------------>
+                     	<a class="nav-link dropdown-toggle" href="friendList" id="navbarDropdown1" role="button">
+                        <i class="la la-envelope"></i>
+                        <span class="notification messageNotify" id="msgCount"></span>      <!-- 새로운 메세지가 있으면 ! 표시-->
+                    	</a>
+                  	   </li>
 						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- request toggle ------------------------------>
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-bell"></i>
@@ -86,9 +76,9 @@
 									</div>
 									<div class="dropdown-divider">
 									</div>
-									<a class="dropdown-item" href="pwdUpdate"><i class="ti-user"></i>パスワード変更</a>
-									<a class="dropdown-item" href="userDelete"><i class="ti-user"></i>アカウント削除</a>
-									<a class="dropdown-item" href="logout"><i class="fa fa-power-off"></i>ログアウト</a>
+									<a class="dropdown-item" href="pwdUpdate"><i class="fa fa-gear"></i>&nbsp; パスワード変更</a>
+									<a class="dropdown-item" href="userDelete"><i class="fa fa-chain-broken"></i>&nbsp; アカウント脱退</a>
+									<a class="dropdown-item" href="logout"><i class="fa fa-power-off"></i>&nbsp; ログアウト</a>
 								</li>
 							</ul>
 						</li>
@@ -100,7 +90,7 @@
 			
 			<div class="sidebar">
 				<div class="scrollbar-inner sidebar-wrapper">
-					<div class="user">
+ 					<div class="user">
 						<div class="photo">
 							<img src="download?userId=${sessionScope.loginId }">
 						</div>
@@ -114,7 +104,7 @@
 							</a>
 							<div class="clearfix"></div>
 
-							<div class="collapse in" id="navcoll" aria-expanded="true" style="">
+ 							<div class="collapse in" id="navcoll" aria-expanded="true" style="">
 								<ul class="nav">
 									<li>
 										<a href="userDetail?userId=${sessionScope.loginId }">
@@ -146,12 +136,12 @@
 								<ul class="nav">
 									<li>
 										<a href="plannerList">
-											<span class="link-collapse">1. Schedule</span>
+											<span class="link-collapse">プランナーリスト</span>
 										</a>
 									</li>
 									<li>
 										<a href="calendar">
-											<span class="link-collapse">2. Calendar</span>
+											<span class="link-collapse">シェアする</span>
 										</a>
 									</li>
 								</ul>
@@ -160,17 +150,16 @@
 						</li>
 						<li class="nav-item">
 							<div class="info">
-							<a class="shareCal" data-toggle="collapse" href="#sp" aria-expanded="true">
+							<a class="shareCal" data-toggle="collapse" href="#calShareUserList" aria-expanded="true">
 									<i class="la la-chain"></i>
-									<span class="user-level">共有プランナー</span>
+									<span class="user-level">シェアプランナー</span>
 									<div class= "caretDiv">
 										<span class="caret" style=""></span>
 									</div>
 							</a>
 							<div class="clearfix" id="calShareUserList"></div>
-
 							<div class="collapse in"  aria-expanded="true" style="">
-								
+
 							</div>
 						</div>
 						</li>
@@ -243,7 +232,7 @@
 <!--===============================================================================================-->
 <script>
  $(function(){
-
+	
 	 $.ajax({
          method  : 'post'
          , url   : 'msgCount'
@@ -256,23 +245,8 @@
          }
       });
 	reqCheck();
-	mainPhoto();
 });
-$(function(){
-	$.ajax({
-		method:'post',
-		url:'isCalendarShare',
-		success:function(r){
-			var shareList='';
-			shareList +='<a class="dropdown-item" href="isShareRequest">calendar 공유리스트</a>';
-			for ( var i in r) {
-				
-				shareList +='<div class="dropdown-item" >'+r[i].requester+'</div>';
-			}
-			$("#calShareList").html(shareList);
-		}
-	});
-});
+
 function reqCheck(){
 	$.ajax({
 		method : 'post'
@@ -295,17 +269,27 @@ function reqOutput(response){
 	
 	var req = '<div class="dropdown-title">お知らせがあります。</div>';
 	$('#reqExistence').html(req);
-	
+	console.log(response);
 	var reqAll = '';
 	for ( var i in response) {
 		reqAll += '<div class="notif-center">';
 		reqAll += '<div class="notif-content"><i class="la la-user-plus" id="buddyIcon"></i>';
-		reqAll += '<span class="time"> &nbsp;'+response[i].userName+'様の友達要請</span>';
-		reqAll += '<div id="btnDiv">';
-		reqAll += '<input type="button" id="successBtn" class="btn btn-success" value="承知"> &nbsp;';
-		reqAll += '<button class="btn btn-danger" id="dangerBtn">拒絶</button>';
-		reqAll += '</div>';
-		reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
+		if (response[i].email == '1') {
+			reqAll += '<span class="time"> &nbsp;'+response[i].userName+'様のシェア申請</span>';
+			reqAll += '<div id="btnDiv">';
+			reqAll += '<input type="button" id="shareBtn" class="btn btn-info" value="承諾"> &nbsp;';
+			reqAll += '<button class="btn btn-danger" id="refuseBtn">拒絶</button>';
+			reqAll += '</div>';
+			reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
+		}else{
+			reqAll += '<span class="time"> &nbsp;'+response[i].userName+'様の友達申請</span>';
+			reqAll += '<div id="btnDiv">';
+			reqAll += '<input type="button" id="successBtn" class="btn btn-success" value="承諾"> &nbsp;';
+			reqAll += '<button class="btn btn-danger" id="dangerBtn">拒絶</button>';
+			reqAll += '</div>';
+			reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
+			
+		}
 		reqAll += '</div>';
 		reqAll += '</div>';
 	}
@@ -325,15 +309,72 @@ $(document).on("click", '#searchBtn', function(){
 });
 
 
+$(document).on("click", "#shareBtn", function(){
+	if(!confirm("承諾しますか?")){
+		return false;
+	}else{
+		var requester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"requester" : requester}
+		$(this).parent().parent().parent().fadeOut(1500);
+		
+		if($('.notif-center').length == 0){
+			$('#reqSignal').parent().remove();
+		}
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'calendarAccept'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert(requester+"様とシェアできました。");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
+});
+
+$(document).on("click", "#refuseBtn", function(){
+	if(!confirm("削除しますか?")){
+		return false;
+	}else{
+		var requester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"requester" : requester}
+		
+		$(this).parent().parent().parent().fadeOut(1500);
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'delShareCal'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("削除完了.");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
+});
+
 $(document).on("click", "#successBtn", function(){
-	if(!confirm("수락하시겠습니까?")){
+	if(!confirm("承諾しますか?")){
 		return false;
 	}else{
 		var friRequester = $(this).parent().parent().children('.accepter').val();
 		var sendData = {"friRequester" : friRequester}
 		
-		console.log($(this).parent().parent().parent().parent());
-		$(this).parent().parent().parent().parent().remove();
+		/* console.log($(this).parent().parent().parent().parent());
+		$(this).parent().parent().parent().parent().remove(); */
+		
+		$(this).parent().parent().parent().fadeOut(1500);
 		
 		if($('.notif-center').length == 0){
 			
@@ -396,15 +437,12 @@ $(function(){
 			contentType : 'application/json; charset=UTF-8',
 			success:function(r){
 				
-				
-				
-				
 				var inputData='';
 				inputData +='<ul class="nav" >';
 				for ( var i in r) {
 					inputData +='<li>';
-					inputData +='<a href="shareCalendar?requester='+r[i].requester+'">';
-					inputData +='<span class="link-collapse">'+r[i].requester+'</span>';
+					inputData +='<a href="shareCalendar?requester='+r[i]+'">';
+					inputData +='<span class="link-collapse">'+r[i]+'</span>';
 					inputData +='</a></li>';
 				}
 				inputData +='</ul>';
@@ -419,7 +457,7 @@ $(function(){
 	$('.groupManual').on('click',function(){
 		var isAccepted='';
 		isAccepted +='<a href="groupApply">';
-		isAccepted +='<span class="link-collapse">## グループ要請があります!!!##</span>';
+		isAccepted +='<span class="link-collapse">## グループ申請があります!!!##</span>';
 		isAccepted +='</a>';
 		 $.ajax({
 			method:'post',
@@ -434,9 +472,33 @@ $(function(){
 	});
 });
 
-function mainPhoto(){
-	
-}
+$(document).on("click", "#friDelBtn", function(){
+	if(!confirm("削除しますか？")){
+		return false;
+	}else{
+		var friRequester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"friRequester" : friRequester}
+		
+		console.log($(this).parent().parent().parent().parent());
+		$(this).parent().parent().parent().parent().remove();
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'friDelete'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("拒絶完了");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
+});
+
 </script>
 
 </body>

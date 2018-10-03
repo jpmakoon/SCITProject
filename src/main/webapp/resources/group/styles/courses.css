@@ -1201,7 +1201,6 @@ section
 }
 .course_mark
 {
-	position: absolute;
 	top: 50%;
 	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
@@ -1209,11 +1208,13 @@ section
 	-ms-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	width: 61px;
-	height: 25px;
+	width: 80px;
+	height: 30px;
 	background: #f9cf0e;
 	border-radius: 3px;
 	text-align: center;
+	margin: 0 auto;
+	margin-top: 30px;
 }
 .course_mark:hover
 {

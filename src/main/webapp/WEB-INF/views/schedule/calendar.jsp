@@ -8,8 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
+    html{
+    	height: 100%;
+    	width: 100%;
+    }
+
     #calendar {
-   		 color:black;
+        color:black;
         max-width: 900px;
         margin-right : 5%;
         height : 700px;
@@ -44,26 +49,30 @@
 <script src='resources/lib/moment.min.js'></script>
 <script src='resources/calendar/fullcalendar.min.js'></script>
 
+      <script>
+      $( function() {
+         $( "#slider" ).slider({
+            range: "min",
+            max: 100,
+            value: 40,
+         });
+         $( "#slider-range" ).slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [ 75, 300 ]
+         });
+      } );
+   </script>
+   
+
 <script>
-$( function() {
-    $( "#slider" ).slider({
-       range: "min",
-       max: 100,
-       value: 40,
-    });
-    $( "#slider-range" ).slider({
-       range: true,
-       min: 0,
-       max: 500,
-       values: [ 75, 300 ]
-    });
- });
- 
+   
   $(document).ready(function() {
      
-	  var fullDate = new Date();
-	   var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)?(fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
-	   var currentDate = fullDate.getFullYear()+"-"+twoDigitMonth+ "-" +fullDate.getDate();
+     var fullDate = new Date();
+      var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)?(fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+      var currentDate = fullDate.getFullYear()+"-"+twoDigitMonth+ "-" +fullDate.getDate();
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -103,9 +112,11 @@ $( function() {
                });
                var a=$(this).attr('class');
                var b=parseInt(a.substring(57,a.length-13));
+        
                var sendData={
                   'schNum':b   
                };
+              
                //ajax 사용해서 db에서 지워주기
                $.ajax({
                   method:'post',
@@ -212,6 +223,8 @@ $( function() {
   }        
        //****************************************************************
     });
+    var tra='<div id="calendarTrash" class="calendar-trash"><img src="resources/calendar/trash.jpg" /></div><br/>';
+    $('.fc-right').html(tra);
   }); 
   
   
@@ -219,33 +232,35 @@ $( function() {
      $('#friendCalendarBtn').on('click',function(){
        var friendIds=$('.friendId');
        var friendId='';
- 	  var fullDate = new Date();
-	   var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)?(fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
-	   var currentDate = fullDate.getFullYear()+"-"+twoDigitMonth+ "-" +fullDate.getDate();
+      var fullDate = new Date();
+      var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)?(fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+      var currentDate = fullDate.getFullYear()+"-"+twoDigitMonth+ "-" +fullDate.getDate();
        for (var i = 0; i < friendIds.length; i++) {
-		if(friendIds[i].selected==true){
-			friendId=friendIds[i].value;
-		}
-	}
+      if(friendIds[i].selected==true){
+         friendId=friendIds[i].value;
+      }
+   }
       
-     	  
+       if(!confirm("シェア申請しますか?")){
+         return false;
+      }else{
        // 친구의 정보를 가져와서 ajax로 calendar를 가져오게 함.
          var requsetData={'reqAccepter':friendId};
          $.ajax({
-       	  method:'post',
-       	  url:'calendarShare',
-       	  data:JSON.stringify(requsetData),
-       	  dataType:'json',
-       	  contentType:'application/json; charset=utf-8',
-       	  success:function(r){
-       		  if(r==1){
-       			  alert(friendId+'님에게 공유여부를 보냈습니다.');
-       		  }else if (r==0) {
-				alert('이미 요청하였습니다.');
-			}
-       	  }
+            method:'post',
+            url:'calendarShare',
+            data:JSON.stringify(requsetData),
+            dataType:'json',
+            contentType:'application/json; charset=utf-8',
+            success:function(r){
+               if(r==1){
+                  alert(friendId+'様に申請されました。');
+               }else if (r==0) {
+            alert('申請されています。');
+         	}
+           }
          });
-       
+      
          var sendData={'userId': friendId};
           $('#friendCalendar').fullCalendar({
             header: {
@@ -257,24 +272,6 @@ $( function() {
             navLinks: true, // can click day/week names to navigate views
             selectable: true,
             selectHelper: true,
-            select: function(start, end) {
-              var title = prompt('스케줄 타이틀:');
-              
-               var content = prompt('스케줄 내용:'); 
-              
-              var eventData;
-              if (title) {
-                eventData = {
-                 
-                  title: title,
-                  content: content, 
-                  start: start,
-                  end: end
-                };
-                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-              }
-              $('#calendar').fullCalendar('unselect');
-            },
             editable: false,
             eventLimit: true, // allow "more" link when too many events
             
@@ -364,23 +361,23 @@ $( function() {
         }        
              //****************************************************************
           });
-        
+     }
      });
   });
   $(document).ready(function(){
      
      $('#friendCalendar').on('dragenter',function(){
-    	  var fullDate = new Date();
-   	   var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)?(fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
-   	   var currentDate = fullDate.getFullYear()+"-"+twoDigitMonth+ "-" +fullDate.getDate();
-    	  var friendIds=$('.friendId');
-    	  
+         var fullDate = new Date();
+         var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)?(fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+         var currentDate = fullDate.getFullYear()+"-"+twoDigitMonth+ "-" +fullDate.getDate();
+         var friendIds=$('.friendId');
+         
           var friendId='';
           for (var i = 0; i < friendIds.length; i++) {
-   		if(friendIds[i].selected==true){
-   			friendId=friendIds[i].value;
-   		}
-   		}
+         if(friendIds[i].selected==true){
+            friendId=friendIds[i].value;
+         }
+         }
           
          var sendData={'userId':friendId};
          
@@ -423,9 +420,9 @@ $( function() {
               
              //************************* 일정 입력란 *********************************
              //해당 스케줄을 모두 가져와서 for문으로 모두 입력시켜야 함  
-			
+         
             events: function(start, end ,timezone, callback) {
-            	
+               
           $.ajax({
               method:'post',
              url:'selectMixSchedule',
@@ -546,19 +543,18 @@ $( function() {
    
 </head>
 <body>
-	
-<div class="main-panel" >
-	<div class="content"  >
-	<!-- 선택할 친구를 불러올 수있게 -->
-	 <select>
-   <c:forEach var="fList" items="${fList }">
-      <option class="friendId" value="${fList.friRequester}">${fList.friRequester}</option>
+         <div class="main-panel" >
+            <div class="content"  >
+                <!-- 선택할 친구를 불러올 수있게 -->
+    <select style="height: 39px; width: 100px;">
+   <c:forEach var="fList" items="${fList}">
+      <option class="friendId" value="${fList}">${fList}</option>
       </c:forEach>
    </select> 
    
-   <input type="button" id="friendCalendarBtn" value="calendar 공유">
+   <input type="button" class="btn btn-success" id="friendCalendarBtn" value="プランナーシェア">
    <!-- 휴지통 사진 부분 -->
-   <div id="calendarTrash" class="calendar-trash"><img src="resources/calendar/trash.jpg" /></div><br/>
+   <br><br>
    <div class="allCalendar">
    
    <!-- 캘린더 부분 -->
@@ -571,8 +567,10 @@ $( function() {
    <div>
       <div class="mixCalendar"></div>
    </div>
-
   </div>
-</div>
+ </div>
+  
+   
+
 </body>
 </html>

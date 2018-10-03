@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.www.dao.T_PlannerMapper">
-	<insert id="insertPlanner" parameterType="planner">
-	INSERT INTO T_PLANNER(
+   <insert id="insertPlanner" parameterType="planner">
+   INSERT INTO T_PLANNER(
     PLANUM,
     PLATITLE
     )VALUES(
     T_PLANNER_SEQ.NEXTVAL,
     #{plaTitle}
     )
-	</insert>
-	<select id="plannerList" parameterType="string" resultType="planner">
-	SELECT 
-	planner.PLANUM PLANUM, 
-	planner.PLATITLE PLATITLE, 
-	planner.PLAREGDATE PLAREGDATE
+   </insert>
+   <select id="plannerList" parameterType="string" resultType="planner">
+   SELECT 
+   planner.PLANUM PLANUM, 
+   planner.PLATITLE PLATITLE, 
+   planner.PLAREGDATE PLAREGDATE
     FROM
     T_PLANNER planner,
     T_PLIST plist 
@@ -23,13 +23,15 @@
     AND 
     plist.USERID=#{userId}
     order by PLANUM
-	</select>
-	<select id="selectOneplanner"  resultType="planner">
-	  SELECT *FROM T_PLANNER
+   </select>
+   <select id="selectOneplanner"  resultType="planner">
+     SELECT *FROM T_PLANNER
      WHERE PLANUM=(SELECT MAX(PLANUM) FROM T_PLANNER)
-	</select>
-	<delete id="deletePlanner" parameterType="int">
-	 DELETE T_PLANNER WHERE PLANUM=#{plaNum}
-	</delete>
+   </select>
+   <delete id="deletePlanner" parameterType="int">
+    DELETE T_PLANNER WHERE PLANUM=#{plaNum}
+   </delete>
+   <select id="maxPlanum" resultType="int">
+   SELECT MAX(PLANUM) PLANUM FROM T_PLANNER
+   </select>
 </mapper>
-

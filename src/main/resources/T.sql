@@ -123,7 +123,6 @@ CREATE TABLE T_REQUEST
    REQUESTER varchar2(20) NOT NULL,
    REQACCEPTER varchar2(20) NOT NULL,
    ISACCEPTED number(4) DEFAULT 0,
-   PLANUM number NOT NULL,
    PRIMARY KEY (REQNUM)
 );
 
@@ -262,6 +261,7 @@ CREATE SEQUENCE T_BOARD_SEQ;
 CREATE SEQUENCE T_REPLY_SEQ;
 CREATE SEQUENCE T_FRIEND_SEQ;
 CREATE SEQUENCE T_MASSAGE_SEQ;
+CREATE SEQUENCE T_GREQUEST_SEQ;
 
 /* user insert */
 
@@ -304,13 +304,13 @@ INSERT INTO T_SCHEDULE(
 	)
 VALUES(
 	T_SCHEDULE_SEQ.NEXTVAL,
-	'스케쥴13',
-	'내용13',
-	'2018-09-21',
-	'2018-09-24',
-	'2',
-	21,
-	'데이트',
+	'飲み会',　
+	'飲み会だ！',
+	'2018-10-25',
+	'2018-10-25',
+	'10',
+	84,
+	'Beer',
 	'삼성동'
 );
 COMMIT
@@ -329,10 +329,21 @@ INSERT INTO T_FRIEND(
       );
       
 SELECT * FROM T_PLIST;
-SELECT * FROM T_SCHEDULE;
+SELECT * FROM T_BOARD;
+DELETE FROM T_BOARD WHERE BOANUM = '36';
 SELECT * FROM T_USER;
 UPDATE T_SCHEDULE SET CHECKED = 1 WHERE IMPORTANCE = '2';
-
+select * from t_request;
 alter table t_message add(accessed number(10));
 
+SELECT *FROM T_GREQUEST;
+DELETE FROM t_schedule WHERE schnum = 138;
+COMMIT
 
+select*from t_group;
+	SELECT *FROM T_REQUEST;
+	WHERE ISACCEPTED=0
+	AND REQACCEPTER='akehdgml';
+select * from t_schedule;
+	update t_schedule set shareable = 1
+	

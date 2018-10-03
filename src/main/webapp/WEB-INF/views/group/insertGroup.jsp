@@ -7,7 +7,6 @@
 <html>
 <head>
 <title>Create a Group</title>
-
 <style>
 
 #createGroup{
@@ -40,6 +39,7 @@ $(function(){
 	function checkGroup(){
 		var groName=$('#groName').val();
 		var groIntro=$('#groIntro').val();
+		
 		if(groName.length==0){
 			alert("グループ名を入れてください。");
 			return false;
@@ -52,7 +52,6 @@ $(function(){
 });
 
 </script>
-<title>Create a Group</title>
 </head>
 <body>
 	<div class="main-panel">

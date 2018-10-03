@@ -24,7 +24,23 @@ repnum=
 </select>
 
 <select id="selectBoardReply" parameterType="int" resultType="reply">
-SELECT *FROM T_REPLY
+SELECT 
+REPNUM,
+USERID,
+REPTEXT,
+TO_CHAR(REPREGDATE,'YYYY-MM-DD') REPREGDATE,
+BOANUM
+FROM T_REPLY
 WHERE BOANUM=#{boaNum}
 </select>
+<delete id="deleteGroupReply" parameterType="int">
+    delete T_REPLY where boanum in
+    (select boanum from t_board where GRONUM=#{groNum})
+</delete>
+<delete id="deleteBoardReply" parameterType="int">
+ DELETE T_REPLY WHERE BOANUM=#{boaNum}
+</delete>
+<delete id="deleteReply" parameterType="int">
+DELETE T_REPLY WHERE REPNUM=#{repNum}
+</delete>
 </mapper>

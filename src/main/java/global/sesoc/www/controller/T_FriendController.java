@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.www.dao.T_FriendRepository;
 import global.sesoc.www.dao.T_MessageRepository;
+import global.sesoc.www.dao.T_RequestRepository;
 import global.sesoc.www.dao.T_UserRepository;
 import global.sesoc.www.dto.T_Friend;
 import global.sesoc.www.dto.T_Message;
+import global.sesoc.www.dto.T_Request;
 import global.sesoc.www.dto.T_User;
 
 @Controller
@@ -31,6 +33,10 @@ public class T_FriendController {
 	
 	@Autowired
 	T_MessageRepository repository3;
+	
+	@Autowired
+	T_RequestRepository repository4;
+	
 	//친구리스트 보여주기
 	@RequestMapping(value = "/friendList", method = RequestMethod.GET)
 	public String friendList(HttpSession session, T_Friend check, Model model) {
@@ -60,7 +66,6 @@ public class T_FriendController {
 				user.setUserId(reqId);
 				user = repository2.selectOne(user);
 				requestList.add(user);
-				System.out.println("아하하하하하하하"+requestList);
 		}
 		
 		List<T_User> friList = new ArrayList<>();					// 친구리스트에 있는 유저들 정보 가져오기
@@ -176,16 +181,36 @@ public class T_FriendController {
 				user = repository2.selectOne(user);
 				checkList.add(user);
 		}
+		
+		List<T_Request> calList = repository4.isCalendarShare(userId);
+		System.out.println("calLIst"+ calList);
+		for (int i = 0; i < calList.size(); i++) {
+			T_User user = new T_User();
+			user.setUserId(calList.get(i).getRequester());
+			user = repository2.selectOne(user);
+			user.setEmail("1");
+			checkList.add(user);
+		}
+			
+		
 		System.out.println(checkList);
 		return checkList;
 	}
-	@ResponseBody
-	@RequestMapping(value="/myFriendList" , method=RequestMethod.POST)
-	public List<T_Friend> myFriendList(HttpSession session){
-		String userId=(String)session.getAttribute("loginId");
-		T_Friend f=new T_Friend(); f.setFriAccepter(userId);
-		List<T_Friend> list=repository.myFriendList(f);
-		return list;
-	}
-	
+	   @ResponseBody
+	   @RequestMapping(value="/myFriendList" , method=RequestMethod.POST)
+	   public List<String> myFriendList(HttpSession session){
+	      String userId=(String)session.getAttribute("loginId");
+	      List<T_Friend> list=repository.myFriendList(userId);
+	      List<String> flist=new ArrayList<>();
+	      for (int i = 0; i < list.size(); i++) {
+	         if(!list.get(i).getFriAccepter().equals(userId)) {
+	            flist.add(list.get(i).getFriAccepter());
+	         }
+	         if(!list.get(i).getFriRequester().equals(userId)) {
+	            flist.add(list.get(i).getFriRequester());
+	         }
+	      }
+	      
+	      return flist;
+	   }
 }

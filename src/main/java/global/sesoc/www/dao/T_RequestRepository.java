@@ -1,6 +1,8 @@
 package global.sesoc.www.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,10 @@ public class T_RequestRepository {
 	}
 	public List<T_Request> shareCal(String userId){
 		T_RequestMapper mapper=session.getMapper(T_RequestMapper.class);
-		List<T_Request> list=mapper.shareCal(userId);
+		Map<String, String> map = new HashMap<>();
+		map.put("requester", userId);
+		map.put("reqAccepter", userId);
+		List<T_Request> list=mapper.shareCal(map);
 		return list;
 	}
 }

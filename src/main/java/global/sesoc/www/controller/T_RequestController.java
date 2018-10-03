@@ -24,6 +24,8 @@ public class T_RequestController {
 	T_RequestRepository T_RequestRepository;
 	@Autowired
 	T_UserRepository T_UserRepository;
+	
+	
 	@ResponseBody
 	@RequestMapping(value="/calendarShare", method=RequestMethod.POST)
 	public int calendarShare(@RequestBody T_Request request, HttpSession session) {
@@ -35,13 +37,12 @@ public class T_RequestController {
 		List<T_Request>list2=T_RequestRepository.checkShare(request);
 		List<T_Request>list=T_RequestRepository.checkShare(checkReq);
 		
-		if(list != null || list2 !=null) {
+		if(list.size() != 0 || list2.size() != 0) {
 			return 0;
+		}else {
+			int result=T_RequestRepository.calendarShare(request);
+			return result; 
 		}
-		
-		
-		int result=T_RequestRepository.calendarShare(request);
-		return result; 
 	}
 	@ResponseBody
 	@RequestMapping(value="/isCalendarShare", method=RequestMethod.POST)
@@ -73,7 +74,7 @@ public class T_RequestController {
 	public int calendarAccept(@RequestBody T_Request request, HttpSession session) {
 		String userId=(String)session.getAttribute("loginId");
 		request.setReqAccepter(userId);
-		
+		System.out.println("알이큐" + request);
 		int result=T_RequestRepository.calendarAccept(request);
 		return result;
 	}
@@ -87,15 +88,26 @@ public class T_RequestController {
 		int result=T_RequestRepository.delShareCal(request);
 		return result;
 	}
+	
 	@ResponseBody
-	@RequestMapping(value="/shareCal", method=RequestMethod.POST)
-	public List<T_Request> shareCal(HttpSession session){
-		String userId=(String)session.getAttribute("loginId");
-		List<T_Request>rList=T_RequestRepository.shareCal(userId);
-		
-		return rList;
-		
-	}
+	   @RequestMapping(value="/shareCal", method=RequestMethod.POST)
+	   public List<String> shareCal(HttpSession session){
+	      String userId=(String)session.getAttribute("loginId");
+	      List<T_Request>rList=T_RequestRepository.shareCal(userId);
+	      List<String> list=new ArrayList<String>();
+	      
+	      for (int i = 0; i < rList.size(); i++) {
+	         if(!rList.get(i).getRequester().equals(userId)) {
+	            list.add(rList.get(i).getRequester());
+	            }
+	         if(!rList.get(i).getReqAccepter().equals(userId)) {
+	            list.add(rList.get(i).getReqAccepter());
+	         }
+	      }
+	      return list;
+	      
+	   }
+	
 	@RequestMapping(value="/shareCalendar", method=RequestMethod.GET)
 	public String shareCalendar(T_Request request,HttpSession session,Model model) {
 		String userId=(String)session.getAttribute("loginId");

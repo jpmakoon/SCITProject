@@ -191,13 +191,13 @@ $(document).ready(function() {
          userId    : userId,
          checked : checked
       }, function(data) {
-    	  console.log("ddddd"+data);
-         var i = 0;
+    	 var i = 0;
          var temp = [];
             $.each(data, function(key, value) {
             if(value.MONTH == month){
                chartDataCount ++;
             }
+            
             if(value.MONTH == month && value.CHECKED == 1){
                if(chartLabels.length == 0){
                    chartLabels.push(value.CATEGORY);
@@ -279,7 +279,6 @@ $(document).ready(function() {
          }
          createChart();
          secondDiv();
-         console.log("확인"+chartLabels);
       });
    })
    $(document).on('click','#btn2', function(){
@@ -479,8 +478,8 @@ $(document).ready(function() {
       $('#firstDiv').html(str);
    }
     function secondTable(){
-		
-    	var temp = 0;
+      
+       var temp = 0;
         var category = '';
         for(var i = 0; i<categoryCount2.length; i++){
            if(temp<categoryCount2[i]){
@@ -488,50 +487,61 @@ $(document).ready(function() {
               category = categoryCount[i];
            }
         }
-        console.log(category);
         
-        if (cateory.equals(date)) {
-			category = "데이트";
-			alert('변환완료!!!!');
-		}
+        if(category =='date'){
+        	category = '데이트';
+        }
         
-		$('#secondDiv').html('');
-		var sessionName = $('#sessionName').val();
-		var sendData = {"category" : category};
-		
-		var str = '<br>';
-		str += '<div class="card card-stats">';
-		str += '<div class="card-header" >';
-		str += '<h4 class="card-title">'+ sessionName +' 様におすすめします！</h4>';
-		str += '<h4 class="card-title">これはいかがでしょうか？</h4>';
-		str += '</div>';
-		str += '<div class="card-body recommendDiv">';
+        if(category == 'beer') {
+        	category = '술집';
+        }
+        
+        if(category == 'meal'){
+        	category = '맛집';
+        }
+        
+        if(category == 'study'){
+        	category = '공부';
+        }
+        
+      $('#secondDiv').html('');
+      var sessionName = $('#sessionName').val();
+      var sendData = {"category" : category};
+      
+      var str = '<br>';
+      str += '<div class="card card-stats">';
+      str += '<div class="card-header" >';
+      str += '<h4 class="card-title">'+ sessionName +' 様におすすめします！</h4>';
+      str += '<h4 class="card-title">これはいかがでしょうか？</h4>';
+      str += '</div>';
+      str += '<div class="card-body recommendDiv">';
 
-		$.ajax({
-			method : 'get'
-			, url  : 'recPerCategory'
-			, data : sendData
-			, contentType : 'application/json; charset=UTF-8'
-			, success : function(response){
-				/* console.log(response[0][0]); */
- 				$.each(response, function(index, item){
-					console.log(response[index][index]);
-					str += '<a href="' + response[index][0] +'" target="_blank">' + response[index][1] + '</a>'
-					str += '<p>電話番号 : ' + response[index][2] +'</p>';
-					str += '<p>アドレス : ' + response[index][3] + '</p>';
-					str += '<hr>';
-				}) 
-					str += '</div>';
-					str += '</div>';
-					$('#secondDiv').html(str);
-			}
-		})   	
-    	
+      $.ajax({
+         method : 'get'
+         , url  : 'recPerCategory'
+         , data : sendData
+         , contentType : 'application/json; charset=UTF-8'
+         , success : function(response){
+            /* console.log(response[0][0]); */
+             $.each(response, function(index, item){
+               console.log(response[index][index]);
+               str += '<a href="' + response[index][0] +'" target="_blank">' + response[index][1] + '</a>'
+               str += '<p>電話番号 : ' + response[index][2] +'</p>';
+               str += '<p>アドレス : ' + response[index][3] + '</p>';
+               str += '<hr>';
+            }) 
+               str += '</div>';
+               str += '</div>';
+               $('#secondDiv').html(str);
+         }
+      })      
+       
        console.log("가장많은 카테고리가 뭔가"+categoryCount);
        console.log("가장많은 카테고리가 수가 얼마가"+categoryCount2);
    }
    /* ====================================secondDiv====================== */
    function secondDiv(){
+	   console.log("ddddd"+chartDataCount);
       checkedCount = 0;
       var str = '';
        var newData = [];
@@ -539,9 +549,20 @@ $(document).ready(function() {
       var firstCard=$('#firstCard').text();
        var unFinished = 0;
        
-       for(var i = 0; i < chartData.length; i++){
-          checkedCount += parseInt(chartData[i]);
+       console.log(chartData);
+       if(checked == 1){
+    	   console.log("아우아우1111111111"+checkedCount);
+    	   for(var i = 0; i < chartData.length; i++){
+    	          checkedCount += parseInt(chartData[i]);
+    	       }
+    	   console.log("아우아우12121"+checkedCount+"뭐지");
+       }else{
+    	   for(var i = 0; i < chartData2.length; i++){
+ 	          checkedCount += parseInt(chartData2[i]);
+ 	       }
+    	   console.log("121::::::"+checkedCount+"뭐지");
        }
+       console.log("아우아우"+checkedCount);
        
        if(checked == '1'){
           for(var i = 0; i < chartData.length; i++){
@@ -552,7 +573,7 @@ $(document).ready(function() {
                 newData += chartLabels[i];
              }       
           }
-       }if(checked == 0){
+       }if(checked == '0'){
           for(var i = 0; i < chartData2.length; i++){
              if(maxCate < parseInt(chartData2[i])){
                 maxCate = parseInt(chartData2[i]);
@@ -563,6 +584,7 @@ $(document).ready(function() {
           }
         }
        console.log(chartLabels);
+       console.log("dhodho"+chartData2);
        var first = chartLabels[0];
        var second= chartLabels[1];
        var third = chartLabels[2];
@@ -583,7 +605,7 @@ $(document).ready(function() {
          str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+checkedCount+'</div> 個チェックしました！</div>';
          str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+ '<div class="ptpt">' + newData + '</div>です！！</div>';
       }else{
-         str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+unFinished+'</div> 個できませんでした。</div>';
+         str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+checkedCount+'</div> 個できませんでした。</div>';
          str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+'<div class="ptpt">'+newData+'</div> です。</div>';
       }
       
@@ -655,6 +677,4 @@ $(document).ready(function() {
 
 </script>
 </body>
-
-
 </html>

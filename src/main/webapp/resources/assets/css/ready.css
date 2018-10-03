@@ -6053,10 +6053,12 @@ body {
 }
 .user-box .u-img {
   width: 80px;
+  height: 69px;
 }
 .user-box .u-img img {
   width: 100%;
   border-radius: 5px;
+  height : 49px;
 }
 .user-box .u-text {
   padding: 0 10px;

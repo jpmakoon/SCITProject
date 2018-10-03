@@ -36,5 +36,13 @@ public class T_ReplyController {
 		
 		return list;
 	}
+	
+	   @ResponseBody
+	   @RequestMapping(value="/deleteReply",method=RequestMethod.POST)
+	   public int deleteReply(@RequestBody T_Reply r){
+	      int result=T_ReplyRepository.deleteReply(r.getRepNum());
+	      
+	      return result;
+	   }
 }
 

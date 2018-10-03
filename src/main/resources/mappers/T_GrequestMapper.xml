@@ -2,82 +2,86 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="global.sesoc.www.dao.T_GrequestMapper">
-	<insert id="insertGrequest" parameterType="grequest">
-	INSERT INTO T_GREQUEST(
-    GREQNUM,
-	GREQUESTER,
-	GREQACCEPTER,
-	GRONUM
+   <insert id="insertGrequest" parameterType="grequest">
+   INSERT INTO T_GREQUEST(
+   GREQNUM,
+   GREQUESTER,
+   GREQACCEPTER,
+   GRONUM
     )VALUES(
-    T_REQUEST_SEQ.NEXTVAL,
+    T_GREQUEST_SEQ.NEXTVAL,
     #{gRequester},
     #{greqAccepter},
     #{groNum}
     )
-	</insert>
-	<select id="selectGrequest" parameterType="grequest" resultType="grequest">
-	SELECT *FROM T_GREQUEST WHERE GRONUM=#{groNum}
-	</select>
-	<select id="groupAccept" resultType="grequest" parameterType="string">
-	SELECT *FROM T_GREQUEST WHERE GREQACCEPTER=#{greqAccepter} AND ISGREQACCEPTED=0
-	</select>
-	
-	<select id="selectGreqUsers" parameterType="string" resultType="greqUser">
-	SELECT 
-	t_group.GRONAME GRONAME,
-	t_grequest.GRONUM GRONUM,
-	t_grequest.GREQNUM GREQNUM,
-	t_grequest.GREQUESTER GREQUESTER,
-	t_grequest.GREQACCEPTER GREQACCEPTER,
-	t_grequest.ISGREQACCEPTED ISGREQACCEPTED,
-	t_user.USERNAME USERNAME,
-	t_user.ORIGINALIMAGE ORIGINALIMAGE,
-	t_user.SAVEDIMAGE SAVEDIMAGE,
-	t_user.INTRODUCE INTRODUCE,
-	t_user.EMAIL EMAIL,
-	t_user.BELONG BELONG
-	FROM T_USER t_user,T_GREQUEST t_grequest,T_GROUP t_group
-	WHERE 
-	t_group.GRONUM=t_grequest.GRONUM
-	AND t_user.USERID=t_grequest.GREQUESTER
-	AND t_grequest.ISGREQACCEPTED=0  
-	AND t_grequest.GREQACCEPTER=#{greqAccepter}
-	</select>
-	
-	<update id="applySuccess" parameterType="int">
-	UPDATE T_GREQUEST
-	SET 
-	ISGREQACCEPTED=1
-	WHERE
-	GREQNUM=#{greqNum}
-	</update>
-	<select id="selectGrequest2" parameterType="grequest" resultType="grequest">
-	SELECT *FROM T_GREQUEST WHERE GREQNUM=#{greqNum}
-	</select>
-	
-	<delete id="applyCancel" parameterType="int">
-	delete T_GREQUEST WHERE GREQNUM=#{greqNum}
-	</delete>
-	
-	<select id="checkInvite" parameterType="grequest" resultType="grequest">
-	SELECT *FROM T_GREQUEST 
-	WHERE GRONUM=#{groNum} 
-	
-	AND (GREQUESTER=#{gRequester}
-	OR GREQACCEPTER=#{greqAccepter})
-	</select>
-	<delete id="groupMemberDelete" parameterType="grequest">
-	DELETE T_GREQUEST 
-	WHERE GRONUM=#{groNum}
-	AND GREQUESTER=#{gRequester}
-	</delete>
-	<delete id="deleteGroupGrequest" parameterType="int">
-	DELETE T_GREQUEST WHERE GRONUM=#{groNum}
-	</delete>
-	
-	<select id="getGroupUsers" parameterType="int" resultType="grequest">
-	SELECT *FROM T_GREQUEST 
-	WHERE GRONUM=#{groNum}
-	AND ISGREQACCEPTED=1
-	</select>
+   </insert>
+   <select id="selectGrequest" parameterType="grequest" resultType="grequest">
+   SELECT *FROM T_GREQUEST WHERE GRONUM=#{groNum}
+   </select>
+   <select id="groupAccept" resultType="grequest" parameterType="string">
+   SELECT *FROM T_GREQUEST WHERE GREQACCEPTER=#{greqAccepter} AND ISGREQACCEPTED=0
+   </select>
+   
+   <select id="selectGreqUsers" parameterType="string" resultType="greqUser">
+   SELECT 
+   t_group.GRONAME GRONAME,
+   t_grequest.GRONUM GRONUM,
+   t_grequest.GREQNUM GREQNUM,
+   t_grequest.GREQUESTER GREQUESTER,
+   t_grequest.GREQACCEPTER GREQACCEPTER,
+   t_grequest.ISGREQACCEPTED ISGREQACCEPTED,
+   t_user.USERNAME USERNAME,
+   t_user.ORIGINALIMAGE ORIGINALIMAGE,
+   t_user.SAVEDIMAGE SAVEDIMAGE,
+   t_user.INTRODUCE INTRODUCE,
+   t_user.EMAIL EMAIL,
+   t_user.BELONG BELONG
+   FROM T_USER t_user,T_GREQUEST t_grequest,T_GROUP t_group
+   WHERE 
+   t_group.GRONUM=t_grequest.GRONUM
+   AND t_user.USERID=t_grequest.GREQUESTER
+   AND t_grequest.ISGREQACCEPTED=0  
+   AND t_grequest.GREQACCEPTER=#{greqAccepter}
+   </select>
+   
+   <update id="applySuccess" parameterType="int">
+   UPDATE T_GREQUEST
+   SET 
+   ISGREQACCEPTED=1
+   WHERE
+   GREQNUM=#{greqNum}
+   </update>
+   <select id="selectGrequest2" parameterType="grequest" resultType="grequest">
+   SELECT *FROM T_GREQUEST WHERE GREQNUM=#{greqNum}
+   </select>
+   
+   <delete id="applyCancel" parameterType="int">
+   delete T_GREQUEST WHERE GREQNUM=#{greqNum}
+   </delete>
+   
+   <select id="checkInvite" parameterType="grequest" resultType="grequest">
+   SELECT *FROM T_GREQUEST 
+   WHERE GRONUM=#{groNum} 
+   
+   AND(
+   (GREQUESTER=#{greqAccepter})
+   OR   
+   (GREQUESTER=#{gRequester})
+   )
+   
+   </select>
+   <delete id="groupMemberDelete" parameterType="grequest">
+   DELETE T_GREQUEST 
+   WHERE GRONUM=#{groNum}
+   AND GREQUESTER=#{gRequester}
+   </delete>
+   <delete id="deleteGroupGrequest" parameterType="int">
+   DELETE T_GREQUEST WHERE GRONUM=#{groNum}
+   </delete>
+   
+   <select id="getGroupUsers" parameterType="int" resultType="grequest">
+   SELECT *FROM T_GREQUEST 
+   WHERE GRONUM=#{groNum}
+   AND ISGREQACCEPTED=1
+   </select>
 </mapper>
