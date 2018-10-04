@@ -184,6 +184,7 @@ public class T_FriendController {
 				T_User user = new T_User();
 				user.setUserId(reqId);
 				user = repository2.selectOne(user);
+				user.setEmail("0");
 				checkList.add(user);
 		}
 		

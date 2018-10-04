@@ -54,11 +54,12 @@ public class T_ScheduleController {
       T_Schedule schedule=T_ScheduleRepository.selectOneUserSchedule(s);
       return schedule;
    }
-   @RequestMapping(value="/scheduleDetail" , method=RequestMethod.GET)
-   public String scheduleDetail(T_Schedule schedule,Model model) {
+   @ResponseBody
+   @RequestMapping(value="/scheduleDetail" , method=RequestMethod.POST)
+   public T_Schedule scheduleDetail(@RequestBody T_Schedule schedule,Model model) {
       T_Schedule s=T_ScheduleRepository.selectOneUserSchedule(schedule);
-      model.addAttribute("schedule",s);
-      return "schedule/scheduleDetail";
+      
+      return s;
    }
    
    //schedule insert
@@ -82,13 +83,14 @@ public class T_ScheduleController {
    
    //schedule update
    @RequestMapping(value="/scheduleUpdate" , method=RequestMethod.GET)
-   public String scheduleUpdate(T_Schedule schedule,Model model) {    //화면 요청
+   public String scheduleUpdate(T_Schedule schedule,Model model,String friId) {    //화면 요청
       System.out.println("1:"+schedule);
       T_Schedule s=T_ScheduleRepository.selectOneUserSchedule(schedule);
+      System.out.println("ssss"+s);
+      model.addAttribute("friId",friId);
       model.addAttribute("schedule",s);
       return "schedule/scheduleUpdate";
    }
-   
    @RequestMapping(value="/scheduleUpdate" , method=RequestMethod.POST)
    public String scheduleUpdate(Model model,T_Schedule schedule) {      //schedule update -- db
          
@@ -313,19 +315,19 @@ public class T_ScheduleController {
       
    }
    
-	@RequestMapping(value="/shareScheduleUpdate" , method=RequestMethod.POST)
-	public String shareScheduleUpdate(Model model,T_Schedule schedule, String friId,HttpSession session) {		//schedule update -- db
-		String userId=(String)session.getAttribute("loginId");	
-		T_Request request=new T_Request();
-		request.setReqAccepter(userId);  request.setReqAccepter(friId);
-		model.addAttribute("req",request);
-		
-		int result=T_ScheduleRepository.updateSchedule(schedule);
-		
-		List<T_Schedule> list=T_ScheduleRepository.selectPlannerSchedule(schedule.getPlaNum()); //userId를 session의 loginId로
-		model.addAttribute("plaNum",schedule.getPlaNum());
-		model.addAttribute("schdulelist",list);
-		return "redirect:/shareCalendar";
-	}
+   @RequestMapping(value="/shareScheduleUpdate" , method=RequestMethod.POST)
+   public String shareScheduleUpdate(Model model,T_Schedule schedule, String friId,HttpSession session) {      //schedule update -- db
+      String userId=(String)session.getAttribute("loginId");   
+      T_Request request=new T_Request();
+      request.setReqAccepter(userId);  request.setReqAccepter(friId);
+      model.addAttribute("req",request);
+      
+      int result=T_ScheduleRepository.updateSchedule(schedule);
+      
+      List<T_Schedule> list=T_ScheduleRepository.selectPlannerSchedule(schedule.getPlaNum()); //userId를 session의 loginId로
+      model.addAttribute("plaNum",schedule.getPlaNum());
+      model.addAttribute("schdulelist",list);
+      return "redirect:/shareCalendar";
+   }
 }
 

@@ -28,6 +28,10 @@
    rel="stylesheet">
 <script src="schduleResist/dist/assets/js/dashboard.js"></script>
 
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
 
 <script type="text/javascript" charset="utf-8" async=""
    data-requirecontext="_" data-requiremodule="selectize"
@@ -41,7 +45,74 @@
 <script type="text/javascript" charset="utf-8" async=""
    data-requirecontext="_" data-requiremodule="input-mask"
    src="schduleResist/dist/assets/plugins/input-mask/js/jquery.mask.min.js"></script>
+ <script>
 
+	 var infoWindow;
+     var markers = [];
+     var map;
+     var bermudaTriangle;
+     var product;
+     var marker;
+     var geocoder;
+     var pos;
+     function initMap() {
+        map = new google.maps.Map(
+              document
+                    .getElementById('map'),
+              {
+                 zoom : 15,
+                 center : {
+                 	
+                    lat : 35.717,
+                    lng : 139.731
+                 },
+                 mapTypeId : 'terrain'
+              });
+        geocoder = new google.maps.Geocoder();
+     geocodeAddress(geocoder,
+              map);
+
+     }
+     function geocodeAddress(
+             geocoder, resultsMap) {
+          var country = document
+                .getElementById('schLocation').value;
+          /* alert(country); */
+          geocoder
+                .geocode(
+                      {
+                         'address' : country
+                      },
+                      function(
+                            results,
+                            status) {
+                         if (status === 'OK') {
+                            resultsMap
+                                  .setCenter(results[0].geometry.location);
+                            marker = new google.maps.Marker(
+                                  {
+                                     zoom : 15,
+                                     map : resultsMap,
+                                     position : results[0].geometry.location
+                                  });
+                            markers
+                                  .push(marker);
+                         } else {
+                         /*    alert('Geocode was not successful for the following reason: '
+                                  + status); */
+                         }
+                      });
+       }
+     function setMapOnAll(map) {
+         for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+         }
+      }
+                                    
+                           
+
+                                  
+                                 </script>
 <script type="text/javascript">
 function schCheck() {
     var title=$("#schTitle").val();// #은 아이디, .은 클래스
@@ -95,7 +166,7 @@ function schCheck() {
  }
 $(function(){
       $('.fe-chevron-up').on('click',function(){
-         $('#calendar').remove();
+    	  $('#calendar').remove();
           $('#cal').html('<div id="calendar"></div> <div class="scheduleUpdate"></div>');
          var calCheck = $('#calendar').attr('class');
 /*          if(calCheck.hasClass("fc") == true){
@@ -301,9 +372,9 @@ $(function(){
 
       //플래너 삭제
       $(".fe-x").on('click',function(){
-         if(!confirm("삭제하시겠습니까?")){
-            return false;
-         }else{
+    	  if(!confirm("삭제하시겠습니까?")){
+   			return false;
+   		}else{
         var plaNum=$(this).parents().parents().parents().parents().children(".card-body").attr('id');
         var sendData={'plaNum':plaNum};
         
@@ -316,17 +387,73 @@ $(function(){
           success:function(res){    
           }
         }); 
-         }
+   		}
       });
       
       $(document).on('click','.insertSchedule',function(){
          var plaNum=$(this).attr("data-rno");
          location.href="insertSchedule?plaNum="+plaNum;
       });
-      //schedule 클릭시 수정
       $(document).on('click','.fc-content',function(){
-         var sch=$(this).parents('a').attr('class');
-         var schNum=parseInt(sch.substring(57,sch.length-13));
+    	  var sch=$(this).parents('a').attr('class');
+    	  
+          var schNum=parseInt(sch.substring(54,sch.length-13));
+          var sendData={'schNum':schNum};
+          var inputData = '';
+          inputData += '<input type="button" class="detailBtn btn btn-success" value="자세히 보기"  data-rno="'+schNum+'"/><br><br>';
+          inputData += '<input type="button" class="updateBtn btn btn-warning" value="수정하기"  data-rno="'+schNum+'"/>';
+          $('.scheduleUpdate').html(inputData);
+      });
+      $(document).on('click','.detailBtn',function(){
+    	  var schNum=$(this).attr('data-rno');
+          var sendData={'schNum':schNum};
+          $.ajax({
+        	 method:'post',
+        	 url:'scheduleDetail',
+        	 data:JSON.stringify(sendData),
+        	 dataType:'json',
+        	 contentType:'application/json;charset=utf-8',
+        	 success:function(sch){
+        		var inputData='';
+        		
+				///
+        		inputData +='<div class="page"><div class="page-main"><div class="my-3 my-md-5"><div class="container"><div class="row"><div class="col-12">';
+        		inputData +='<div class="card-header" style="padding-left : 0 ! important "><h4 class="card-title">スケジュール情報</h4><div class="closeimg"><img alt="" src="resources/close.png" class="closeDetail"></div></div></div></div></div>   ';                      
+        		inputData +='<table>';
+        		inputData +='<tr><td>タイトル</td><th>'+sch.schTitle+'</th></tr>';
+        		inputData +='<tr><td>内容</td><th>'+sch.schContent+'</th></tr>';
+        		inputData +='<tr><td>スタート日</td><th>'+sch.schStartdate+'</th></tr>';   
+        		inputData +='<tr><td>終わる日</td><th>'+sch.schEnddate+'</th></tr>'; 
+        		inputData +='<tr><td>category</td><th>'+sch.category+'</th></tr>';  
+        		inputData +='<tr><td>위치</td><th>'+sch.schLocation+'</th></tr>';  
+        		inputData +='<tr><th colspan="2"><input type="hidden" class="form-control" id="schLocation" value="'+sch.schLocation+'" name="schLocation" >';
+        		inputData +='</div> <span class="col-auto">  <button class="btn btn-secondary" type="button"  onclick="initMap()"><i class="fe fe-search"></i></button> ';
+        		inputData +='<div id="map"></div> <div id="infowindow-content"><span id="place-name" class="title"></span> <br> Place  ID <span id="place-id"></span><br> <span id="place-address"></span>'; 
+        		inputData +='</th></tr></table>';
+                
+        		
+               
+                  
+            
+                    
+                       
+                       
+                  
+                      
+                                                         
+                  
+                   
+             
+        		              
+                 $('.scheduleUpdate').html(inputData);
+                 
+                 
+        	 }
+          });
+      });
+      //schedule 클릭시 수정
+      $(document).on('click','.updateBtn',function(){
+         var schNum=$(this).attr('data-rno');
          var sendData={'schNum':schNum};
          $.ajax({
             method:'post',
@@ -340,7 +467,7 @@ $(function(){
                
                inputData += '<div class="page"><div class="page-main"><div class="my-3 my-md-5"><div class="container"><div class="row"><div class="col-12">';
                inputData +='<div class="card-header" style="padding-left : 0 ! important "><h4 class="card-title">スケジュール情報</h4><div class="closeimg"><img alt="" src="resources/close.png" class="closeDetail"></div>   ';
-               inputData += '</div><div class="card-body"><div class="row"><div class="col-md-6 col-lg-4"><div class="form-group">';
+               inputData += '</div><div class="card-body"><div class="row" ><div class="col-md-6 col-lg-4"><div class="form-group">';
                inputData += '<label class="form-label">タイトル</label> <input type="text" id="schTitle" class="form-control" name="schTitle" value="'+sch.schTitle+'"></div>';   
                inputData +='<input type="hidden" id="plaNum" name="plaNum" value="'+sch.plaNum+'"><input type="hidden" id="schNum" name="schNum" value="'+sch.schNum+'"><br>';
                inputData +='<div class="form-group"> <label class="form-label">内容 <span class="form-label-small">56/100</span></label>';
@@ -584,9 +711,10 @@ $(function(){
              }        
                   //****************************************************************
                });
-     
            var tra='<div id="calendarTrash" class="calendar-trash"><img src="resources/calendar/trash.jpg" /></div><br/>';
            $('.fc-right').html(tra);
+        
+           
         
        /*  var ass = $(".fc-content").parents('a').attr('class');
        alert(ass);  */
@@ -740,7 +868,7 @@ width: 300px;}
             </div>
                  
           <div id="cal">
-            <div id="calendar"></div><br/>
+            <div id="calendar" ></div><br/>
             <div class="scheduleUpdate"></div>
              </div>
                </div>
@@ -749,5 +877,8 @@ width: 300px;}
       
       
 <script src="assets/js/core/bootstrap.min.js"></script>
+
 </body>
+ <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMznx2aLBJ_JHzvyCml6LMwP_yHkigeqc&libraries=places&callback=initMap"
+                                    async defer></script>
 </html>

@@ -15,10 +15,7 @@
 <link href="schduleResist/dist/assets/css/dashboard.css"
    rel="stylesheet">
 <script src="schduleResist/dist/assets/js/dashboard.js"></script>
-
-<script type="text/javascript" charset="utf-8" async=""
-   data-requirecontext="_" data-requiremodule="jquery"
-   src="schduleResist/dist/assets/js/vendors/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" async=""
    data-requirecontext="_" data-requiremodule="selectize"
    src="schduleResist/dist/assets/js/vendors/selectize.min.js"></script>
@@ -204,7 +201,7 @@ html, body {
                               <div class="col-md-6 col-lg-4">
 
                                  <div class="form-group">
-                                    <label class="form-label">제목</label> <input type="text"
+                                    <label class="form-label">タイトル</label> <input type="text"
                                     id="schTitle"
                                        class="form-control" name="schTitle"
                                        placeholder="Text..">                                       
@@ -213,8 +210,7 @@ html, body {
 
                                  <br>
                                  <div class="form-group">
-                                    <label class="form-label">내용 <span
-                                       class="form-label-small">56/100</span></label>
+                                    <label class="form-label">内容 </label>
                                     <textarea class="form-control" id="schContent" name="schContent"
                                        rows="6" placeholder="Content.."></textarea>
                                  </div>
@@ -222,7 +218,7 @@ html, body {
                                   
 
                                  <div class="form-group">
-                                    <label class="form-label">중요도</label>
+                                    <label class="form-label">重要度</label>
                                     <div class="row gutters-xs">
                                        <div class="col-auto">
                                           <label class="colorinput"> <input name="importance"
@@ -299,7 +295,7 @@ html, body {
                               <div class="col-md-6 col-lg-4">
 
                                  <div class="form-group">
-                                    <label class="form-label">시작 날짜</label>
+                                    <label class="form-label">スタート日</label>
                                     <div class="row gutters-xs">
                                       <input type="date" class="form-control" name="schStartdate"  id="schStartdate">
                                  
@@ -307,92 +303,87 @@ html, body {
                                  </div>
 
                                  <div class="form-group">
-                                    <label class="form-label">끝나는 날짜</label>
+                                    <label class="form-label">終わる日</label>
                                     <div class="row gutters-xs">
                                       <input type="date" class="form-control" name="schEnddate"  id="schEnddate">
                                     </div>
                                  </div>
 
-                              
-                              
-                              
-
-
                                  <div class="form-group">
-                                    <label class="form-label">카테고리</label>
+                                    <label class="form-label">category</label>
                                     <div class="selectgroup selectgroup-pills">
                                        <label class="selectgroup-item"> <input
                                           type="radio"  value="Beer" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">회식</span>
+                                          class="selectgroup-button">beer</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio" value="Date" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">데이트</span>
+                                          class="selectgroup-button">date</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Driving" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">드라이브</span>
+                                          class="selectgroup-button">drive</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Event" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">이벤트</span>
+                                          class="selectgroup-button">event</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Exercise" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">운동</span>
+                                          class="selectgroup-button">exercise</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Family" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">가족</span>
+                                          class="selectgroup-button">family</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Friendship" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">친구</span>
+                                          class="selectgroup-button">friend</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Game" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">게임</span>
+                                          class="selectgroup-button">game</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio" value="Healing" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">힐링</span>
+                                          class="selectgroup-button">healing</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Meal" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">식사</span>
+                                          class="selectgroup-button">meal</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Movie" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">영화</span>
+                                          class="selectgroup-button">movie</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio" value="Promise" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">약속</span>
+                                          class="selectgroup-button">promise</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Reading" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">독서</span>
+                                          class="selectgroup-button">reading</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Shopping" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">쇼핑</span>
+                                          class="selectgroup-button">shopping</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Study" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">공부</span>
+                                          class="selectgroup-button">study</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Traveling" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">여행</span>
+                                          class="selectgroup-button">traveling</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio"  value="Working" name="category"
                                           class="selectgroup-input" value="Beer"> <span
-                                          class="selectgroup-button">근무</span>
+                                          class="selectgroup-button">working</span>
                                        </label> <label class="selectgroup-item"> <input
                                           type="radio" value="others" name="category"
                                           class="selectgroup-input" > <span
-                                          class="selectgroup-button">기타</span>
+                                          class="selectgroup-button">others</span>
                                        </label>
                                        
                                     <!--    <input type="hidden"  id="category" name="category" value=""> -->
@@ -405,7 +396,7 @@ html, body {
 
                               </div>
                               <div class="col-md-6 col-lg-4">
-                                 <label class="form-label">위치</label>
+                                 <label class="form-label">位置</label>
                                  <div class="form-group">
                                     <div class="row gutters-xs">
                                        <div class="col">
@@ -502,13 +493,13 @@ html, body {
 
                                  <br>
                                  <div class="form-group">
-                                    <div class="form-label">공유 여부</div>
+                                    <div class="form-label">シェアチェック</div>
                                     <div>
                                        <label
                                           class="custom-control custom-checkbox custom-control-inline">
                                           <input type="checkbox" class="custom-control-input"
                                           name="shareable" value="" checked id ="shareable">
-                                          <span class="custom-control-label">공유함</span>
+                                          <span class="custom-control-label">シェアする</span>
                                           
                                        </label>
 
@@ -521,7 +512,7 @@ html, body {
                         </div>
                         <div class="card-footer text-right">
                            <div class="d-flex">
-                              <a href="javascript:void(0)" class="btn btn-link">Cancel</a>
+                              <a href="javascript:void(0)" class="btn btn-link">取り消し</a>
                               <input type="submit" class="btn btn-primary ml-auto" value="Schdule Resist" />
                            </div>
                         </div>

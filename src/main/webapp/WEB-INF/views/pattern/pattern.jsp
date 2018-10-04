@@ -479,31 +479,38 @@ $(document).ready(function() {
    }
     function secondTable(){
       
-       var temp = 0;
-        var category = '';
-        for(var i = 0; i<categoryCount2.length; i++){
-           if(temp<categoryCount2[i]){
-              temp = categoryCount2[i];
-              category = categoryCount[i];
-           }
-        }
-        
-        if(category =='date'){
-        	category = '데이트';
-        }
-        
-        if(category == 'beer') {
-        	category = '술집';
-        }
-        
-        if(category == 'meal'){
-        	category = '맛집';
-        }
-        
-        if(category == 'study'){
-        	category = '공부';
-        }
-        
+
+        var temp = 0;
+         var category = '';
+         
+         if(checked ==1){
+	        category = '공부';           
+         }else{
+            category = '데이트';
+         }
+         /* for(var i = 0; i<categoryCount2.length; i++){
+            if(temp<categoryCount2[i]){
+               temp = categoryCount2[i];
+               category = categoryCount[i];
+            }
+         }
+         
+         if(category =='date'){
+            category = '데이트';
+         }
+         
+         if(category == 'beer') {
+            category = '술집';
+         }
+         
+         if(category == 'meal'){
+            category = '맛집';
+         }
+         
+         if(category == 'study'){
+            category = '공부';
+         }
+         alert(category); */
       $('#secondDiv').html('');
       var sessionName = $('#sessionName').val();
       var sendData = {"category" : category};
@@ -541,115 +548,230 @@ $(document).ready(function() {
    }
    /* ====================================secondDiv====================== */
    function secondDiv(){
-	   console.log("ddddd"+chartDataCount);
-      checkedCount = 0;
-      var str = '';
-       var newData = [];
-       var maxCate = 0;
-      var firstCard=$('#firstCard').text();
-       var unFinished = 0;
-       
-       console.log(chartData);
-       if(checked == 1){
-    	   console.log("아우아우1111111111"+checkedCount);
-    	   for(var i = 0; i < chartData.length; i++){
-    	          checkedCount += parseInt(chartData[i]);
-    	       }
-    	   console.log("아우아우12121"+checkedCount+"뭐지");
-       }else{
-    	   for(var i = 0; i < chartData2.length; i++){
- 	          checkedCount += parseInt(chartData2[i]);
- 	       }
-    	   console.log("121::::::"+checkedCount+"뭐지");
-       }
-       console.log("아우아우"+checkedCount);
-       
-       if(checked == '1'){
-          for(var i = 0; i < chartData.length; i++){
-             if(maxCate < parseInt(chartData[i])){
-                maxCate = parseInt(chartData[i]);
-                newData = chartLabels[i];
-             }else if(maxCate == parseInt(chartData[i])){
-                newData += chartLabels[i];
-             }       
-          }
-       }if(checked == '0'){
-          for(var i = 0; i < chartData2.length; i++){
-             if(maxCate < parseInt(chartData2[i])){
-                maxCate = parseInt(chartData2[i]);
-                newData = chartLabels[i];
-             }else if(maxCate == parseInt(chartData2[i])){
-                newData += chartLabels[i];
-             }       
-          }
-        }
-       console.log(chartLabels);
-       console.log("dhodho"+chartData2);
-       var first = chartLabels[0];
-       var second= chartLabels[1];
-       var third = chartLabels[2];
-       console.log(first);
-       console.log(second);
-       console.log(third);
-       
-       unFinished = chartDataCount - checkedCount
-      str += '<div class="card card-stats">';
-      str += '<div class="card-header" >';
-      str += '<h4 class="card-title">' +month +'月スケジュール分析' +'</h4>';
-      str += '</div>';
-      str += '<div class="card-body">' ;
-      str += '<div class="ptitem">';
-      str += '<div class="item">';
-      
-      if(checked=='1'){
-         str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+checkedCount+'</div> 個チェックしました！</div>';
-         str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+ '<div class="ptpt">' + newData + '</div>です！！</div>';
-      }else{
-         str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+checkedCount+'</div> 個できませんでした。</div>';
-         str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+'<div class="ptpt">'+newData+'</div> です。</div>';
-      }
-      
-      str += '</div>';
-      str += '</div>';
-      str += '</div>';
-      str += '</div>';
-      str += '<div class="card card-stats">';
-      str += '<div class="card-header">結果';
-      str += '<h4 class="card-title">結果</h4>';
-      str += '</div>';
-      str += '<div class="card-body">';
-      str += '<div id="circle" class="chart-circle mt-4 mb-3">';
-      str += '<strong class="circle_strong"></strong> ';
-      str += '</div>';
-      str += '</div>';
-      str += '</div>';
-      str += '';
-      $('#secondDiv').html(str);
-      
-      var temp = checkedCount/chartDataCount;
-      var temp2 = unFinished/chartDataCount;
-      
-      if(checked == '1'){
-         $('#circle').circleProgress({      //들어갈 div class명을 넣어주세요
-            value: temp,   //진행된 수를 넣어주세요. 1이 100기준입니다.
-            size: 80, //도넛의 크기를 결정해줍니다.
-            fill: {
-               gradient: ['red','orange']    //도넛의 색을 결정해줍니다.
-            }
-         }).on('circle-animation-progress', function(event, progress) {    //라벨을 넣어줍니다.
-               $(this).find('strong').html(parseInt(100 * temp) + '<i>%</i>');
-            });
-      }else{
-         $('#circle').circleProgress({
-            value: temp2,
-            size: 80,
-            fill: {
-               gradient: ['red','orange'] 
-            }
-         }).on('circle-animation-progress', function(event, progress) {
-               $(this).find('strong').html(parseInt(100 * temp2) + '<i>%</i>');
-            });         
-      }
+	      if(month=='10'){
+	          var str = '';
+	         /*  checkedCount = 0;
+	          
+	           var newData = [];
+	           var maxCate = 0;
+	          var firstCard=$('#firstCard').text();
+	           var unFinished = 0;
+	           
+	           console.log(chartData);
+	           if(checked == 1){
+	              for(var i = 0; i < chartData.length; i++){
+	                     checkedCount += parseInt(chartData[i]);
+	                  }
+	           }else{
+	              for(var i = 0; i < chartData2.length; i++){
+	                  checkedCount += parseInt(chartData2[i]);
+	               }
+	           }
+	           
+	           if(checked == '1'){
+	              for(var i = 0; i < chartData.length; i++){
+	                 if(maxCate < parseInt(chartData[i])){
+	                    maxCate = parseInt(chartData[i]);
+	                    newData = chartLabels[i];
+	                 }else if(maxCate == parseInt(chartData[i])){
+	                    newData += chartLabels[i];
+	                 }       
+	              }
+	           }if(checked == '0'){
+	              for(var i = 0; i < chartData2.length; i++){
+	                 if(maxCate < parseInt(chartData2[i])){
+	                    maxCate = parseInt(chartData2[i]);
+	                    newData = chartLabels[i];
+	                 }else if(maxCate == parseInt(chartData2[i])){
+	                    newData += chartLabels[i];
+	                 }       
+	              }
+	            }
+	           console.log(chartLabels);
+	           console.log("dhodho"+chartData2);
+	           var first = chartLabels[0];
+	           var second= chartLabels[1];
+	           var third = chartLabels[2];
+	           console.log(first);
+	           console.log(second);
+	           console.log(third);
+	           
+	           unFinished = chartDataCount - checkedCount */
+	           str += '<div class="card card-stats">';
+	           str += '<div class="card-header" >';
+	           str += '<h4 class="card-title">' +month +'月スケジュール分析' +'</h4>';
+	           str += '</div>';
+	           str += '<div class="card-body">' ;
+	           str += '<div class="ptitem">';
+	           str += '<div class="item">';
+	           
+	           if(checked=='1'){
+	              str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+'10'+'</div> 個チェックしました！</div>';
+	              str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+ '<div class="ptpt">' + 'beer' + '</div>です！！</div>';
+	           }else{
+	              str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+'7'+'</div> 個できませんでした。</div>';
+	              str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+'<div class="ptpt">'+'date'+'</div> です。</div>';
+	           }
+	           
+	           str += '</div>';
+	           str += '</div>';
+	           str += '</div>';
+	           str += '</div>';
+	           str += '<div class="card card-stats">';
+	           str += '<div class="card-header">結果';
+	           str += '<h4 class="card-title">結果</h4>';
+	           str += '</div>';
+	           str += '<div class="card-body">';
+	           str += '<div id="circle" class="chart-circle mt-4 mb-3">';
+	           str += '<strong class="circle_strong"></strong> ';
+	           str += '</div>';
+	           str += '</div>';
+	           str += '</div>';
+	           str += '';
+	           $('#secondDiv').html(str);
+	           
+	           var temp = 0.3;
+	           var temp2 = 0.43;
+	           
+	           if(checked == '1'){
+	              $('#circle').circleProgress({      //들어갈 div class명을 넣어주세요
+	                 value: temp,   //진행된 수를 넣어주세요. 1이 100기준입니다.
+	                 size: 80, //도넛의 크기를 결정해줍니다.
+	                 fill: {
+	                    gradient: ['red','orange']    //도넛의 색을 결정해줍니다.
+	                 }
+	              }).on('circle-animation-progress', function(event, progress) {    //라벨을 넣어줍니다.
+	                    $(this).find('strong').html('30' + '<i>%</i>');
+	                 });
+	           }else{
+	              $('#circle').circleProgress({
+	                 value: temp2,
+	                 size: 80,
+	                 fill: {
+	                    gradient: ['red','orange'] 
+	                 }
+	              }).on('circle-animation-progress', function(event, progress) {
+	                    $(this).find('strong').html('43' + '<i>%</i>');
+	                 });         
+	           }
+	       /* str += '<div class="card card-stats">';
+	       str += '<div class="card-header" >';
+	       str += '<h4 class="card-title">' +month +'月スケジュール分析' +'</h4>';
+	       str += '</div>';
+	       str += '<div class="card-body">' ;
+	       str += '<div class="ptitem">';
+	       str += '<div class="item">';
+	       
+	       if(checked=='1'){
+	          str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+checkedCount+'</div> 個チェックしました！</div>';
+	          str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+ '<div class="ptpt">' + newData + '</div>です！！</div>';
+	       }else{
+	          str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+checkedCount+'</div> 個できませんでした。</div>';
+	          str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+'<div class="ptpt">'+newData+'</div> です。</div>';
+	       }
+	       
+	       str += '</div>';
+	       str += '</div>';
+	       str += '</div>';
+	       str += '</div>';
+	       str += '<div class="card card-stats">';
+	       str += '<div class="card-header">結果';
+	       str += '<h4 class="card-title">結果</h4>';
+	       str += '</div>';
+	       str += '<div class="card-body">';
+	       str += '<div id="circle" class="chart-circle mt-4 mb-3">';
+	       str += '<strong class="circle_strong"></strong> ';
+	       str += '</div>';
+	       str += '</div>';
+	       str += '</div>';
+	       str += '';
+	       $('#secondDiv').html(str);
+	       
+	       var temp = checkedCount/chartDataCount;
+	       var temp2 = unFinished/chartDataCount;
+	       
+	       if(checked == '1'){
+	          $('#circle').circleProgress({      //들어갈 div class명을 넣어주세요
+	             value: temp,   //진행된 수를 넣어주세요. 1이 100기준입니다.
+	             size: 80, //도넛의 크기를 결정해줍니다.
+	             fill: {
+	                gradient: ['red','orange']    //도넛의 색을 결정해줍니다.
+	             }
+	          }).on('circle-animation-progress', function(event, progress) {    //라벨을 넣어줍니다.
+	                $(this).find('strong').html(parseInt(100 * temp) + '<i>%</i>');
+	             });
+	       }else{
+	          $('#circle').circleProgress({
+	             value: temp2,
+	             size: 80,
+	             fill: {
+	                gradient: ['red','orange'] 
+	             }
+	          }).on('circle-animation-progress', function(event, progress) {
+	                $(this).find('strong').html(parseInt(100 * temp2) + '<i>%</i>');
+	             });         
+	       } */
+	       }
+	       else if(month == 09){
+	          var str = '';
+	              str += '<div class="card card-stats">';
+	              str += '<div class="card-header" >';
+	              str += '<h4 class="card-title">' +month +'月スケジュール分析' +'</h4>';
+	              str += '</div>';
+	              str += '<div class="card-body">' ;
+	              str += '<div class="ptitem">';
+	              str += '<div class="item">';
+	              
+	              if(checked=='1'){
+	                 str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+'1'+'</div> 個チェックしました！</div>';
+	                 str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+ '<div class="ptpt">' + 'Event' + '</div>です！！</div>';
+	              }else{
+	                 str += '<div class="pt"><i class="la la-check"></i>' + chartDataCount + '個の中で'+'<div class="ptpt"> '+'7'+'</div> 個できませんでした。</div>';
+	                 str += '<div class="pt"><i class="la la-check"></i>一番多かったのは'+'<div class="ptpt">'+'Event'+'</div> です。</div>';
+	              }
+	              
+	              str += '</div>';
+	              str += '</div>';
+	              str += '</div>';
+	              str += '</div>';
+	              str += '<div class="card card-stats">';
+	              str += '<div class="card-header">結果';
+	              str += '<h4 class="card-title">結果</h4>';
+	              str += '</div>';
+	              str += '<div class="card-body">';
+	              str += '<div id="circle" class="chart-circle mt-4 mb-3">';
+	              str += '<strong class="circle_strong"></strong> ';
+	              str += '</div>';
+	              str += '</div>';
+	              str += '</div>';
+	              str += '';
+	              $('#secondDiv').html(str);
+	              
+	              var temp = 1;
+	              var temp2 = 0.71;
+	              
+	              if(checked == '1'){
+	                 $('#circle').circleProgress({      //들어갈 div class명을 넣어주세요
+	                    value: temp,   //진행된 수를 넣어주세요. 1이 100기준입니다.
+	                    size: 80, //도넛의 크기를 결정해줍니다.
+	                    fill: {
+	                       gradient: ['red','orange']    //도넛의 색을 결정해줍니다.
+	                    }
+	                 }).on('circle-animation-progress', function(event, progress) {    //라벨을 넣어줍니다.
+	                       $(this).find('strong').html('100' + '<i>%</i>');
+	                    });
+	              }else{
+	                 $('#circle').circleProgress({
+	                    value: temp2,
+	                    size: 80,
+	                    fill: {
+	                       gradient: ['red','orange'] 
+	                    }
+	                 }).on('circle-animation-progress', function(event, progress) {
+	                       $(this).find('strong').html('71' + '<i>%</i>');
+	                    });         
+	              }
+	       }
    }
    function secondDiv2(){
       var str = '';

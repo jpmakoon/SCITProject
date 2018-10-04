@@ -251,8 +251,8 @@ function reqOutput(response){
 	var reqAll = '';
 	for ( var i in response) {
 		reqAll += '<div class="notif-center">';
-		reqAll += '<div class="notif-content"><i class="la la-user-plus" id="buddyIcon"></i>';
-		if (response[i].email == '1') {
+		if (response[i].email == '1') {	/* 공유신청 */
+			reqAll += '<div class="notif-content"><i class="la la-user-plus" id="buddyIcon"></i>';
 			reqAll += '<span class="time"> &nbsp;'+response[i].userName+'様のシェア申請</span>';
 			reqAll += '<div id="btnDiv">';
 			reqAll += '<input type="button" id="shareBtn" class="btn btn-info" value="承諾"> &nbsp;';
@@ -261,7 +261,8 @@ function reqOutput(response){
 			reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
 		}
 		
-		if(response[i].email == '0'){
+		if(response[i].email == '0'){	/* 친구신청 */
+			reqAll += '<div class="notif-content"><i class="la la-user-plus" id="buddyIcon"></i>';
 			reqAll += '<span class="time"> &nbsp;'+response[i].userName+'様の友達申請</span>';
 			reqAll += '<div id="btnDiv">';
 			reqAll += '<input type="button" id="successBtn" class="btn btn-success" value="承諾"> &nbsp;';
@@ -270,7 +271,8 @@ function reqOutput(response){
 			reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
 			
 		}
-		if ( response[i].email =='2'){
+		if ( response[i].email =='2'){	/* 그륩초대 */
+			reqAll += '<div class="notif-content"><i class="la la-user-plus" id="buddyIcon"></i>';
 			reqAll += '<span class="time"> &nbsp;'+response[i].userName+'様のグループ招待</span>';
 			reqAll += '<div id="btnDiv">';
 			reqAll += '<input type="button" id="groAccBtn" class="btn btn-info" value="承諾"> &nbsp;';
@@ -426,8 +428,7 @@ $(document).on("click", "#successBtn", function(){
 		var friRequester = $(this).parent().parent().children('.accepter').val();
 		var sendData = {"friRequester" : friRequester}
 		
-		/* console.log($(this).parent().parent().parent().parent());
-		$(this).parent().parent().parent().parent().remove(); */
+		$(this).parent().parent().parent().remove(); 
 		
 		$(this).parent().parent().parent().fadeOut(1500);
 		
@@ -461,7 +462,7 @@ $(document).on("click", "#dangerBtn", function(){
 		var sendData = {"friRequester" : friRequester}
 		
 		console.log($(this).parent().parent().parent().parent());
-		$(this).parent().parent().parent().parent().remove();
+		$(this).parent().parent().parent().remove();
 		
 		if($('.notif-center').length == 0){
 			$('#reqSignal').parent().remove();
@@ -517,7 +518,7 @@ $(document).on("click", "#friDelBtn", function(){
 		var sendData = {"friRequester" : friRequester}
 		
 		console.log($(this).parent().parent().parent().parent());
-		$(this).parent().parent().parent().parent().remove();
+		$(this).parent().parent().parent().remove();
 		
 		$.ajax({
 			method : 'post'

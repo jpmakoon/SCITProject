@@ -304,13 +304,13 @@ INSERT INTO T_SCHEDULE(
 	)
 VALUES(
 	T_SCHEDULE_SEQ.NEXTVAL,
-	'飲み会',　
-	'飲み会だ！',
-	'2018-10-25',
-	'2018-10-25',
-	'10',
+	'K-Fair',　
+	'k-fair',
+	'2018-10-04',
+	'2018-10-08',
+	'8',
 	84,
-	'Beer',
+	'Healing',
 	'삼성동'
 );
 COMMIT
@@ -339,11 +339,12 @@ alter table t_message add(accessed number(10));
 SELECT *FROM T_GREQUEST;
 DELETE FROM t_schedule WHERE schnum = 138;
 COMMIT
-
-select*from t_group;
+rollback
+select*from t_schedule;
 	SELECT *FROM T_REQUEST;
 	WHERE ISACCEPTED=0
 	AND REQACCEPTER='akehdgml';
-select * from t_schedule;
-	update t_schedule set shareable = 1
-	
+
+select * from t_request;
+
+
