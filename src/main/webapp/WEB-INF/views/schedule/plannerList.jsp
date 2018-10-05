@@ -236,7 +236,7 @@ $(function(){
                          var a=$(this).attr('class');
                          var b=a.split(' ');
                         var schNum=parseInt(b[5].trim());
-                
+                		
                          var sendData={
                             'schNum':schNum   
                          };
@@ -395,9 +395,12 @@ $(function(){
          location.href="insertSchedule?plaNum="+plaNum;
       });
       $(document).on('click','.fc-content',function(){
-    	  var sch=$(this).parents('a').attr('class');
+    	  var a=$(this).parents('a').attr('class');
     	  
-          var schNum=parseInt(sch.substring(54,sch.length-13));
+          var b=a.split(' ');
+         
+         var schNum=parseInt(b[5].trim());
+    	  
           var sendData={'schNum':schNum};
           var inputData = '';
           inputData += '<input type="button" class="detailBtn btn btn-success" value="자세히 보기"  data-rno="'+schNum+'"/><br><br>';
@@ -455,6 +458,7 @@ $(function(){
       $(document).on('click','.updateBtn',function(){
          var schNum=$(this).attr('data-rno');
          var sendData={'schNum':schNum};
+         
          $.ajax({
             method:'post',
             url:'selectContent',

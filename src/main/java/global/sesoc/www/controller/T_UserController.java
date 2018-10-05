@@ -71,9 +71,9 @@ public class T_UserController {
 		int result = repository.signUp(user);
 
 		if (result != 1) {
-			model.addAttribute("message", "회원가입이 실패하였습니다. 다시 회원가입을 해주세요.");
+			model.addAttribute("message", "登録失敗！もう一度確認してください。");
 		} else {
-			model.addAttribute("message", "회원가입이 성공하였습니다.");
+			model.addAttribute("message", "登録完了。");
 		}
 		return "message";
 	}

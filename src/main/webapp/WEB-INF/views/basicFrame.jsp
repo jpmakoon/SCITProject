@@ -382,6 +382,18 @@ $(document).on("click", "#shareBtn", function(){
 			, success : function(response){
 				if(response == 1){
 					alert(requester+"様とシェアできました。");
+					$.ajax({
+			               method : 'post'
+			                  , url  : 'insertShareShedule'
+			                  , data : JSON.stringify(sendData)
+			                  , dataType : 'text'
+			                  , contentType : 'application/json; charset=UTF-8'
+			                  , success:function(r){
+			                     if(r==1){
+			                        alert('공유스케줄이 생성되었습니다.');
+			                     }
+			                  }
+			            });
 				}else{
 					alert('다시 시도해주세요');
 				}

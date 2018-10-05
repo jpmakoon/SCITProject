@@ -36,7 +36,7 @@
 	SELECT *
 	FROM T_MESSAGE
 	WHERE USERB = #{userB}
-	ORDER BY MESREGDATE
+	ORDER BY MESREGDATE desc
 </select>
 <delete id="msgDelete" parameterType="message">
 	DELETE FROM T_MESSAGE

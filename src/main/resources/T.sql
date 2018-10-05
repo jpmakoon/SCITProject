@@ -304,13 +304,13 @@ INSERT INTO T_SCHEDULE(
 	)
 VALUES(
 	T_SCHEDULE_SEQ.NEXTVAL,
-	'K-Fair',　
-	'k-fair',
+	'정처기',　
+	'정처기',
 	'2018-10-04',
 	'2018-10-08',
 	'8',
 	84,
-	'Healing',
+	'Study',
 	'삼성동'
 );
 COMMIT
@@ -347,4 +347,20 @@ select*from t_schedule;
 
 select * from t_request;
 
-
+   SELECT *FROM T_REQUEST
+   WHERE (
+    ISACCEPTED=1
+   AND 
+   REQACCEPTER='kimura')
+   ) OR (
+    ISACCEPTED=1
+   AND 
+    REQUESTER='kimura' )
+    
+    select *from t_request ;
+   SELECT * FROM T_REQUEST WHERE (ISACCEPTED=1 AND REQACCEPTER='kimura') or (ISACCEPTED=1 AND REQUESTER='kimura');
+   update t_request
+   set ISACCEPTED=0;
+   commit
+   delete from t_friend where frinum = 289;
+   select * from t_friend;
